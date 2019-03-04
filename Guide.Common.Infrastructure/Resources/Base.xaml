@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Guide.Common.Infrastructure"
+                    xmlns:converters="clr-namespace:Guide.Common.Infrastructure.Resources.Converters">
+    
+    <!--#region Converters-->
+    <converters:NegativeConverter x:Key="NegativeConverter"/>
+    <converters:MathConverter x:Key="MathConverter"/>
+    <converters:LengthToThicknessConverter x:Key="LengthToThicknessConverter"/>
+    <converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
+    <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <converters:AndBooleanToVisibilityConverter x:Key="AndBooleanToVisibilityConverter"/>
+    <converters:TimespanToDoubleConverter x:Key="TimespanToDoubleConverter"/>
+    <!--#endregion-->
+    
+</ResourceDictionary>

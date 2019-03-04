@@ -1,0 +1,183 @@
+﻿<coreControls:PresentationControl x:Class="Guide.Desktop.Views.StartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
+             xmlns:local="clr-namespace:Guide.Desktop.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:prism="http://prismlibrary.com/" AutoOpen="true" 
+             xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
+             mc:Ignorable="d" prism:ViewModelLocator.AutoWireViewModel="True"
+             d:DesignHeight="450" d:DesignWidth="800" OpenAnimationActive="true">
+    <UserControl.Resources>
+        <Storyboard x:Key="BrushFadeStart" BeginTime="0:0:01">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="MainGrid">
+                <EasingColorKeyFrame KeyTime="0:0:0.8" Value="{Binding Color, Source={StaticResource AuxBrush}}">
+                    <EasingColorKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseInOut"/>
+                    </EasingColorKeyFrame.EasingFunction>
+                </EasingColorKeyFrame>
+            </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LogoGrid">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="LogoBox1">
+                <EasingColorKeyFrame KeyTime="0:0:1.9" Value="#4CFFFFFF"/>
+                <EasingColorKeyFrame KeyTime="0:0:2.1" Value="{Binding Color, Source={StaticResource MicrosoftLogoBox1}}"/>
+            </ColorAnimationUsingKeyFrames>
+
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="LogoBox2">
+                <EasingColorKeyFrame KeyTime="0:0:2.1" Value="#4CFFFFFF"/>
+                <EasingColorKeyFrame KeyTime="0:0:2.3" Value="{Binding Color, Source={StaticResource MicrosoftLogoBox2}}"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="LogoBox3">
+                <EasingColorKeyFrame KeyTime="0:0:2.3" Value="#4CFFFFFF"/>
+                <EasingColorKeyFrame KeyTime="0:0:2.5" Value="{Binding Color, Source={StaticResource MicrosoftLogoBox3}}"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="LogoBox4">
+                <EasingColorKeyFrame KeyTime="0:0:2.5" Value="#4CFFFFFF"/>
+                <EasingColorKeyFrame KeyTime="0:0:2.7" Value="{Binding Color, Source={StaticResource MicrosoftLogoBox4}}"/>
+            </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="Microsoft" BeginTime="0:0:2.7">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textBlock">
+                <EasingDoubleKeyFrame KeyTime="0:0:3.6" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="HiddenLogoPanel">
+                <DiscreteObjectKeyFrame KeyTime="0:0:5.2" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:5.2" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="HiddenLogoBox1">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#4CFFFFFF"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:5.2" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="HiddenLogoBox2">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#4CFFFFFF"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:5.2" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="HiddenLogoBox3">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#4CFFFFFF"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:5.2" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="HiddenLogoBox4">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#4CFFFFFF"/>
+            </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:5.2" Storyboard.TargetProperty="(Canvas.Left)" Storyboard.TargetName="HiddenLogoPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:5.2" Storyboard.TargetProperty="(Canvas.Top)" Storyboard.TargetName="HiddenLogoPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames BeginTime="0:0:5.2" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="MainGrid">
+                <EasingColorKeyFrame KeyTime="0:0:0.7" Value="{Binding Color, Source={StaticResource MainBrush}}">
+                    <EasingColorKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseInOut"/>
+                    </EasingColorKeyFrame.EasingFunction>
+                </EasingColorKeyFrame>
+            </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:5.2" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="HiddenLogoCover">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="MicrosoftContainer">
+                <DiscreteObjectKeyFrame KeyTime="0:0:5.2" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+    </UserControl.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <prism:InvokeCommandAction Command="{Binding ViewLoadedCommand}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="MouseDown">
+            <prism:InvokeCommandAction Command="{Binding MoveCommand}"/>
+        </i:EventTrigger>
+
+        <!--#region Init-->
+        <i:EventTrigger EventName="Opening" SourceObject="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
+            <ie:ControlStoryboardAction Storyboard="{StaticResource BrushFadeStart}"/>
+        </i:EventTrigger>
+        
+        <ie:StoryboardCompletedTrigger Storyboard="{StaticResource BrushFadeStart}">
+            <ie:CallMethodAction MethodName="OnOpen" TargetObject="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
+        </ie:StoryboardCompletedTrigger>
+        <!--#endregion-->
+        
+    </i:Interaction.Triggers>
+    
+    <!--
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource BrushFadeStart}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    -->
+    
+
+    <Grid x:Name="MainGrid" Background="#ffffff">
+
+
+
+        <StackPanel x:Name="MainLogoPanel" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <StackPanel x:Name="MicrosoftContainer" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                <UniformGrid Name="LogoGrid" Width="40" Height="40" Opacity="0" VerticalAlignment="Center">
+                    <Rectangle x:Name="LogoBox1"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="17" Height="17" Stroke="#9DFFFFFF" StrokeThickness="1" Fill="#4CFFFFFF"/>
+                    <Rectangle x:Name="LogoBox2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="17" Height="17" Fill="#4CFFFFFF" Stroke="#9DFFFFFF" StrokeThickness="1"/>
+                    <Rectangle x:Name="LogoBox3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="17" Height="17" Fill="#4CFFFFFF" Stroke="#9DFFFFFF" StrokeThickness="1"/>
+                    <Rectangle x:Name="LogoBox4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="17" Height="17" Fill="#4CFFFFFF" Stroke="#9DFFFFFF" StrokeThickness="1"/>
+                </UniformGrid>
+                <StackPanel VerticalAlignment="Center" ClipToBounds="True">
+                    <TextBlock x:Name="Microsoft" VerticalAlignment="Center" FontFamily="Helectiva" FontSize="30" FontWeight="DemiBold" Margin="7 2 0 0" Foreground="{DynamicResource MainBrush}" Text="Microsoft" RenderTransformOrigin="0.5,0.5">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=StackPanel}, Path=ActualWidth, Converter={StaticResource NegativeConverter}}"/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+
+            <TextBlock x:Name="textBlock" Opacity="0" Text="Dynamics Business Central Interactive Guide" VerticalAlignment="Center" FontFamily="Helectiva" FontSize="30" FontWeight="Light" Margin="0" Foreground="{DynamicResource MainBrush}" />
+        </StackPanel>
+
+        <Canvas>
+            <StackPanel x:Name="HiddenLogoPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" RenderTransformOrigin="0.5,0.5">
+                <Canvas.Left>
+                    <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="(a/2) - (b/2)">
+                        <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Canvas}" Path="ActualWidth"/>
+                        <Binding ElementName="MainLogoPanel" Path="ActualWidth"/>
+                    </MultiBinding>
+                </Canvas.Left>
+                <Canvas.Top>
+                    <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="(a/2) - (b/2)">
+                        <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Canvas}" Path="ActualHeight"/>
+                        <Binding ElementName="MainLogoPanel" Path="ActualHeight"/>
+                    </MultiBinding>
+                </Canvas.Top>
+                
+                <StackPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </StackPanel.RenderTransform>
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <UniformGrid x:Name="HiddenLogo" Width="40" Height="40" Opacity="1">
+                        <Rectangle x:Name="HiddenLogoBox1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="17" Height="17" Stroke="#00FFFFFF" StrokeThickness="1" Fill="#f25022"/>
+                        <Rectangle x:Name="HiddenLogoBox2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="17" Height="17" Stroke="#00FFFFFF" StrokeThickness="1" Fill="#7fba00"/>
+                        <Rectangle x:Name="HiddenLogoBox3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="17" Height="17" Fill="#00a4ef" Stroke="#00FFFFFF" StrokeThickness="1"/>
+                        <Rectangle x:Name="HiddenLogoBox4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="17" Height="17" Fill="#ffb900" Stroke="#00FFFFFF" StrokeThickness="1"/>
+                    </UniformGrid>
+                    <Border x:Name="HiddenLogoCover" Width="{Binding ElementName=HiddenLogo, Path=ActualWidth}" Height="{Binding ElementName=HiddenLogo, Path=ActualHeight}" Opacity="0" Background="{DynamicResource AuxBrush}" />
+                </Grid>
+                
+                <TextBlock Opacity="0" Text="Dynamics Business Central Interactive Guide" VerticalAlignment="Center" FontFamily="Helectiva" FontSize="30" FontWeight="Light" Margin="0" Foreground="{DynamicResource MainBrush}" />
+            </StackPanel>
+        </Canvas>
+        
+    </Grid>
+</coreControls:PresentationControl>

@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Guide.Common.Infrastructure.Resources.Image_Sets.Official.svg"
+                    xmlns:c="clr-namespace:Guide.Common.Infrastructure.Resources.Containers">
+
+    <!--
+    <c:SvgSource x:Key="PlaySvg" Source="caret-right.svg"/>
+    <c:SvgSource x:Key="PauseSvg" Source="pause.svg"/>
+    <c:SvgSource x:Key="SpeedSvg" Source="fast-runner.svg"/>
+    <c:SvgSource x:Key="UndoSvg" Source="undo-alt.svg"/>
+    <c:SvgSource x:Key="RedoSvg" Source="redo-alt.svg"/>
+    <c:SvgSource x:Key="LoopingArrowsSvg" Source="sync-alt.svg"/>
+    -->
+
+    <c:Svg x:Key="PlaySvg" Source="caret-right.svg" Fill="{DynamicResource AuxBrush}"/>
+    <c:Svg x:Key="PauseSvg" Source="pause.svg" Fill="{DynamicResource AuxBrush}"/>
+    <c:Svg x:Key="SpeedSvg" Source="fast-runner.svg" Fill="{DynamicResource AuxBrush}"/>
+    <c:Svg x:Key="UndoSvg" Source="undo-alt.svg" Fill="{DynamicResource AuxBrush}"/>
+    <c:Svg x:Key="RedoSvg" Source="redo-alt.svg" Fill="{DynamicResource AuxBrush}"/>
+    <c:Svg x:Key="LoopingArrowsSvg" Source="sync-alt.svg"/>
+    <c:Svg x:Key="MarkerSvg" Source="map-marker.svg" Fill="{DynamicResource AuxBrush}"/>
+    <c:Svg x:Key="LightBulbSvg" Source="light-bulb.svg" Fill="{DynamicResource AuxBrush}"/>
+    <c:Svg x:Key="BackArrowSvg" Source="back-arrow.svg" Fill="{DynamicResource AuxBrush}"/>
+    <c:Svg x:Key="DownArrowSvg" Source="angle-down.svg" Fill="{DynamicResource AuxBrush}"/>
+    <c:Svg x:Key="TimesSvg" Source="times.svg" Fill="{DynamicResource AuxBrush}"/>
+    <c:Svg x:Key="CircledLeftArrowSvg" Source="arrow-alt-circle-left.svg" Fill="{DynamicResource AuxBrush}"/>
+    <c:Svg x:Key="CircledRightArrowSvg" Source="arrow-alt-circle-right.svg" Fill="{DynamicResource AuxBrush}"/>
+    <c:Svg x:Key="TellMeSvg" Source="tell-me.svg" Fill="{DynamicResource MainBrush}"/>
+
+    <c:Svg x:Key="HomeSvg" Source="home.svg" Fill="{DynamicResource MainBrush}"/>
+</ResourceDictionary>

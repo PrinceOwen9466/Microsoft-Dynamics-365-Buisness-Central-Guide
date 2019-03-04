@@ -1,0 +1,121 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Media.xaml"/>
+        <ResourceDictionary Source="/Guide.Common.Infrastructure;component/Resources/Common.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    <!--#region Images-->
+    <BitmapImage x:Key="AzureLogo" UriSource="Images/Azure.png"/>
+    <BitmapImage x:Key="OfficeLogo" UriSource="Images/Office.png"/>
+    <BitmapImage x:Key="DynamicsLogo" UriSource="Images/Dynamics.png"/>
+
+    <BitmapImage x:Key="ModernIcon" UriSource="Images/Modern.png"/>
+    <BitmapImage x:Key="IntelligentIcon" UriSource="Images/Intelligent.png"/>
+    <BitmapImage x:Key="AdaptableIcon" UriSource="Images/Adaptable.png"/>
+    <BitmapImage x:Key="UnifiedIcon" UriSource="Images/Unified.png"/>
+
+
+    <BitmapImage x:Key="FinanceIcon" UriSource="Images/Finance and Operations.png"/>
+    <BitmapImage x:Key="OperationsManagementIcon" UriSource="Images/Operations Management.png"/>
+    <BitmapImage x:Key="ProjectManagementIcon" UriSource="Images/Project Managment.png"/>
+    <BitmapImage x:Key="ReportsAndAnalyticsIcon" UriSource="Images/Reports and analytics.png"/>
+    <BitmapImage x:Key="SuplyChainManagementIcon" UriSource="Images/Supply Chain Management.png"/>
+    <BitmapImage x:Key="SalesAndServicesManagement" UriSource="Images/Sales and Services Management.png"/>
+
+    <BitmapImage x:Key="BusinessCentralPreview" UriSource="Images/Business Central Preview.jpg"/>
+    <BitmapImage x:Key="AIConnections" UriSource="Images/AI Connections.jpg"/>
+    <BitmapImage x:Key="TeamAgreement" UriSource="Images/Team Agreement.jpg"/>
+    <BitmapImage x:Key="AdaptableComputer" UriSource="Images/Close up bandwidth computer.jpg"/>
+
+    <BitmapImage x:Key="HappyShopping" UriSource="Images/Happy Shopping.jpg"/>
+    <BitmapImage x:Key="Reports" UriSource="Images/Reports and analytics.jpg"/>
+    <BitmapImage x:Key="ProjectManagement" UriSource="Images/Project Management.jpg"/>
+    <BitmapImage x:Key="OperationsManagement" UriSource="Images/Operations Management.jpg"/>
+    <BitmapImage x:Key="SupplyManamgment" UriSource="Images/Business Cargo.jpg"/>
+    <BitmapImage x:Key="FinancingAndManagment" UriSource="Images/Financing and Management.jpg"/>
+    <BitmapImage x:Key="BusinessCentralDevices" UriSource="Images/Business Central Devices.png"/>
+
+    <BitmapImage x:Key="WorkspaceView" UriSource="Images/Workspace View.jpg"/>
+    <BitmapImage x:Key="MicrosoftSignIn" UriSource="Images/Microsoft Sign in.png"/>
+    <BitmapImage x:Key="EmailMarketing" UriSource="Images/Email Marketing.png"/>
+    <BitmapImage x:Key="SatisfiedCustomer" UriSource="Images/Satisfied Customer.jpg"/>
+    <BitmapImage x:Key="BusinessCentralHomePreview" UriSource="Images/Business Central Home Preview.png"/>
+
+    <BitmapImage x:Key="AndroidLogo" UriSource="Images/Android Logo.png"/>
+    <BitmapImage x:Key="AppleLogo" UriSource="Images/Apple Logo.png"/>
+    <BitmapImage x:Key="WindowsLogo" UriSource="Images/Windows Logo.png"/>
+    <BitmapImage x:Key="EarthLogo" UriSource="Images/Earth Globe.png"/>
+
+    <BitmapImage x:Key="TourIllustration" UriSource="Images/Tour Illustration.png"/>
+
+    <BitmapImage x:Key="FacingArrows" UriSource="Images/Facing Arrows.png"/>
+    <BitmapImage x:Key="FacingArrowsWhite" UriSource="Images/Facing Arrows White.png"/>
+
+    <BitmapImage x:Key="TellMe" UriSource="Images/Tell Me.png"/>
+    <BitmapImage x:Key="TellMeWhite" UriSource="Images/Tell Me White.png"/>
+
+    <BitmapImage x:Key="Filter" UriSource="Images/Filter.png"/>
+    <BitmapImage x:Key="FilterWhite" UriSource="Images/Filter White.png"/>
+
+    <BitmapImage x:Key="FactBox" UriSource="Images/Fact Box.png"/>
+    <BitmapImage x:Key="FactBoxWhite" UriSource="Images/Fact Box White.png"/>
+
+    <BitmapImage x:Key="DownArrow" UriSource="Images/Down Arrow.png"/>
+    <BitmapImage x:Key="DownArrowWhite" UriSource="Images/Down Arrow White.png"/>
+
+    <BitmapImage x:Key="LayoutOptions" UriSource="Images/Layout Options.png"/>
+    <BitmapImage x:Key="LayoutOptionsWhite" UriSource="Images/Layout Options White.png"/>
+
+    <BitmapImage x:Key="VerticalEllipse" UriSource="Images/Vertical Ellipse.png"/>
+    <BitmapImage x:Key="VerticalEllipseWhite" UriSource="Images/Vertical Ellipse White.png"/>
+
+    <BitmapImage x:Key="PushPin" UriSource="Images/Push Pin.png"/>
+    <BitmapImage x:Key="PushPinWhite" UriSource="Images/Push Pin White.png"/>
+
+    <BitmapImage x:Key="Add" UriSource="Images/Add.png"/>
+    <BitmapImage x:Key="AddWhite" UriSource="Images/Add White.png"/>
+
+    <BitmapImage x:Key="DustBin" UriSource="Images/DustBin.png"/>
+    <BitmapImage x:Key="DustBinWhite" UriSource="Images/DustBin White.png"/>
+
+    <BitmapImage x:Key="Pencil" UriSource="Images/Pencil.png"/>
+    <BitmapImage x:Key="PencilWhite" UriSource="Images/Pencil White.png"/>
+
+    <BitmapImage x:Key="BackArrow" UriSource="Images/Back Arrow.png"/>
+    <BitmapImage x:Key="BackArrowWhite" UriSource="Images/Back Arrow White.png"/>
+
+    <BitmapImage x:Key="ExcelIcon" UriSource="Images/Excel Icon.png"/>
+
+    <BitmapImage x:Key="NewBusiness" UriSource="Images/New Business.jpg"/>
+
+    <BitmapImage x:Key="Finance" UriSource="Images/Bank Notes.jpg"/>
+    <BitmapImage x:Key="Sales" UriSource="Images/Family Shopping.jpg"/>
+    <BitmapImage x:Key="Inventory" UriSource="Images/Inventory.jpg"/>
+    <BitmapImage x:Key="Vendors" UriSource="Images/Vendors.jpg"/>
+    <!--#endregion-->
+    
+    <!--#region Videos-->
+    <!--
+    <sys:String x:Key="ExpandingLayoutVideo">Resources//Videos//Expanding Layout.mp4</sys:String>
+    -->
+
+    <BitmapImage x:Key="ExpandingLayout" UriSource="Gifs/Expanding Layout.gif"/>
+    <!--#endregion-->
+   
+    
+    <!--#region Colors-->
+    <Color x:Key="AzureBlue">#0089D6</Color>
+    <Color x:Key="DynamicsBlue">#13224D</Color>
+    <Color x:Key="OfficeOrange">#EB3C00</Color>
+    <Color x:Key="CortanaBlue">#4DADE2</Color>
+    <!--#endregion-->
+    
+    <!--#region Brushes-->
+    <SolidColorBrush x:Key="AzureBlueBrush" Color="{StaticResource AzureBlue}"/>
+    <SolidColorBrush x:Key="DynamicsBlueBrush" Color="{StaticResource DynamicsBlue}"/>
+    <SolidColorBrush x:Key="OfficeOrangeBrush" Color="{StaticResource OfficeOrange}"/>
+    <SolidColorBrush x:Key="CortanaBlueBrush" Color="{StaticResource CortanaBlue}"/>
+    <!--#endregion-->
+</ResourceDictionary>

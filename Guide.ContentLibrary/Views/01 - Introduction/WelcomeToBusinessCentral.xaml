@@ -1,0 +1,475 @@
+﻿<coreControls:RippleControl x:Class="Guide.ContentLibrary.Views.Introduction.WelcomeToBusinessCentral"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Guide.ContentLibrary.Views.Introduction"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:coreModels="clr-namespace:Guide.Common.Infrastructure.Models;assembly=Guide.Common.Infrastructure"
+             xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800" Template="{DynamicResource RippleControlTemplate}"
+             OpenAnimationActive="true" Title="Welcome To Business Central">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Storyboard x:Key="Startup" Duration="00:00:3" Completed="Storyboard_Completed">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Welcome">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="To">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+                    <EasingColorKeyFrame KeyTime="0:0:01.2" Value="{Binding Source={StaticResource AuxBrush}, Path=Color}"/>
+                    <EasingColorKeyFrame KeyTime="0:0:01.7" Value="{Binding Source={StaticResource MainBrush}, Path=Color}"/>
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="TealImage">
+                    <EasingDoubleKeyFrame KeyTime="0:0:01.2" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:01.7" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="WhiteImage">
+                    <EasingDoubleKeyFrame KeyTime="0:0:01.2" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:01.7" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames BeginTime="0:0:1.3" Storyboard.TargetProperty="(Canvas.Left)" Storyboard.TargetName="SimulatorMiddlePanel">
+                    <EasingDoubleKeyFrame KeyTime="0:0:.7" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames BeginTime="0:0:1.3" Storyboard.TargetProperty="(Canvas.Top)" Storyboard.TargetName="SimulatorMiddlePanel">
+                    <EasingDoubleKeyFrame KeyTime="0:0:.7" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Simulator">
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.49" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:01.5" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="MainMiddlePanel">
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.49" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:01.5" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="stackPanel">
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.49" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="border">
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.7" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="OfficeContainer">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.2" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="OfficeContainer">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.2" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="AzureContainer">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.2" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.4" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="AzureContainer">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.2" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.4" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+
+
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="DynamicsContainer">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.4" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.6" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="DynamicsContainer">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.4" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.6" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+
+
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="CortanaContainer">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.6" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.8" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="CortanaContainer">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.6" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.8" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+
+            </Storyboard>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <i:Interaction.Triggers>
+        <!--#region Init-->
+        <i:EventTrigger EventName="Opening" SourceObject="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
+            <ie:ControlStoryboardAction Storyboard="{StaticResource Startup}"/>
+        </i:EventTrigger>
+        
+        <ie:StoryboardCompletedTrigger Storyboard="{StaticResource Startup}">
+            <ie:CallMethodAction MethodName="OnOpen" TargetObject="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
+        </ie:StoryboardCompletedTrigger>
+        <!--#endregion-->
+    </i:Interaction.Triggers>
+
+    <UserControl.Triggers>
+        <!--
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource Startup}"/>
+        </EventTrigger>
+        -->
+        
+        
+    </UserControl.Triggers>
+    <Grid x:Name="grid">
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource AuxColor}"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.RowSpan="1" Orientation="Horizontal" x:Name="MainMiddlePanel" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True">
+            <Grid Margin="20">
+                <Image x:Name="TealImage" Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoTeal}" Width="70" Height="70" Opacity="0"/>
+                <Image x:Name="WhiteImage" Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoWhite}" Width="70" Height="70" />
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" ClipToBounds="True" >
+                <TextBlock x:Name="Welcome" Text="Welcome" FontSize="40" FontFamily="Helectiva" FontWeight="Light"  Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center" HorizontalAlignment="Left" Opacity=".7" RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                    <TextBlock.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.LayoutTransform>
+
+                </TextBlock>
+                <TextBlock x:Name="To" Text=" To" FontSize="40" FontFamily="Helectiva" FontWeight="Light"  Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity=".7">
+                    <TextBlock.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.LayoutTransform>
+                </TextBlock>
+            </StackPanel>
+
+        </StackPanel>
+        <Canvas Grid.RowSpan="1" x:Name="Simulator" Opacity="0">
+            <StackPanel Orientation="Horizontal" Name="SimulatorMiddlePanel">
+                <Canvas.Left>
+                    <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="(a/2) - (b/2)">
+                        <MultiBinding.Bindings>
+                            <Binding ElementName="Simulator" Path="ActualWidth"/>
+                            <Binding ElementName="MainMiddlePanel" Path="ActualWidth"/>
+                        </MultiBinding.Bindings>
+                    </MultiBinding>
+                </Canvas.Left>
+                <Canvas.Top>
+                    <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="(a/2) - (b/2)">
+                        <MultiBinding.Bindings>
+                            <Binding ElementName="Simulator" Path="ActualHeight"/>
+                            <Binding ElementName="MainMiddlePanel" Path="ActualHeight"/>
+                        </MultiBinding.Bindings>
+                    </MultiBinding>
+                </Canvas.Top>
+                <Grid Margin="20">
+                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoTeal}" Width="70" Height="70" Opacity="{Binding ElementName=TealImage, Path=Opacity}"/>
+                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoWhite}" Width="70" Height="70" Opacity="{Binding ElementName=WhiteImage, Path=Opacity}" />
+                </Grid>
+
+                <StackPanel x:Name="stackPanel" Orientation="Horizontal" VerticalAlignment="Center" Opacity="0">
+                    <Grid>
+                        <TextBlock x:Name="Central" Text="Business Central" FontSize="40" FontFamily="Helectiva" FontWeight="Light"  Foreground="{DynamicResource AuxBrush}"/>
+                        <Border x:Name="border" VerticalAlignment="Top"  Height="4" Background="{DynamicResource AuxBrush}" CornerRadius="5" RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform>
+                                        <TranslateTransform.Y>
+                                            <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="a-b">
+                                                <MultiBinding.Bindings>
+                                                    <Binding ElementName="Central" Path="ActualHeight"/>
+                                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Border}" Path="ActualHeight"/>
+                                                </MultiBinding.Bindings>
+                                            </MultiBinding>
+                                        </TranslateTransform.Y>
+                                    </TranslateTransform>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+
+                        </Border>
+                    </Grid>
+                </StackPanel>
+
+                <!--
+                <StackPanel>
+                    <TextBlock Text="Business Central" FontSize="40" FontFamily="Helectiva" FontWeight="Light"  Foreground="{DynamicResource AuxBrush}" VerticalAlignment="Center" HorizontalAlignment="Left" Opacity="1" RenderTransformOrigin="0.5,0.5"/>
+                </StackPanel>
+                -->
+            </StackPanel>
+        </Canvas>
+
+
+        <TextBlock Grid.Row="1" Foreground="{DynamicResource AuxBrush}" Background="#00FFFFFF" FontSize="20" FontFamily="Helectiva" FontWeight="Normal" TextWrapping="Wrap" Padding="60 20">
+            Microsoft Dynamics 365 Business Central is an all-in-one business management
+            solution that is designed to seamlessly manage, automate and streamline
+            business processes of small and mid-sized organizations.
+            <LineBreak/>
+            <LineBreak/>
+            Business Central is powered by and fully intergrated into the Microsoft Cloud. This ensures
+            a secure, productive and innovative experience for Dynamics 365 users.
+        </TextBlock>
+
+
+        <Grid Margin="100 20"  Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource OfficeOrangeBrush}">
+                <StackPanel x:Name="OfficeContainer" RenderTransformOrigin="0.5,0.5">
+                    <StackPanel.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </StackPanel.RenderTransform>
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Width="100" Height="100"  Background="{DynamicResource OfficeOrangeBrush}">
+                        <Image Source="{DynamicResource OfficeLogo}" Style="{DynamicResource ClearImage}" Width="50"/>
+                    </UserControl>
+                    <TextBlock Text="Office 365" HorizontalAlignment="Center" Foreground="{DynamicResource OfficeOrangeBrush}" FontFamily="Helectiva" FontSize="20" Margin="10"/>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <coreControls:PresentationControl Title="Office 365">
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource OfficeLogo}" Style="{DynamicResource ClearImage}" Width="50" Margin="10"/>
+                                <TextBlock Text="Office 365" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Bottom" Margin="0 10 10 10"/>
+                            </StackPanel>
+
+
+                            <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+            
+                            Microsoft Office 365 is an integrated experience of apps and services designed to help you
+                            pursue your passion and grow your business. With purpose built applications like 
+                            Word, Excel, PowerPoint and more, Office 365 ensures that the essential business tools
+                            are always at your fingertips.
+            
+                            <LineBreak/>
+                            <LineBreak/>
+
+                            Collaborate in teams using Microsoft Teams, where you can chat, organize meetings and share files.
+            
+                            <LineBreak/>
+                            <LineBreak/>
+            
+                            Securly save files with OneDrive while having access to one terabyte of online storage, allowing access across devices, 
+                            anytime, anywhere.
+                            <LineBreak/>
+                            <LineBreak/>
+            
+                            For more information, click 
+                            <coreControls:ActiveHyperlink NavigateUri="https://products.office.com">
+                                here.    
+                            </coreControls:ActiveHyperlink>
+                            </TextBlock>
+                        </Grid>
+                    </coreControls:PresentationControl>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+
+
+            <coreControls:RippleControlButton Grid.Column="1" Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource AzureBlueBrush}" RenderTransformOrigin="0.5,0.5">
+                <StackPanel Grid.Column="1" x:Name="AzureContainer" RenderTransformOrigin="0.5,0.5">
+                    <StackPanel.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </StackPanel.RenderTransform>
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Width="100" Height="100"  Background="{DynamicResource AzureBlueBrush}" Grid.Column="1">
+                        <Image Source="{DynamicResource AzureLogo}" Style="{DynamicResource ClearImage}" Width="60" />
+                    </UserControl>
+                    <TextBlock Text="Azure" HorizontalAlignment="Center" Foreground="{DynamicResource AzureBlueBrush}" FontFamily="Helectiva" FontSize="20" Margin="10"/>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <coreControls:PresentationControl Title="Azure">
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource AzureLogo}" Style="{DynamicResource ClearImage}" Width="50" Margin="10"/>
+                                <TextBlock Text="Azure" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Bottom" Margin="0 10 10 10"/>
+                            </StackPanel>
+
+
+                            <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+            
+                            Microsoft Azure is a set of cloud services designed to meet the
+                            business challenges of your company. It is trusted worldwide, secure, lightning fast 
+                            and accessible anywhere, anytime.
+            
+                            <LineBreak/>
+                            <LineBreak/>
+                            <LineBreak/>
+                            Click <coreControls:ActiveHyperlink NavigateUri="https://azure.microsoft.com">here</coreControls:ActiveHyperlink>
+                            for more information on Azure.
+                            </TextBlock>
+                        </Grid>
+                    </coreControls:PresentationControl>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+
+
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource DynamicsBlueBrush}" Grid.Column="2" RenderTransformOrigin="0.5,0.5">
+                <StackPanel Grid.Column="2" x:Name="DynamicsContainer" RenderTransformOrigin="0.5,0.5">
+                    <StackPanel.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </StackPanel.RenderTransform>
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Width="100" Height="100"  Background="{DynamicResource DynamicsBlueBrush}">
+                        <Image Source="{DynamicResource DynamicsLogo}" Style="{DynamicResource ClearImage}" Width="50" />
+                    </UserControl>
+                    <TextBlock Text="Dynamics 365" HorizontalAlignment="Center" Foreground="{DynamicResource DynamicsBlueBrush}" FontFamily="Helectiva" FontSize="20" Margin="10"/>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <coreControls:PresentationControl Title="Dynamics 365">
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{DynamicResource DynamicsLogo}" Style="{DynamicResource ClearImage}" Width="50" Margin="10"/>
+                                <TextBlock Text="Dynamics 365" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Bottom" Margin="0 10 10 10"/>
+                            </StackPanel>
+
+
+                            <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+            
+                        Microsoft Dynamics 365 is a cloud based business platform 
+                        that combines Customer Relationship Management (CRM)
+                        and Enterprise Resource Planning (ERP). 
+                        It is integrated with Office 365, Azure, Cortana 
+                        Intelligence and other Microsoft products to provide a 
+                        unified working experience across business processes.
+            
+                        <LineBreak/>
+                        <LineBreak/>
+                        <LineBreak/>
+                        Click <coreControls:ActiveHyperlink NavigateUri="https://dynamics.microsoft.com">here</coreControls:ActiveHyperlink>
+                        for more information on Dynamics 365.
+
+
+                            </TextBlock>
+                        </Grid>
+                    </coreControls:PresentationControl>
+                </coreControls:RippleControlButton.TransitionContent>
+
+            </coreControls:RippleControlButton>
+
+            <coreControls:RippleControlButton Grid.Column="3" Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource CortanaBlueBrush}" RenderTransformOrigin="0.5,0.5">
+                <StackPanel Grid.Column="3" x:Name="CortanaContainer" RenderTransformOrigin="0.5,0.5">
+                    <StackPanel.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </StackPanel.RenderTransform>
+                    <UserControl Template="{DynamicResource EllipseContainer}" Width="100" Height="100"  Background="#00FFFFFF" Grid.Column="3" BorderThickness="10" BorderBrush="{DynamicResource AzureBlueBrush}">
+
+                    </UserControl>
+                    <TextBlock Text="Cortana Intelligence" HorizontalAlignment="Center" Foreground="{DynamicResource AzureBlueBrush}" FontFamily="Helectiva" FontSize="20" Margin="10" TextWrapping="Wrap" TextAlignment="Center"/>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <coreControls:PresentationControl Title="Cortana Intelligence">
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Grid Margin="10 0">
+                                    <UserControl Template="{DynamicResource ThinEllipseContainer}" Width="50" Height="50"  Background="#00FFFFFF" Grid.Column="3" BorderThickness="2" BorderBrush="{DynamicResource MainBrush}"/>
+                                </Grid>
+                                <TextBlock Text="Cortana Intelligence" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Bottom" Margin="0 10 10 10"/>
+                            </StackPanel>
+
+
+                            <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                        <LineBreak/>
+            Cortana Intelligence is a set of fully managed Business Intelligence (BI), 
+            Big Data and Advanced Analytics service offerings present in the Microsoft Azure Cloud. 
+            Using machine learning, Microsoft’s very own Artificial Intelligence can predict important 
+            events, improve your decision making and automate business processes therefore resulting
+            in easier, faster and smarted business transactions.
+                            </TextBlock>
+                        </Grid>
+                    </coreControls:PresentationControl>
+
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+        </Grid>
+    </Grid>
+</coreControls:RippleControl>

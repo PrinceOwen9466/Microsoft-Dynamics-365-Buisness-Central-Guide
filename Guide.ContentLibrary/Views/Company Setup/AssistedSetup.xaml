@@ -1,0 +1,118 @@
+﻿<coreControls:RippleControl x:Class="Guide.ContentLibrary.Views.Company_Setup.AssistedSetup"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
+                            xmlns:contentCore="clr-namespace:Guide.ContentLibrary"
+                            mc:Ignorable="d" Template="{DynamicResource RippleControlTemplate}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid ClipToBounds="True">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                <StackPanel VerticalAlignment="Center" Margin="5">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                        <TextBlock Text="2" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                    </UserControl>
+                </StackPanel>
+
+                <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                    Assisted Setup
+                </TextBlock>
+            </StackPanel>
+
+
+
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                <ScrollViewer.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </ScrollViewer.Resources>
+
+                <DockPanel Grid.Row="1">
+                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                                Assisted Setup is a collection of setup wizards that are designed to speed up
+                                                your company's integration into Microsoft Dynamics 365 Business 
+                                                Central.
+                                                <LineBreak/>
+                                                <LineBreak/>
+                                                Assisted Setup can be found in the "Setup &amp; Extensions" section 
+                                                on the Navigation Bar. Once on the Assisted Setup page, 
+                                                simply click on any of the items to begin.
+                    </TextBlock>
+
+                    <StackPanel DockPanel.Dock="Bottom">
+                        <TextBlock FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                            
+                        </TextBlock>
+
+                        <!--
+                        <StackPanel Orientation="Horizontal" Margin="5 10">
+                            <coreControls:RippleControlButton Background="{DynamicResource MainBrush}" Template="{DynamicResource ContentOnlyTemplate}" Margin="5">
+                                <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="30" Height="30">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="20" Height="20"/>
+                                </UserControl>
+                            </coreControls:RippleControlButton>
+
+                            <TextBlock FontSize="17" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                Migrating Business Data
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="5 10">
+                            <coreControls:RippleControlButton Background="{DynamicResource MainBrush}" Template="{DynamicResource ContentOnlyTemplate}" Margin="5">
+                                <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="30" Height="30">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="20" Height="20"/>
+                                </UserControl>
+                            </coreControls:RippleControlButton>
+
+                            <TextBlock FontSize="17" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                Setting Up Sales Tax
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="5 10">
+                            <coreControls:RippleControlButton Background="{DynamicResource MainBrush}" Template="{DynamicResource ContentOnlyTemplate}" Margin="5">
+                                <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="30" Height="30">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="20" Height="20"/>
+                                </UserControl>
+                            </coreControls:RippleControlButton>
+
+                            <TextBlock FontSize="17" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                Setting Up Cash Flow Forecast
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="5 10">
+                            <coreControls:RippleControlButton Background="{DynamicResource MainBrush}" Template="{DynamicResource ContentOnlyTemplate}" Margin="5">
+                                <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="30" Height="30">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="20" Height="20"/>
+                                </UserControl>
+                            </coreControls:RippleControlButton>
+
+                            <TextBlock FontSize="17" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                Setting Up Email
+                            </TextBlock>
+                        </StackPanel>
+                        -->
+
+                    </StackPanel>
+
+                    <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Assisted Setup.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                    </Border>
+
+                    
+                </DockPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</coreControls:RippleControl>

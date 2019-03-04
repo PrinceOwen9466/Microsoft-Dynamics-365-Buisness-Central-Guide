@@ -1,0 +1,1023 @@
+﻿<coreControls:RippleControl x:Class="Guide.ContentLibrary.Views.Business_Central_Overview.TipsAndTricks"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
+             xmlns:local="clr-namespace:Guide.ContentLibrary.Views.Business_Central_Overview"
+             xmlns:contentCore="clr-namespace:Guide.ContentLibrary"
+             mc:Ignorable="d" Background="{DynamicResource AuxBrush}" Template="{DynamicResource RippleControlTemplate}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" ClipToBounds="True" Margin="20">
+            <Grid Margin="20">
+                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoTeal}" Width="70" Height="70" Opacity="0"/>
+                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoWhite}" Width="70" Height="70" Opacity="1" />
+            </Grid>
+            <Grid VerticalAlignment="Center">
+                <TextBlock x:Name="Central" Text="Key Symbols" FontSize="40" FontFamily="Helectiva" FontWeight="Light"  Foreground="{DynamicResource MainBrush}" Opacity=".7"/>
+                <Border x:Name="border" VerticalAlignment="Top"  Height="4" Background="{DynamicResource MainBrush}" CornerRadius="5" RenderTransformOrigin="0.5,0.5" Opacity=".7">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform>
+                                <TranslateTransform.Y>
+                                    <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="a-b">
+                                        <MultiBinding.Bindings>
+                                            <Binding ElementName="Central" Path="ActualHeight"/>
+                                            <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Border}" Path="ActualHeight"/>
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </TranslateTransform.Y>
+                            </TranslateTransform>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+
+                </Border>
+            </Grid>
+            
+            
+        </StackPanel>
+
+        <UniformGrid Grid.Row="1" Margin="50 0 50 30">
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel x:Name="Launcher">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <UniformGrid x:Name="UniformGrid" Width="25" Height="25" RenderTransformOrigin="0.5,0.5">
+                            <UniformGrid.Resources>
+                                <ResourceDictionary>
+                                    <Style TargetType="Rectangle">
+                                        <Setter Property="Width" Value="5.5"/>
+                                        <Setter Property="Height" Value="5.5"/>
+                                        <Setter Property="Fill" Value="{DynamicResource AuxBrush}"/>
+                                    </Style>
+                                </ResourceDictionary>
+                            </UniformGrid.Resources>
+
+                            <Rectangle/>
+                            <Rectangle/>
+                            <Rectangle/>
+                            <Rectangle/>
+                            <Rectangle/>
+                            <Rectangle/>
+                            <Rectangle/>
+                            <Rectangle/>
+                            <Rectangle/>
+                        </UniformGrid>
+                    </UserControl>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                        <UniformGrid Width="20" Height="20" RenderTransformOrigin="0.5,0.5">
+                                            <UniformGrid.Resources>
+                                                <ResourceDictionary>
+                                                    <Style TargetType="Rectangle">
+                                                        <Setter Property="Width" Value="4.2"/>
+                                                        <Setter Property="Height" Value="4.2"/>
+                                                        <Setter Property="Fill" Value="{DynamicResource MainBrush}"/>
+                                                    </Style>
+                                                </ResourceDictionary>
+                                            </UniformGrid.Resources>
+
+                                            <Rectangle/>
+                                            <Rectangle/>
+                                            <Rectangle/>
+                                            <Rectangle/>
+                                            <Rectangle/>
+                                            <Rectangle/>
+                                            <Rectangle/>
+                                            <Rectangle/>
+                                            <Rectangle/>
+                                        </UniformGrid>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    App Launcher
+                                </TextBlock>
+                            </StackPanel>
+
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                <ScrollViewer.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </ScrollViewer.Resources>
+                                <StackPanel Grid.Row="1">
+                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                        The App Laucher is the main menu in Microsoft Dynamics 365 Business Central. It is
+                                        designed to give you access to other platforms and extensions in Dynamics 365. 
+                                        
+                                        <LineBreak/>
+                                        <LineBreak/>
+                                        
+                                        The "My Apps" section provides a quick way to access apps that you 
+                                        frequently work with. To view all your Dynamics 365 apps, click on 
+                                        "All Apps" as demonstrated below.
+                                    </TextBlock>
+
+                                    <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/App Launcher.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="1.2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                    </Border>
+
+                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                        Microsoft Dynamics 365 Business Central is designed to be flexible 
+                                        and extensive. This gives you the ability to access or develop
+                                        extensions that can provide new solutions to any new 
+                                        need in your business. To manage your Dynamics 365 apps, 
+                                        simply visit (home.dynamics.com) or click
+                                        <coreControls:ActiveHyperlink NavigateUri="https:\\home.dynamics.com" Foreground="{DynamicResource AuxBrush}">
+                                            here.
+                                        </coreControls:ActiveHyperlink>
+                                    </TextBlock>
+                                </StackPanel>
+                            </ScrollViewer>
+
+
+
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+            
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel x:Name="TellMe">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <Image Source="{DynamicResource TellMe}" Style="{DynamicResource ClearImage}" Height="30" />
+                    </UserControl>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                        <Image Source="{DynamicResource TellMeWhite}" Style="{DynamicResource ClearImage}" Height="25"/>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    Tell Me
+                                </TextBlock>
+                            </StackPanel>
+
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                <ScrollViewer.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </ScrollViewer.Resources>
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                    Tell Me is a quick way to access pages in Microsoft Dynamics 365 Business Central. It gives 
+                                    you the ability to search for what you are looking for, and then it provides 
+                                    a set of options to select from.
+                                    
+                                    <LineBreak/>
+                                        <LineBreak/>
+                                    Tell Me is a great navigation tool for Microsoft Dynamics 365 Central. It 
+                                    is fast and very intuitive. Making it the main tool for your navigation
+                                    throughout Microsoft Dynamics 365 Business Central would 
+                                    simplify your tasks and speed up your workflow.
+                                    </TextBlock>
+
+                                    <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Tell Me.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2"/>
+                                    </Border>
+                                </DockPanel>
+                            </ScrollViewer>
+
+                            
+
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+            
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel x:Name="ToggleLayout">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <Image Source="{DynamicResource FacingArrows}" Style="{DynamicResource ClearImage}" Height="30" />
+                    </UserControl>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                        <Image Source="{DynamicResource FacingArrowsWhite}" Style="{DynamicResource ClearImage}" Height="25"/>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    Toggle Layout
+                                </TextBlock>
+                            </StackPanel>
+
+
+                            <DockPanel Grid.Row="1">
+                                <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                    Increase or reduce the width of your workspace.
+                                </TextBlock>
+
+                                <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                    <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Expanding Layout.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2"/>
+                                </Border>
+                            </DockPanel>
+
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+            
+            
+
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel x:Name="Actions">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <Image Source="{DynamicResource DownArrow}" Style="{DynamicResource ClearImage}" Height="30" />
+                    </UserControl>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                        <Image Source="{DynamicResource DownArrowWhite}" Style="{DynamicResource ClearImage}" Height="25"/>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    Actions
+                                </TextBlock>
+                            </StackPanel>
+
+
+                            <DockPanel Grid.Row="1">
+                                <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                    An action button provides a list of 
+                                    options to select from in Microsoft Dynamics 365 
+                                    Business Central.
+                                </TextBlock>
+
+                                <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                    <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Actions.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2"/>
+                                </Border>
+                            </DockPanel>
+
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel x:Name="Pin">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <Image Source="{DynamicResource PushPin}" Style="{DynamicResource ClearImage}" Height="40" />
+                    </UserControl>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                        <Image Source="{DynamicResource PushPinWhite}" Style="{DynamicResource ClearImage}" Height="25"/>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    Pin Navigation
+                                </TextBlock>
+                            </StackPanel>
+
+
+                            <DockPanel Grid.Row="1">
+                                <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                    Pinning the navigation bar, gives you quicker access other pages in your 
+                                    workspace.
+                                </TextBlock>
+
+                                <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                    <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Pin.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2"/>
+                                </Border>
+                            </DockPanel>
+
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+            
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel x:Name="ItemOptions">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <Image Source="{DynamicResource VerticalEllipse}" Style="{DynamicResource ClearImage}" Height="30" />
+                    </UserControl>
+                </StackPanel>
+
+
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                        <Image Source="{DynamicResource VerticalEllipseWhite}" Style="{DynamicResource ClearImage}" Height="25"/>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    Item Options
+                                </TextBlock>
+                            </StackPanel>
+
+
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                <ScrollViewer.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </ScrollViewer.Resources>
+
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                    When data (Customers, Items, Vendors or Accounts) are grouped together in Microsoft Dynamics 365 Business 
+                                    Central, they can be viewed, modified or deleted by simply using the Item Options button. This button can 
+                                    be found around any group of items. 
+                                    
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    Using the Item Options button, multiple items can be selected, modified or removed by
+                                    choosing "Select More" from the set of options generated.
+                                    </TextBlock>
+
+                                    <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Item Select.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2"/>
+                                    </Border>
+                                </DockPanel>
+                            </ScrollViewer>
+                            
+
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel x:Name="LayoutOptions">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <Image Source="{DynamicResource LayoutOptions}" Style="{DynamicResource ClearImage}" Height="30" />
+                    </UserControl>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                        <Image Source="{DynamicResource LayoutOptionsWhite}" Style="{DynamicResource ClearImage}" Height="25"/>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    Item Layouts
+                                </TextBlock>
+                            </StackPanel>
+
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                <ScrollViewer.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </ScrollViewer.Resources>
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                    Microsoft Dynamics 365 Business Central provides different layouts to 
+                                    view your company's data. You can choose to change the view by simply 
+                                    clicking the layout button.
+                                    
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    Data layouts in Business Central can be mainly classified into Lists and Tiles. Lists are normally
+                                    great for making lengthy multiple selections, sorting and filtering. Lists are tabulated
+                                    making them more informative and clear. Tiles are more visually 
+                                    appealing and display less information. It is advisable to register your Customers, 
+                                    Vendors and Items with clear images to make them easier to detect and classify.
+                                    </TextBlock>
+
+                                    <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Item Layouts.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2"/>
+                                    </Border>
+                                </DockPanel>
+                            </ScrollViewer>
+
+                            
+
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+
+            
+
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel x:Name="Filter">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <Image Source="{DynamicResource Filter}" Style="{DynamicResource ClearImage}" Height="30" />
+                    </UserControl>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                        <Image Source="{DynamicResource FilterWhite}" Style="{DynamicResource ClearImage}" Height="25"/>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    Toggle Filter Pane
+                                </TextBlock>
+                            </StackPanel>
+
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                <ScrollViewer.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </ScrollViewer.Resources>
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                        The Filter Pane provides a set of options that states 
+                                        and defines the conditions at which each item must meet
+                                        before it is can be displayed.
+                                        
+                                        <LineBreak/>
+                                        <LineBreak/>
+                                        This way, data can be filtered out when a certain requirement is not 
+                                        met. The illustration below demonstrates how to filter your company's items based on
+                                        the current quantity on hand.
+                                    </TextBlock>
+
+                                    <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Filtering.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2"/>
+                                    </Border>
+                                </DockPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+
+            
+
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel x:Name="FactBox">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <Image Source="{DynamicResource FactBox}" Style="{DynamicResource ClearImage}" Height="30" />
+                    </UserControl>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                        <Image Source="{DynamicResource FactBoxWhite}" Style="{DynamicResource ClearImage}" Height="25"/>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    Toggle FactBox
+                                </TextBlock>
+                            </StackPanel>
+
+
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                <ScrollViewer.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </ScrollViewer.Resources>
+
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                    The FactBox provides more information on the selected item. Items are more easily selected 
+                                     when they displayed in a list layout. To select an item in a tile layout, simply click the
+                                     Item Options 
+                                     <InlineUIContainer>
+                                         <Image Source="{DynamicResource VerticalEllipse}" Style="{DynamicResource ClearImage}" Width="15"/>
+                                     </InlineUIContainer>
+                                        button on the item.
+                                    </TextBlock>
+
+                                    <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Fact Box.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2"/>
+                                    </Border>
+                                </DockPanel>
+                            </ScrollViewer>
+
+
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+
+            </coreControls:RippleControlButton>
+
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin=".5,.5">
+                <Button.RenderTransform>
+                    <RotateTransform Angle="90"/>
+                </Button.RenderTransform>
+                <StackPanel x:Name="MoreOptionsHorizontal">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <Image Source="{DynamicResource VerticalEllipse}" Style="{DynamicResource ClearImage}" Height="30" />
+                    </UserControl>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40" RenderTransformOrigin=".5,.5">
+                                        <UserControl.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </UserControl.RenderTransform>
+                                        <Image Source="{DynamicResource VerticalEllipseWhite}" Style="{DynamicResource ClearImage}" Height="25"/>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    More Options
+                                </TextBlock>
+                            </StackPanel>
+
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                <ScrollViewer.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </ScrollViewer.Resources>
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                        The More Options button serves as a context menu with an extra set of 
+                                        options. When you can't seem to find what you are looking for, 
+                                        this button can be quite resourceful.
+                                    </TextBlock>
+
+                                    <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/More Options.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                    </Border>
+                                </DockPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+
+            
+
+            
+
+
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel x:Name="Edit">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <Image Source="{DynamicResource Pencil}" Style="{DynamicResource ClearImage}" Height="30" />
+                    </UserControl>
+                </StackPanel>
+
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                        <Image Source="{DynamicResource PencilWhite}" Style="{DynamicResource ClearImage}" Height="25"/>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    Toggle Edit Mode
+                                </TextBlock>
+                            </StackPanel>
+
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                <ScrollViewer.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </ScrollViewer.Resources>
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                    This button makes an item to be readonly or editable. The readonly mode
+                                    should be activated when you would only like to view the information 
+                                    in a card or template.
+                                    </TextBlock>
+
+                                    
+                                    <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Toggle Edit.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2"/>
+                                    </Border>
+                                    
+                                </DockPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel x:Name="Add">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <Image Source="{DynamicResource Add}" Style="{DynamicResource ClearImage}" Height="40" />
+                    </UserControl>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                        <Image Source="{DynamicResource AddWhite}" Style="{DynamicResource ClearImage}" Height="25"/>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    New
+                                </TextBlock>
+                            </StackPanel>
+
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                <ScrollViewer.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </ScrollViewer.Resources>
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                    This button simply creates a new item.
+                                    </TextBlock>
+
+
+                                    <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/New.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2"/>
+                                    </Border>
+
+                                </DockPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+
+            </coreControls:RippleControlButton>
+
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel x:Name="Delete">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <Image Source="{DynamicResource DustBin}" Style="{DynamicResource ClearImage}" Height="30" />
+                    </UserControl>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                        <Image Source="{DynamicResource DustBinWhite}" Style="{DynamicResource ClearImage}" Height="25"/>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    Delete
+                                </TextBlock>
+                            </StackPanel>
+
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                <ScrollViewer.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </ScrollViewer.Resources>
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                    This button deletes the current item. Since, Microsoft Dynamics 365 
+                                    Business Central automatically saves your changes, the Delete
+                                    button can also serve as a "Cancel" button. If an unwanted new
+                                    item is created, simply click the Delete button to go back without 
+                                    saving the new item.
+                                    </TextBlock>
+
+
+                                    <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Delete.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2"/>
+                                    </Border>
+
+                                </DockPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel x:Name="Back">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <Image Source="{DynamicResource BackArrow}" Style="{DynamicResource ClearImage}" Height="40" />
+                    </UserControl>
+                </StackPanel>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                        <Image Source="{DynamicResource TellMeWhite}" Style="{DynamicResource ClearImage}" Height="25"/>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    Tell Me
+                                </TextBlock>
+                            </StackPanel>
+
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                <ScrollViewer.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </ScrollViewer.Resources>
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                        The Back Button 
+                                    </TextBlock>
+
+                                    <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Back.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="1"/>
+                                    </Border>
+                                </DockPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+
+            <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource ExcelBrush}" Padding="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel x:Name="Excel">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="50" Height="50">
+                        <Image Source="{DynamicResource ExcelIcon}" Style="{DynamicResource ClearImage}" Height="25" />
+                    </UserControl>
+                </StackPanel>
+
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <Grid ClipToBounds="True">
+
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <StackPanel VerticalAlignment="Center" Margin="5">
+                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="40" Height="40">
+                                        <Image Source="{DynamicResource ExcelIcon}" Style="{DynamicResource ClearImage}" Height="25"/>
+                                    </UserControl>
+                                </StackPanel>
+
+
+
+                                <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                    Edit In Excel
+                                </TextBlock>
+                            </StackPanel>
+
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                <ScrollViewer.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </ScrollViewer.Resources>
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                        The Edit In Excel button is designed to export data from the current page into 
+                                        Microsoft Excel. To learn more about this feature, click
+                                        <coreControls:ActiveHyperlink NavigateUri="https://www.youtube.com/watch?v=eGJrtFJAfao" Foreground="{DynamicResource MainBrush}">
+                                            here.
+                                        </coreControls:ActiveHyperlink>
+                                    </TextBlock>
+
+                                    <!--
+                                    <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Tell Me.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2"/>
+                                    </Border>
+                                    -->
+                                </DockPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+        </UniformGrid>
+    </Grid>
+</coreControls:RippleControl>

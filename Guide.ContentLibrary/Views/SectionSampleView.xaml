@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="Guide.ContentLibrary.Views.SectionSampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Guide.ContentLibrary.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Material.xaml"/>
+                <ResourceDictionary Source="../Resources/Common.xaml"/>
+                
+            </ResourceDictionary.MergedDictionaries>
+            <Storyboard x:Key="SlideIn">
+                <DoubleAnimationUsingKeyFrames BeginTime="00:00:01" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="border">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <ExponentialEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource SlideIn}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid Background="{DynamicResource MainBrush}" ClipToBounds="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".8*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border x:Name="border" Background="{DynamicResource IntenseAuxBrush}" Padding="40" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Border}, Path=ActualWidth, Converter={StaticResource NegativeConverter}}"/>
+                </TransformGroup>
+            </Border.RenderTransform>
+            <TextBlock FontFamily="Helectiva" Foreground="{DynamicResource MainBrush}" FontSize="50" FontWeight="Light" VerticalAlignment="Center" Opacity=".9" TextWrapping="Wrap">
+                Introduction
+                <LineBreak/>
+                <LineBreak/>
+                <LineBreak/>
+                <Run x:Name="Content" FontSize="20">
+                   An overview of Microsoft Dynamics 365 Business Central
+                    and it's benefits to your company
+                </Run>
+            </TextBlock>
+        </Border>
+
+        <Border Grid.Column="1" Padding="40 40 40 40">
+            <StackPanel>
+                <TextBlock Text="In this section:" FontSize="30" FontFamily="Helectiva" FontWeight="Light" Foreground="{DynamicResource IntenseAuxBrush}"/>
+
+                <ListBox  Foreground="{DynamicResource IntenseAuxBrush}">
+                    <ListBox.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.MergedDictionaries>
+                                
+                            </ResourceDictionary.MergedDictionaries>
+                        </ResourceDictionary>
+                    </ListBox.Resources>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Light" FontSize="18" FontFamily="Helectiva">
+                                ·
+                                <Run Text="{Binding}" />
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                    
+                    <ListBoxItem>
+                        <TextBlock FontWeight="Light" FontSize="18" FontFamily="Helectiva">
+                            <Bold><Run Text="·    "></Run></Bold>
+                            Why Business Central?
+                        </TextBlock>
+                        
+                    </ListBoxItem>
+
+                    <ListBoxItem>
+                        <TextBlock FontWeight="Light" FontSize="18" FontFamily="Helectiva">
+                            <Bold><Run Text="·    "></Run></Bold>
+                            Overview of Business Functionality
+                        </TextBlock>
+                    </ListBoxItem>
+
+                    <ListBoxItem>
+                        <TextBlock FontWeight="Light" FontSize="18" FontFamily="Helectiva">
+                            <Bold><Run Text="·    "></Run></Bold>
+                            Accessing Business Central
+                        </TextBlock>
+                    </ListBoxItem>
+                </ListBox>
+            </StackPanel>
+        </Border>
+        
+    </Grid>
+</UserControl>

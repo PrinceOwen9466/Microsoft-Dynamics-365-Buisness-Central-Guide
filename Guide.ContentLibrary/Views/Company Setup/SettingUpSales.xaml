@@ -1,0 +1,349 @@
+﻿<coreControls:RippleControl x:Class="Guide.ContentLibrary.Views.Company_Setup.SettingUpSales"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Guide.ContentLibrary.Views.Company_Setup"
+             xmlns:contentCore="clr-namespace:Guide.ContentLibrary"
+             xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
+             mc:Ignorable="d" Template="{StaticResource RippleControlTemplate}"
+             d:DesignHeight="450" d:DesignWidth="800" Background="{DynamicResource MainBrush}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="{DynamicResource Sales}" Style="{DynamicResource ClearImage}" Grid.RowSpan="2" Stretch="UniformToFill" Opacity=".5"/>
+
+        <StackPanel Orientation="Horizontal" ClipToBounds="True">
+            <Grid Margin="20">
+                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoTeal}" Width="70" Height="70" Opacity="1"/>
+                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoWhite}" Width="70" Height="70" Opacity="0" />
+            </Grid>
+            <Grid VerticalAlignment="Center">
+                <TextBlock x:Name="Central" Text="Setting Up Sales" FontSize="40" FontFamily="Helectiva" FontWeight="Light"  Foreground="{DynamicResource AuxBrush}"/>
+                <Border x:Name="border" VerticalAlignment="Top"  Height="4" Background="{DynamicResource AuxBrush}" CornerRadius="5" RenderTransformOrigin="0.5,0.5">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform>
+                                <TranslateTransform.Y>
+                                    <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="a-b">
+                                        <MultiBinding.Bindings>
+                                            <Binding ElementName="Central" Path="ActualHeight"/>
+                                            <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Border}" Path="ActualHeight"/>
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </TranslateTransform.Y>
+                            </TranslateTransform>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+
+                </Border>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="50 0">
+            <StackPanel Orientation="Horizontal" Margin="2 30">
+                <coreControls:RippleControlButton Background="{DynamicResource AuxBrush}" Template="{DynamicResource ContentOnlyTemplate}">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}">
+                        <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource MainBrush}"/>
+                    </UserControl>
+
+                    <coreControls:RippleControlButton.TransitionContent>
+                        <Grid ClipToBounds="True">
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <StackPanel VerticalAlignment="Center" Margin="5">
+                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                            <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                        </UserControl>
+                                    </StackPanel>
+
+
+
+                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        Sales And Receivables
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                    <ScrollViewer.Resources>
+                                        <ResourceDictionary>
+                                            <ResourceDictionary.MergedDictionaries>
+                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                            </ResourceDictionary.MergedDictionaries>
+                                        </ResourceDictionary>
+                                    </ScrollViewer.Resources>
+
+                                    <StackPanel Grid.Row="1">
+                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                           The Sales And Receivables Setup page configures 
+                                           the foundation on which sales will be made in your company.
+                                           
+                                           <LineBreak/>
+                                           <LineBreak/>
+                                           The number series section of the Sales And Receivables Setup page
+                                           is a very important section to setup. This is because it defines 
+                                           how important sale areas like Customers, Sale Invoices and Orders
+                                           are numbered.
+                                        </TextBlock>
+
+                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Sales And Receivables.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                        </Border>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
+                    </coreControls:RippleControlButton.TransitionContent>
+
+                </coreControls:RippleControlButton>
+
+                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                    Sales And Receivables
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="2 30">
+                <coreControls:RippleControlButton Background="{DynamicResource AuxBrush}" Template="{DynamicResource ContentOnlyTemplate}">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}">
+                        <TextBlock Text="2" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource MainBrush}"/>
+                    </UserControl>
+
+                    <coreControls:RippleControlButton.TransitionContent>
+                        <Grid ClipToBounds="True">
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <StackPanel VerticalAlignment="Center" Margin="5">
+                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                            <TextBlock Text="2" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                        </UserControl>
+                                    </StackPanel>
+
+
+
+                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        New Customers
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                    <ScrollViewer.Resources>
+                                        <ResourceDictionary>
+                                            <ResourceDictionary.MergedDictionaries>
+                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                            </ResourceDictionary.MergedDictionaries>
+                                        </ResourceDictionary>
+                                    </ScrollViewer.Resources>
+
+                                    <StackPanel Grid.Row="1">
+                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                            Customers are your company's source of income. It is important
+                                            to register your customers with enough information for easy
+                                            referencing in the future.
+                                            <LineBreak/>
+                                            <LineBreak/>
+                                            Customer Templates allow you to provide default values for customers 
+                                            to make registeration easier. The video below demonstrates how to 
+                                            create a Customer Template.
+                                        </TextBlock>
+
+                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Customer Templates.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                        </Border>
+
+                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                            Once the Customer Template is well configured, you can start the 
+                                            process of registering customers.
+                                        </TextBlock>
+
+                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/New Customers.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                        </Border>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
+                    </coreControls:RippleControlButton.TransitionContent>
+
+                </coreControls:RippleControlButton>
+
+                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                    New Customers
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="2 30">
+                <coreControls:RippleControlButton Background="{DynamicResource AuxBrush}" Template="{DynamicResource ContentOnlyTemplate}">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}">
+                        <TextBlock Text="3" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource MainBrush}"/>
+                    </UserControl>
+
+                    <coreControls:RippleControlButton.TransitionContent>
+                        <Grid ClipToBounds="True">
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <StackPanel VerticalAlignment="Center" Margin="5">
+                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                            <TextBlock Text="3" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                        </UserControl>
+                                    </StackPanel>
+
+
+
+                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        Payment Services
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                    <ScrollViewer.Resources>
+                                        <ResourceDictionary>
+                                            <ResourceDictionary.MergedDictionaries>
+                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                            </ResourceDictionary.MergedDictionaries>
+                                        </ResourceDictionary>
+                                    </ScrollViewer.Resources>
+
+                                    <StackPanel Grid.Row="1">
+                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                            Payment Services serve as an alternative to 
+                                            collecting payments through cash, credit cards or bank transfer. 
+                                            Services like Microsoft Pay, PayPal or WorldPay can be integrated
+                                            into Microsoft Dynamics 365 Business Central.
+                                            <LineBreak/>
+                                            <LineBreak/>
+                                            Once a payment service is enabled in Business Central, a 
+                                            payment link is available on sales documents sent to customers 
+                                            by email. This link can be removed before posting the document
+                                            if the customer is expected to pay cash.
+                                            
+                                            <LineBreak/>
+                                            <LineBreak/>
+                                            The video below demonstration on how to setup payment services.
+                                        </TextBlock>
+
+                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Payment Services.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                        </Border>
+
+                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                            Once the Customer Template is well configured, you can start the 
+                                            process of registering customers.
+                                        </TextBlock>
+
+                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/New Customers.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                        </Border>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
+                    </coreControls:RippleControlButton.TransitionContent>
+
+                </coreControls:RippleControlButton>
+
+                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                    Payment Services
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="2 30">
+                <coreControls:RippleControlButton Background="{DynamicResource AuxBrush}" Template="{DynamicResource ContentOnlyTemplate}">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}">
+                        <TextBlock Text="4" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource MainBrush}"/>
+                    </UserControl>
+
+                    <coreControls:RippleControlButton.TransitionContent>
+                        <Grid ClipToBounds="True">
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <StackPanel VerticalAlignment="Center" Margin="5">
+                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                            <TextBlock Text="3" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                        </UserControl>
+                                    </StackPanel>
+
+
+
+                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        Salespeople
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                    <ScrollViewer.Resources>
+                                        <ResourceDictionary>
+                                            <ResourceDictionary.MergedDictionaries>
+                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                            </ResourceDictionary.MergedDictionaries>
+                                        </ResourceDictionary>
+                                    </ScrollViewer.Resources>
+
+                                    <StackPanel Grid.Row="1">
+                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                            Setting up salespeople are vital for relationship management and 
+                                            marketing. Tasks can be directly assigned to a salesperson and 
+                                            reports can be printed based on a particular salesperson.
+                                            <LineBreak/>
+                                            <LineBreak/>
+                                            The video below demonstrates how to setup a salesperson.
+                                        </TextBlock>
+
+                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/SalesPeople.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                        </Border>
+
+                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                            To learn more about SalesPeople in Microsoft Dynamics 365 Business Central,
+                                            click 
+                                            <coreControls:ActiveHyperlink NavigateUri="https://docs.microsoft.com/en-us/dynamics365/business-central/sales-how-setup-salespeople">
+                                                here.
+                                            </coreControls:ActiveHyperlink>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
+                    </coreControls:RippleControlButton.TransitionContent>
+
+                </coreControls:RippleControlButton>
+
+                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                    Salespeople
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</coreControls:RippleControl>

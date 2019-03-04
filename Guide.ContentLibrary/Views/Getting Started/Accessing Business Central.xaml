@@ -1,0 +1,114 @@
+﻿<coreControls:RippleControl x:Class="Guide.ContentLibrary.Views.Getting_Started.Accessing_Business_Central"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
+             xmlns:local="clr-namespace:Guide.ContentLibrary.Views.Getting_Started"
+             mc:Ignorable="d" Background="{DynamicResource AuxBrush}"
+             d:DesignHeight="650" d:DesignWidth="1000" Template="{DynamicResource RippleControlTemplate}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="{DynamicResource SatisfiedCustomer}" Grid.RowSpan="2" Style="{DynamicResource ClearImage}" Opacity=".5" Stretch="UniformToFill"/>
+
+        <StackPanel Orientation="Horizontal" ClipToBounds="True" Margin="20">
+            <Grid Margin="20">
+                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoTeal}" Width="70" Height="70" Opacity="0"/>
+                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoWhite}" Width="70" Height="70" Opacity="1" />
+            </Grid>
+            <Grid VerticalAlignment="Center">
+                <TextBlock x:Name="Central" Text="Accessing Business Central" FontSize="40" FontFamily="Helectiva" FontWeight="Light"  Foreground="{DynamicResource MainBrush}" Opacity=".7"/>
+                <Border x:Name="border" VerticalAlignment="Top"  Height="4" Background="{DynamicResource MainBrush}" CornerRadius="5" RenderTransformOrigin="0.5,0.5" Opacity=".7">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform>
+                                <TranslateTransform.Y>
+                                    <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="a-b">
+                                        <MultiBinding.Bindings>
+                                            <Binding ElementName="Central" Path="ActualHeight"/>
+                                            <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Border}" Path="ActualHeight"/>
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </TranslateTransform.Y>
+                            </TranslateTransform>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+                </Border>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="50 0">
+            <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Opacity=".9" TextWrapping="Wrap">
+                Business Central is available everywhere, with 
+                an Android device, an iPhone, a Windows pc, and any
+                device that has access to a web browser.
+                
+                <LineBreak/>
+                <LineBreak/>
+                It is important to access Microsoft Dynamics 365
+                Business Central with an up-to-date 
+                browser to maintain security and to get access
+                to latest features. For a list of browsers, 
+                and their latest versions, click 
+                <coreControls:ActiveHyperlink NavigateUri="https://browsehappy.com/">
+                    here
+                </coreControls:ActiveHyperlink>.
+                <LineBreak/>
+                <LineBreak/>
+                Click any of the below links to get 
+                Microsoft Dynamics 365 on their respective
+                platforms.
+            </TextBlock>
+
+            <Grid HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <coreControls:HyperlinkButton Margin="20" Grid.Column="1" Template="{DynamicResource ContentOnlyTemplate}" Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" Width="100" NavigateUri="https://play.google.com/store/apps/details?id=com.microsoft.dynamics.ProjectMadeira">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                        <Image Source="{DynamicResource AndroidLogo}" Style="{DynamicResource ClearImage}" Width="50"/>
+                    </UserControl>
+                </coreControls:HyperlinkButton>
+
+                <coreControls:HyperlinkButton Margin="20" Grid.Column="2" Template="{DynamicResource ContentOnlyTemplate}" Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" Width="100" NavigateUri="https://itunes.apple.com/us/app/dynamics-365-business-central/id1093325047">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                        <Image Source="{DynamicResource AppleLogo}" Style="{DynamicResource ClearImage}" Width="50"/>
+                    </UserControl>
+                </coreControls:HyperlinkButton>
+
+                <coreControls:HyperlinkButton Margin="20" Grid.Column="3" Template="{DynamicResource ContentOnlyTemplate}" Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" Width="100" NavigateUri="https://www.microsoft.com/en-us/p/microsoft-dynamics-365-business-central/9nblggh4ql79">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                        <Image Source="{DynamicResource WindowsLogo}" Style="{DynamicResource ClearImage}" Width="50"/>
+                    </UserControl>
+                </coreControls:HyperlinkButton>
+
+                <coreControls:HyperlinkButton Margin="20" Grid.Column="4" Template="{DynamicResource ContentOnlyTemplate}" Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" Width="90" NavigateUri="https://businesscentral.dynamics.com">
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                        <Image Source="{DynamicResource EarthLogo}" Style="{DynamicResource ClearImage}" Width="50"/>
+                    </UserControl>
+                </coreControls:HyperlinkButton>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</coreControls:RippleControl>

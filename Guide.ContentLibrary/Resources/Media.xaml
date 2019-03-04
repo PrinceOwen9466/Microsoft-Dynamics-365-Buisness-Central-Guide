@@ -1,0 +1,46 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Guide.ContentLibrary"
+                    xmlns:c="clr-namespace:Guide.Common.Infrastructure.Resources.Containers;assembly=Guide.Common.Infrastructure"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <c:MediaSource x:Key="AppLauncher" UriSource="Videos/App Launcher.mp4">
+        <c:MediaSource.Context>
+            <c:MediaContext Title="Using the app launcher">
+                <c:MediaContext.Description>
+                    The app launcher provides a quick way to access other applications and 
+                    extensions in Microsoft Dynamics Business Central. It links directly to your
+                    Dynamics 365 applications and allows you to pin add-ins and extensions.
+                </c:MediaContext.Description>
+                <c:MediaContext.Placemarks>
+                    <c:MediaPlacemark Start="00:00:00" End="00:00:00" Title="Click on the top right corner of Business Central to open the app launcher.">
+                        The app launcher is a common feature in the Dynamics 365 Platform.
+                    </c:MediaPlacemark>
+                    <c:MediaPlacemark Start="00:00:06" End="00:00:08" Title="Once open, the app launcher gives direct access to Office and Dynamics 365.">
+                        
+                    </c:MediaPlacemark>
+                    <c:MediaPlacemark Start="00:00:08" End="00:00:10" Title="All pinned apps will appear here.">
+                        Pinned applications and extensions will be neatly arranged in that area, until you're manually unpin them.
+                    </c:MediaPlacemark>
+
+                    <c:MediaPlacemark Start="00:00:12" End="00:00:10" Title="The All apps section gives you access to all your Dynamics 365 applications and extensions.">
+                        From this section, you can simply search for your extensions and pin them to your workspace
+                    </c:MediaPlacemark>
+                </c:MediaContext.Placemarks>
+            </c:MediaContext>
+        </c:MediaSource.Context>
+    </c:MediaSource>
+    
+    
+    
+    <c:MediaSource x:Key="AccountingPeriods" UriSource="Videos/Accounting Periods.mp4"/>
+    <c:MediaSource x:Key="Actions" UriSource="Videos/Actions.mp4"/>
+    
+    <c:MediaSource x:Key="AssistedSetup" UriSource="Videos/Assisted Setup.mp4"/>
+    <c:MediaSource x:Key="Back" UriSource="Videos/Back.mp4"/>
+    <c:MediaSource x:Key="BankAccounts" UriSource="Videos/Bank Accounts.mp4"/>
+    <c:MediaSource x:Key="CashFlowSettingUpAccounts" UriSource="Videos/Cash Flow (Setting Up Accounts).mp4"/>
+    <c:MediaSource x:Key="CashFlowFinalizing" UriSource="Videos/Cash Flow (Finalizing).mp4"/>
+    
+
+</ResourceDictionary>

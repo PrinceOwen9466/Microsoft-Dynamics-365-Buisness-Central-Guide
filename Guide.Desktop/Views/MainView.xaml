@@ -1,0 +1,829 @@
+﻿<coreControls:PresentationControl x:Class="Guide.Desktop.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Guide.Desktop.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:prism="http://prismlibrary.com/" Name="ParentControl"
+             xmlns:core="clr-namespace:Guide.Common.Infrastructure;assembly=Guide.Common.Infrastructure"
+             xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
+             xmlns:coreBehaviors="clr-namespace:Guide.Common.Infrastructure.Resources.Behaviors;assembly=Guide.Common.Infrastructure"
+             xmlns:cap="clr-namespace:Guide.Common.Infrastructure.Resources.AttachedProperties;assembly=Guide.Common.Infrastructure"
+             xmlns:debug="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+             xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
+             mc:Ignorable="d" prism:ViewModelLocator.AutoWireViewModel="True" AutoOpen="true"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <!--
+        <Storyboard x:Key="Assemble">
+            <DoubleAnimationUsingKeyFrames BeginTime="0:0:0.2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="TitlePanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="uniformGrid">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1.2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="uniformGrid">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1.2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+        -->
+        <Storyboard x:Key="OpenSlidebar">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="SlideBarDummyBorder">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseSlideBar">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="SlideBarDummyBorder">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="DockTitleBar">
+            <Int32AnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Row)" Storyboard.TargetName="ContentContainer">
+                <EasingInt32KeyFrame KeyTime="0:0:0" Value="1"/>
+            </Int32AnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="UndockTitleBar">
+            <Int32AnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Row)" Storyboard.TargetName="ContentContainer">
+                <EasingInt32KeyFrame KeyTime="0:0:0" Value="0"/>
+            </Int32AnimationUsingKeyFrames>
+        </Storyboard>
+
+
+
+        <!--
+        <Storyboard x:Key="DockTitle">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder3">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+
+        <Storyboard x:Key="ActivateTitle">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder3">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            
+        </Storyboard>
+
+        <Storyboard x:Key="DeactivateTitle">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder3">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+        -->
+
+
+        <!--
+        <Storyboard x:Key="HideTitleBar">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        
+        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="InvertedTitleBarDummyBorder">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+            
+        </Storyboard>
+        <Storyboard x:Key="ShowTitleBar">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        
+        
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="InvertedTitleBarDummyBorder">
+                <EasingDoubleKeyFrame KeyTime="0:0:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        
+        <Storyboard x:Key="DockTitleBar">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="InvertedTitleBarDummyBorder">
+                <EasingDoubleKeyFrame KeyTime="0:0:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="UnDockTitleBar">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="InvertedTitleBarDummyBorder">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        -->
+    </UserControl.Resources>
+    <i:Interaction.Triggers>
+        <!--#region Init-->
+        <i:EventTrigger EventName="Opening" SourceObject="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
+            <ie:ControlStoryboardAction Storyboard="{StaticResource DockTitleBar}"/>
+        </i:EventTrigger>
+
+        <ie:StoryboardCompletedTrigger Storyboard="{StaticResource DockTitleBar}">
+            <ie:CallMethodAction MethodName="OnOpen" TargetObject="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
+        </ie:StoryboardCompletedTrigger>
+        <!--#endregion-->
+    </i:Interaction.Triggers>
+    
+    <UserControl.Triggers>
+<!--
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource DockTitleBar}"/>
+        </EventTrigger>
+-->
+    </UserControl.Triggers>
+    <Grid ClipToBounds="False">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="SlideBarOpen" SourceObject="{Binding Mode=OneWay}">
+                <ei:ControlStoryboardAction Storyboard="{StaticResource OpenSlidebar}"/>
+            </i:EventTrigger>
+            <i:EventTrigger EventName="SlideBarClosed" SourceObject="{Binding Mode=OneWay}">
+                <ei:ControlStoryboardAction Storyboard="{StaticResource CloseSlideBar}" />
+            </i:EventTrigger>
+
+            <i:EventTrigger EventName="TitleBarDocked" SourceObject="{Binding Mode=OneWay}">
+                <ei:ControlStoryboardAction Storyboard="{StaticResource DockTitleBar}"/>
+            </i:EventTrigger>
+
+            <i:EventTrigger EventName="TitleBarUndocked"  SourceObject="{Binding Mode=OneWay}">
+                <ei:ControlStoryboardAction Storyboard="{StaticResource UndockTitleBar}"/>
+            </i:EventTrigger>
+
+            <!--
+            <i:EventTrigger EventName="TitleBarDeactivated"  SourceObject="{Binding Mode=OneWay}">
+                <ei:ControlStoryboardAction Storyboard="{StaticResource DeactivateTitle}"/>
+            </i:EventTrigger>
+-->
+
+            <!--
+            <i:EventTrigger EventName="MouseEnterTitleBar" SourceObject="{Binding Mode=OneWay}">
+                <ei:ControlStoryboardAction Storyboard="{StaticResource HideTitleBar}" ControlStoryboardOption="Stop"/>
+                <ei:ControlStoryboardAction Storyboard="{StaticResource ShowTitleBar}"/>
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseLeaveTitleBar" SourceObject="{Binding Mode=OneWay}">
+                <ei:ControlStoryboardAction Storyboard="{StaticResource ShowTitleBar}" ControlStoryboardOption="Stop"/>
+                <ei:ControlStoryboardAction Storyboard="{StaticResource HideTitleBar}"/>
+            </i:EventTrigger>
+
+            <i:EventTrigger EventName="TitlePinned" SourceObject="{Binding Mode=OneWay}">
+                <ei:ControlStoryboardAction Storyboard="{StaticResource UnDockTitleBar}"/>
+            </i:EventTrigger>
+            <i:EventTrigger EventName="TitleUnpinned" SourceObject="{Binding Mode=OneWay}">
+                <ei:ControlStoryboardAction Storyboard="{StaticResource DockTitleBar}"/>
+            </i:EventTrigger>
+            -->
+        </i:Interaction.Triggers>
+
+        <Grid ClipToBounds="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+
+            <Border Width="1" x:Name="SlideBarDummyBorder"/>
+
+
+            <Button x:Name="ContentContainer" Template="{DynamicResource ContentOnlyTemplate}"  Grid.Row="1" Grid.RowSpan="2">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <prism:InvokeCommandAction Command="{Binding CloseSlideBarCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Border>
+                    <!--
+                    <ContentControl prism:RegionManager.RegionName="{x:Static core:Core.CONTENT_REGION}"/>
+                    -->
+                    <Control>
+                        <Control.Template>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition x:Name="WestColumn" Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition x:Name="EastColumn" Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <coreControls:SwipeContainer x:Name="ContentContainer" Content="{Binding Presenter.CurrentView, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SwipeDirection="{Binding Presenter.SwipeDirection, Mode=OneWay}" Grid.ColumnSpan="3"/>
+
+
+
+                                    <!--
+                        <coreControls:AirSpaceOverlay>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="ChildClicked">
+                                    <prism:InvokeCommandAction Command="{Binding ElementName=ParentControl, Path=DataContext.PreviousCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <coreControls:AirSpaceOverlay.OverlayChild>
+                                <Button VerticalAlignment="Center" Content="Previous" />
+                            </coreControls:AirSpaceOverlay.OverlayChild>
+                        </coreControls:AirSpaceOverlay>
+                        -->
+
+                                    <Grid x:Name="LeftButtonPanel" Background="{x:Null}" Margin="0 0 0 0" cap:Hits.RecordHits="true" Visibility="{Binding ElementName=ContentContainer, Path=Content.VideoActive, Converter={StaticResource BoolToVisibilityConverter}}">
+                                        <Button x:Name="LeftButton" VerticalAlignment="Center" Command="{Binding PreviousCommand}" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20" RenderTransformOrigin="0.5,0.5">
+                                            <Button.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform/>
+                                                    <TranslateTransform X="-100"/>
+                                                </TransformGroup>
+                                            </Button.RenderTransform>
+                                            <coreControls:SvgContainer SvgSource="{DynamicResource CircledLeftArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
+                                        </Button>
+                                    </Grid>
+
+                                    <Grid x:Name="RightButtonPanel" Background="{x:Null}" Grid.Column="2" cap:Hits.RecordHits="true">
+                                        <Button x:Name="RightButton" VerticalAlignment="Center" Grid.Column="2" Command="{Binding NextCommand}" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20">
+                                            <Button.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform/>
+                                                    <TranslateTransform X="100"/>
+                                                </TransformGroup>
+                                            </Button.RenderTransform>
+                                            <coreControls:SvgContainer SvgSource="{DynamicResource CircledRightArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
+                                        </Button>
+                                    </Grid>
+
+
+                                </Grid>
+
+                                <ControlTemplate.Resources>
+                                    <ResourceDictionary>
+                                        <Storyboard x:Key="PopInNavigation">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="LeftButton">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="20">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <ExponentialEase EasingMode="EaseInOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <ExponentialEase EasingMode="EaseInOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="RightButton">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-20">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <ExponentialEase EasingMode="EaseInOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <ExponentialEase EasingMode="EaseInOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+
+                                        <Storyboard x:Key="PopOutNavigation">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="LeftButton">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="-100"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="RightButton">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="100"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </ResourceDictionary>
+                                </ControlTemplate.Resources>
+
+                                <ControlTemplate.Triggers>
+                                    <Trigger SourceName="LeftButtonPanel" Property="cap:Hits.MouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <StopStoryboard BeginStoryboardName="BeginPopOutNavigation"/>
+                                            <BeginStoryboard x:Name="BeginPopInNavigation" Storyboard="{StaticResource PopInNavigation}"/>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard x:Name="BeginPopOutNavigation" Storyboard="{StaticResource PopOutNavigation}"/>
+                                            <StopStoryboard BeginStoryboardName="BeginPopInNavigation"/>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+
+                                    <Trigger SourceName="RightButtonPanel" Property="cap:Hits.MouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <StopStoryboard BeginStoryboardName="BeginPopOutNavigation1"/>
+                                            <BeginStoryboard x:Name="BeginPopInNavigation1" Storyboard="{StaticResource PopInNavigation}"/>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard x:Name="BeginPopOutNavigation1" Storyboard="{StaticResource PopOutNavigation}"/>
+                                            <StopStoryboard BeginStoryboardName="BeginPopInNavigation1"/>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                    <!--
+                                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                        <BeginStoryboard Storyboard="{StaticResource PopInNavigation}"/>
+                                    </EventTrigger>
+                                    -->
+                                    <!--
+                                    <Trigger SourceName="LeftButtonPanel" Property="IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <StopStoryboard BeginStoryboardName="BeginPopOutNavigation"/>
+                                            <BeginStoryboard x:Name="BeginPopInNavigation" Storyboard="{StaticResource PopInNavigation}"/>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard x:Name="BeginPopOutNavigation" Storyboard="{StaticResource PopOutNavigation}"/>
+                                            <StopStoryboard BeginStoryboardName="BeginPopInNavigation"/>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+
+                                    <Trigger SourceName="RightButtonPanel" Property="IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <StopStoryboard BeginStoryboardName="BeginPopOutNavigation1"/>
+                                            <BeginStoryboard x:Name="BeginPopInNavigation1" Storyboard="{StaticResource PopInNavigation}"/>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard x:Name="BeginPopOutNavigation1" Storyboard="{StaticResource PopOutNavigation}"/>
+                                            <StopStoryboard BeginStoryboardName="BeginPopInNavigation1"/>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                    -->
+
+                                </ControlTemplate.Triggers>
+
+                            </ControlTemplate>
+                        </Control.Template>
+                    </Control>
+
+                </Border>
+
+            </Button>
+
+            <Border Grid.Row="1" Margin="0 0 5 0" x:Name="Sidebar" Background="{DynamicResource SlightlyPolarBrush}" Width="300" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="LostFocus">
+                        <prism:InvokeCommandAction Command="{Binding CloseSlideBarCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+                <Border.Effect>
+                    <DropShadowEffect Color="{Binding Source={StaticResource SlightlyPolarBrush}, Path=Color}" Direction="0" BlurRadius="3" ShadowDepth="2"/>
+                </Border.Effect>
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform />
+                        <TranslateTransform>
+                            <TranslateTransform.X>
+                                <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="(-(a + 12) * b)">
+                                    <MultiBinding.Bindings>
+                                        <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Border}" Path="ActualWidth"/>
+                                        <Binding ElementName="SlideBarDummyBorder" Path="ActualWidth"/>
+                                    </MultiBinding.Bindings>
+                                </MultiBinding>
+                            </TranslateTransform.X>
+                        </TranslateTransform>
+                    </TransformGroup>
+                </Border.RenderTransform>
+
+                <Grid>
+                    <ItemsControl ItemsSource="{Binding Presenter.Content.Sections}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border x:Name="Container" BorderBrush="{DynamicResource MainBrush}" BorderThickness="0 0 0 .2">
+                                    <Button x:Name="ButtonContainer" Template="{DynamicResource ContentOnlyTemplate}" Command="{Binding ElementName=ParentControl, Path=DataContext.SidebarNavigateCommand}" CommandParameter="{Binding}">
+                                        <TextBlock Text="{Binding Name}" FontSize="20" Foreground="{DynamicResource MainBrush}" FontWeight="Light" FontFamily="Helectiva" TextAlignment="Center" Padding="0 13"/>
+                                    </Button>
+                                </Border>
+                                <DataTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" TargetName="Container" Value="{DynamicResource IntenseAuxBrush}"/>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding ElementName=ButtonContainer, Path=IsPressed}" Value="True">
+                                        <Setter Property="Background" TargetName="Container" Value="{DynamicResource AuxBrush}"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                </Grid>
+            </Border>
+
+
+            <Control>
+                <Control.Template>
+                    <ControlTemplate>
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="Assemble" x:Name="Assemble">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder2">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder3">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+
+                            <Storyboard x:Key="PopInMenu">
+                                <DoubleAnimationUsingKeyFrames BeginTime="0:0:0.3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="UniformGrid">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <BackEase EasingMode="EaseInOut"/>
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                </DoubleAnimationUsingKeyFrames>
+
+                                <DoubleAnimationUsingKeyFrames BeginTime="0:0:0.3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="UniformGrid">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <BackEase EasingMode="EaseInOut"/>
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+
+                            <Storyboard x:Key="DockTitle" x:Name="DockTitle">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder2">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <!--
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder3">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                -->
+                            </Storyboard>
+
+                            <Storyboard x:Key="UndockTitle" x:Name="UndockTitle">
+                                <!--
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder3">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                -->
+                            </Storyboard>
+
+                            <Storyboard x:Key="ActivateTitle" x:Name="ActivateTitle">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <!--
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder2">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                -->
+                            </Storyboard>
+
+                            <Storyboard x:Key="DeactivateTitle" x:Name="DeactivateTitle">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <!--
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder2">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                -->
+                            </Storyboard>
+
+                            <Storyboard x:Key="ActivateSearch" x:Name="ActivateSearch">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(cap:Directions.VerticalDirection)" Storyboard.TargetName="SearchPanel">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+
+                            <Storyboard x:Key="DeactivateSearch" x:Name="DeactivateSearch">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(cap:Directions.VerticalDirection)" Storyboard.TargetName="SearchPanel">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-1.5"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+
+                        </ControlTemplate.Resources>
+
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding TitleBarPinned}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard Name="DockTitleBegin" Storyboard="{StaticResource DockTitle}"/>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard Name="UndockTitleBegin" Storyboard="{StaticResource UndockTitle}"/>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+
+
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding TitleBarPinned}" Value="False"/>
+                                    <Condition Binding="{Binding TitleBarActive}" Value="True"/>
+                                </MultiDataTrigger.Conditions>
+
+                                <MultiDataTrigger.EnterActions>
+                                    <StopStoryboard BeginStoryboardName="AssembleBegin"/>
+                                    <BeginStoryboard x:Name="Storyboard0" Storyboard="{StaticResource ActivateTitle}"/>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                    <StopStoryboard BeginStoryboardName="Storyboard0"/>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>
+
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding TitleBarPinned}" Value="False"/>
+                                    <Condition Binding="{Binding TitleBarActive}" Value="False"/>
+                                    <Condition Binding="{Binding SlideBarActive}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+
+                                <MultiDataTrigger.EnterActions>
+                                    <StopStoryboard BeginStoryboardName="AssembleBegin"/>
+                                    <BeginStoryboard x:Name="Storyboard1" Storyboard="{StaticResource DeactivateTitle}"/>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                    <StopStoryboard BeginStoryboardName="Storyboard1"/>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>
+
+
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <BeginStoryboard Name="AssembleBegin" Storyboard="{StaticResource Assemble}"/>
+                                <BeginStoryboard Storyboard="{StaticResource PopInMenu}"/>
+                            </EventTrigger>
+
+                            <DataTrigger Binding="{Binding SearchActive}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard x:Name="BeginActivateSearch" Storyboard="{StaticResource ActivateSearch}"/>
+                                    <StopStoryboard BeginStoryboardName="BeginDeactivateSearch"/>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard x:Name="BeginDeactivateSearch" Storyboard="{StaticResource DeactivateSearch}"/>
+                                    <StopStoryboard BeginStoryboardName="BeginActivateSearch"/>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+
+
+                        <coreControls:NoClipGrid x:Name="TitleBarMainGrid" VerticalAlignment="Top" Height="{Binding ElementName=TitleBarDummyBorder3, Path=ActualWidth, Converter={StaticResource MathConverter}, ConverterParameter=a*40}" DockPanel.Dock="Top" ClipToBounds="False"  RenderTransformOrigin="0.5,0.5" Visibility="{Binding Presenter.FullPageActive, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseMove">
+                                    <prism:InvokeCommandAction Command="{Binding MouseMoveTitleBarCommand}"/>
+                                </i:EventTrigger>
+
+                                <i:EventTrigger EventName="MouseLeave">
+                                    <prism:InvokeCommandAction Command="{Binding MouseLeaveTitleBarCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <Border Width="1" x:Name="TitleBarDummyBorder"/>
+                            <Border Width="0" x:Name="TitleBarDummyBorder2"/>
+                            <Border Width="1" x:Name="TitleBarDummyBorder3"/>
+
+                            <Border Height="{Binding ElementName=TitleContainer, Path=ActualHeight}" Opacity="0" Background="#FFFFFF"/>
+                            <DockPanel x:Name="TitleContainer">
+                                <DockPanel.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform>
+                                            <TranslateTransform.Y>
+                                                <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="-(a*(b))">
+                                                    <MultiBinding.Bindings>
+                                                        <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Grid}" Path="ActualHeight"/>
+                                                        <Binding ElementName="TitleBarDummyBorder" Path="ActualWidth"/>
+                                                        <!--
+                                                        <Binding ElementName="TitleBarDummyBorder2" Path="ActualWidth"/>
+                                                        -->
+                                                    </MultiBinding.Bindings>
+                                                </MultiBinding>
+                                            </TranslateTransform.Y>
+                                        </TranslateTransform>
+                                    </TransformGroup>
+                                </DockPanel.RenderTransform>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown">
+                                        <prism:InvokeCommandAction Command="{Binding MoveCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Button Width="37" Height="40" DockPanel.Dock="Left" Style="{DynamicResource BasicButton}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <prism:InvokeCommandAction Command="{Binding OpenSlideBarCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+
+                                    <UniformGrid x:Name="UniformGrid" Width="16" Height="16" RenderTransformOrigin="0.5,0.5">
+                                        <UniformGrid.Resources>
+                                            <ResourceDictionary>
+                                                <Style TargetType="Rectangle">
+                                                    <Setter Property="Width" Value="3.5"/>
+                                                    <Setter Property="Height" Value="3.5"/>
+                                                    <Setter Property="Fill" Value="{DynamicResource MainBrush}"/>
+                                                </Style>
+                                            </ResourceDictionary>
+                                        </UniformGrid.Resources>
+                                        <UniformGrid.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform ScaleX="0" ScaleY="0"/>
+                                                <SkewTransform/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </UniformGrid.RenderTransform>
+
+                                        <Rectangle/>
+                                        <Rectangle/>
+                                        <Rectangle/>
+                                        <Rectangle/>
+                                        <Rectangle/>
+                                        <Rectangle/>
+                                        <Rectangle/>
+                                        <Rectangle/>
+                                        <Rectangle/>
+                                    </UniformGrid>
+                                </Button>
+                                <DockPanel x:Name="TitlePanel" RenderTransformOrigin="0.5,0.5" Background="#000000">
+                                    <!--
+                                    <DockPanel.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform Y="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DockPanel}, Path=ActualHeight, Converter={StaticResource NegativeConverter}}"/>
+                                        </TransformGroup>
+                                    </DockPanel.RenderTransform>
+                                    -->
+
+                                    <Button Foreground="{StaticResource MainBrush}" Style="{DynamicResource TransparentButton}" DockPanel.Dock="Right" Width="34" BorderBrush="{DynamicResource MainBrush}" BorderThickness=".5 0 0 0" Padding="5 0">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <prism:InvokeCommandAction Command="{Binding CloseCommand}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+
+                                        <Image Source="{DynamicResource CloseIcon}" Style="{DynamicResource ClearImage}"/>
+                                    </Button>
+                                    <Button Foreground="{StaticResource MainBrush}" DockPanel.Dock="Right" Width="34" Style="{DynamicResource TransparentButton}" BorderBrush="{DynamicResource MainBrush}" BorderThickness=".5 0 0 0" Padding="5">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <prism:InvokeCommandAction Command="{Binding MinimizeCommand}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                        <Image Source="{DynamicResource MinimizeIcon}" Style="{DynamicResource ClearImage}"/>
+                                    </Button>
+
+                                    <Border BorderThickness=".5 0 0 0" DockPanel.Dock="Right" BorderBrush="#FFFFFF" Padding="3 0" >
+                                        <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5 0" Orientation="Horizontal">
+                                            <!--
+                                            <Button Style="{DynamicResource RoundButton}" Margin="10 0" Command="{Binding PreviousCommand}">
+                                                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource LeftArrow}" Width="30"/>
+                                            </Button>
+                                            -->
+                                            
+                                            <ToggleButton Width="30" Height="30" Style="{DynamicResource RoundToggleButton}" Margin="5 0" Padding="0 5" IsChecked="{Binding SearchActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <coreControls:SvgContainer SvgSource="{DynamicResource TellMeSvg}" Style="{DynamicResource ClearImage}"/>
+                                            </ToggleButton>
+
+                                            <Button Width="30" Height="30" Style="{DynamicResource RoundButton}" Margin="5 0" Padding="0 6" Command="{Binding HomeCommand}">
+                                                <coreControls:SvgContainer SvgSource="{DynamicResource HomeSvg}" Style="{DynamicResource ClearImage}"/>
+                                            </Button>
+
+                                            <ToggleButton Width="30" Style="{DynamicResource RoundToggleButton}" IsChecked="{Binding TitleBarPinned, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5 0">
+                                                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource PushPinIcon}"/>
+                                            </ToggleButton>
+
+                                            <!--
+                                            <Button Style="{DynamicResource RoundButton}" Margin="10 0" Command="{Binding NextCommand}">
+                                                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource RightArrow}" Width="30"/>
+                                            </Button>
+                                            -->
+                                        </StackPanel>
+                                    </Border>
+
+
+                                    <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal">
+                                        <Border Padding="14 0" BorderThickness="0 0 .5 0" BorderBrush="{DynamicResource MainBrush}">
+                                            <TextBlock Foreground="{DynamicResource MainBrush}" Margin="10" VerticalAlignment="Center" Width="Auto" FontSize="16" FontFamily="Helvetica" FontWeight="Light">
+                                                Dynamics 365
+                                            </TextBlock>
+                                        </Border>
+                                        <Border BorderThickness="0 0 0 0" BorderBrush="{DynamicResource MainBrush}">
+                                            <TextBlock Foreground="{DynamicResource MainBrush}"  Margin="10" VerticalAlignment="Center" Width="Auto" FontSize="16" FontFamily="Helvetica" FontWeight="Light">
+                                                Business Central Guide
+                                            </TextBlock>
+                                        </Border>
+                                    </StackPanel>
+                                </DockPanel>
+                            </DockPanel>
+
+                            <Grid ClipToBounds="True" Grid.Row="1" Margin="50 0">
+                                <DockPanel x:Name="SearchPanel" Margin="10 0 10 10" Background="{DynamicResource MainBrush}" RenderTransformOrigin="0.5,0.5" cap:Directions.VerticalDirection="-1.5" >
+                                    <DockPanel.Resources>
+                                        <ResourceDictionary>
+                                            <ResourceDictionary.MergedDictionaries>
+                                                <ResourceDictionary Source="/Guide.Common.Infrastructure;component/Resources/Material.xaml"/>
+                                            </ResourceDictionary.MergedDictionaries>
+                                        </ResourceDictionary>
+                                    </DockPanel.Resources>
+                                    <DockPanel.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform>
+                                                <TranslateTransform.Y>
+                                                    <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="(x*y)+z">
+                                                        <Binding ElementName="SearchPanel" Path="ActualHeight"/>
+                                                        <Binding ElementName="SearchPanel" Path="(cap:Directions.VerticalDirection)"/>
+                                                        <Binding ElementName="TitleContainer" Path="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"/>
+                                                    </MultiBinding>
+                                                </TranslateTransform.Y>
+                                            </TranslateTransform>
+                                        </TransformGroup>
+                                    </DockPanel.RenderTransform>
+                                    <Panel.Effect>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="2" Color="Black" Direction="315"/>
+                                    </Panel.Effect>
+                                    <TextBlock DockPanel.Dock="Top" Margin="20 20 20 2" Text="WHAT WOULD YOU LIKE TO KNOW?" FontWeight="Light" Background="#00FFFFFF" FontFamily="Helectiva" FontSize="20"/>
+                                    <TextBox DockPanel.Dock="Top" Margin="20 4" Padding="0"/>
+                                    <ListBox Margin="20 2" BorderThickness="0">
+                                    </ListBox>
+                                </DockPanel>
+                            </Grid>
+                            
+                        </coreControls:NoClipGrid>
+                    </ControlTemplate>
+                </Control.Template>
+            </Control>
+        </Grid>
+
+
+        <Border Height="40" Background="#FFFFFF" Opacity="0" IsHitTestVisible="True"  VerticalAlignment="Top">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseMove">
+                    <prism:InvokeCommandAction Command="{Binding MouseMoveTitleBarCommand}"/>
+                </i:EventTrigger>
+
+                <i:EventTrigger EventName="MouseLeave">
+                    <prism:InvokeCommandAction Command="{Binding MouseLeaveTitleBarCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Border.Visibility>
+                <MultiBinding Converter="{StaticResource AndBooleanToVisibilityConverter}">
+                    <Binding Path="TitleBarActive" Converter="{StaticResource InverseBoolToVisibilityConverter}"/>
+                    <Binding Path="Presenter.FullPageActive" Converter="{StaticResource InverseBoolToVisibilityConverter}"/>
+                </MultiBinding>
+            </Border.Visibility>
+        </Border>
+    </Grid>
+</coreControls:PresentationControl>

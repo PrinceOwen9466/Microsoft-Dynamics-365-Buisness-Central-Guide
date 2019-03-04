@@ -1,0 +1,82 @@
+﻿<coreControls:RippleControl x:Class="Guide.ContentLibrary.Views.SectionHome"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:coreModels="clr-namespace:Guide.Common.Infrastructure.Models;assembly=Guide.Common.Infrastructure"
+             xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Template="{DynamicResource RippleControlTemplate}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Common.xaml"/>
+                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Storyboard x:Key="SlideIn">
+                <DoubleAnimationUsingKeyFrames BeginTime="00:00:01" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="MainBorder">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <ExponentialEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard Storyboard="{StaticResource SlideIn}"/>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid Background="{DynamicResource MainBrush}" ClipToBounds="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".8*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border x:Name="MainBorder" Padding="40" RenderTransformOrigin="0.5,0.5" Background="{DynamicResource IntenseAuxBrush}">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Border}, Path=ActualWidth, Converter={StaticResource NegativeConverter}}"/>
+                </TransformGroup>
+            </Border.RenderTransform>
+
+            <TextBlock FontFamily="Helectiva" Foreground="{DynamicResource MainBrush}" FontSize="50" FontWeight="Light" VerticalAlignment="Center" Opacity=".9" TextWrapping="Wrap">
+                <Run Text="{Binding Name, Mode=OneWay}"/>
+                <LineBreak/>
+                <LineBreak/>
+                <LineBreak/>
+                <Run Text="{Binding Description, Mode=OneWay}" FontSize="20"/>
+            </TextBlock>
+        </Border>
+
+        <Border Grid.Column="1" Padding="40" Background="{DynamicResource MainBrush}">
+
+            <StackPanel>
+                <TextBlock Text="In this section:" FontSize="30" FontFamily="Helectiva" FontWeight="Light" Foreground="{DynamicResource IntenseAuxBrush}"/>
+
+                <ListBox Foreground="{DynamicResource IntenseAuxBrush}" ItemsSource="{Binding PageMap}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Button Template="{DynamicResource ContentOnlyTemplate}">
+                                <TextBlock FontWeight="Light" FontSize="18" FontFamily="Helectiva" Foreground="{DynamicResource IntenseAuxBrush}">
+                                    <Bold><Run Text="·    "></Run></Bold>
+                                    <TextBlock Text="{Binding TargetPageName}"/>
+                                </TextBlock>
+                            </Button>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>  
+            </StackPanel>
+            
+        </Border>
+    </Grid>
+</coreControls:RippleControl>

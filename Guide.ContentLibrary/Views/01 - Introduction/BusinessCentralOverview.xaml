@@ -1,0 +1,722 @@
+﻿<coreControls:RippleControl x:Class="Guide.ContentLibrary.Views.Introduction.BusinessCentralOverview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
+             xmlns:coreModels="clr-namespace:Guide.Common.Infrastructure.Models;assembly=Guide.Common.Infrastructure"
+             xmlns:cap="clr-namespace:Guide.Common.Infrastructure.Resources.AttachedProperties;assembly=Guide.Common.Infrastructure"
+             xmlns:local="clr-namespace:Guide.ContentLibrary.Views.Introduction"
+             mc:Ignorable="d" Template="{DynamicResource RippleControlTemplate}" Title="Business Central Overview"
+             d:DesignHeight="650" d:DesignWidth="800" Background="{DynamicResource MainBrush}" Key="BusinessCentralOverview">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Storyboard x:Key="Rotate" RepeatBehavior="Forever">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="SpinGrid">
+                    <EasingDoubleKeyFrame KeyTime="0:0:30" Value="360"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="FinanceImage">
+                    <EasingDoubleKeyFrame KeyTime="0:0:30" Value="-360"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ProjectManagmentImage">
+                    <EasingDoubleKeyFrame KeyTime="0:0:30" Value="-360"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="OperationsManagementImage">
+                    <EasingDoubleKeyFrame KeyTime="0:0:30" Value="-360"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="SupplyChainManagementImage">
+                    <EasingDoubleKeyFrame KeyTime="0:0:30" Value="-360"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="RepotsAndAnalyticsImage">
+                    <EasingDoubleKeyFrame KeyTime="0:0:30" Value="-360"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="SalesAndServicesImage">
+                    <EasingDoubleKeyFrame KeyTime="0:0:30" Value="-360"/>
+                </DoubleAnimationUsingKeyFrames>
+                
+            </Storyboard>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource Rotate}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" ClipToBounds="True">
+            <Grid Margin="20">
+                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoTeal}" Width="70" Height="70" Opacity="1"/>
+                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoWhite}" Width="70" Height="70" Opacity="0" />
+            </Grid>
+            <Grid VerticalAlignment="Center">
+                <TextBlock x:Name="Central" Text="Business Central Overview" FontSize="40" FontFamily="Helectiva" FontWeight="Light"  Foreground="{DynamicResource AuxBrush}"/>
+                <Border x:Name="border" VerticalAlignment="Top"  Height="4" Background="{DynamicResource AuxBrush}" CornerRadius="5" RenderTransformOrigin="0.5,0.5">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform>
+                                <TranslateTransform.Y>
+                                    <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="a-b">
+                                        <MultiBinding.Bindings>
+                                            <Binding ElementName="Central" Path="ActualHeight"/>
+                                            <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Border}" Path="ActualHeight"/>
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </TranslateTransform.Y>
+                            </TranslateTransform>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+
+                </Border>
+            </Grid>
+        </StackPanel>
+
+
+        <Grid x:Name="SpinGrid" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <Ellipse Width="380" Height="380" StrokeThickness="4" Stroke="{DynamicResource AuxBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="MotherEllipse" Fill="{DynamicResource FaintAuxBrush}" Opacity=".8"/>
+
+            <coreControls:RippleControlButton VerticalAlignment="Center" HorizontalAlignment="Center" Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource AuxBrush}" Padding="10">
+                <StackPanel Orientation="Horizontal">
+                    <!--
+                    <TextBlock Text="Financial Management" Margin="-120 0 0 0" VerticalAlignment="Center" Width="100" TextWrapping="Wrap" FontSize="15" FontFamily="Helectiva" FontWeight="Bold" Foreground="{DynamicResource AuxBrush}" TextAlignment="Center"/>
+                    -->
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="120" Height="120" ToolTip="Financial Management">
+                        <Image x:Name="FinanceImage" Source="{DynamicResource FinanceIcon}" Style="{DynamicResource ClearImage}" Height="70" RenderTransformOrigin=".5,.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                    </UserControl>
+
+
+                </StackPanel>
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform>
+                            <TranslateTransform.X>
+                                <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="-a/2.5">
+                                    <Binding ElementName="MotherEllipse" Path="ActualWidth"/>
+                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Button}" Path="ActualWidth"/>
+                                </MultiBinding>
+                            </TranslateTransform.X>
+                            <TranslateTransform.Y>
+                                <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="-a/4">
+                                    <Binding ElementName="MotherEllipse" Path="ActualHeight"/>
+                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Button}" Path="ActualWidth"/>
+                                </MultiBinding>
+                            </TranslateTransform.Y>
+                        </TranslateTransform>
+                    </TransformGroup>
+                </Button.RenderTransform>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <coreControls:PresentationControl Key="FinancingAndManagment" Title="Financial Management">
+                        <Grid>
+                            <Image Source="{DynamicResource FinancingAndManagment}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".4" Grid.RowSpan="2"/>
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource FinanceIcon}" Margin="20" Width="70"/>
+                                    <TextBlock Text="Financial Management" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+
+                                <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                Microsoft Dynamics 365 Business Central gives you realtime 
+                information on the performance of your business. Gain full
+                control over your budgets and cashflow and share confidencial 
+                information in a secure manner with the rest of your business 
+                team.
+
+                
+                <LineBreak/>
+                <LineBreak/>
+                <LineBreak/>
+                · Develop and manage your company's budget while being
+                directly connected to your bank.
+                <LineBreak/>
+                <LineBreak/>
+                · Get business insight on when to pay your
+                vendors to take advantage of discounts
+                or avoid overdue penalties.
+                <LineBreak/>
+                <LineBreak/>
+                · Apply incoming payments directly to a
+                customer and mark invoices as paid to 
+                automatically reconcile accounts.
+                <LineBreak/>
+                <LineBreak/>
+                · Mark entries with tags to make categorisation and analysis
+                easier and faster.
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </coreControls:PresentationControl>
+                </coreControls:RippleControlButton.TransitionContent>
+                
+                
+            </coreControls:RippleControlButton>
+
+
+            <coreControls:RippleControlButton VerticalAlignment="Center" HorizontalAlignment="Center" Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource AuxBrush}" Padding="10">
+                <StackPanel>
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="120" Height="120">
+                        <Image x:Name="ProjectManagmentImage" Source="{DynamicResource ProjectManagementIcon}" Style="{DynamicResource ClearImage}" Height="70" RenderTransformOrigin=".5,.5" >
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                    </UserControl>
+                </StackPanel>
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform>
+                            <TranslateTransform.Y>
+                                <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="-a/2">
+                                    <Binding ElementName="MotherEllipse" Path="ActualHeight"/>
+                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Button}" Path="ActualWidth"/>
+                                </MultiBinding>
+                            </TranslateTransform.Y>
+                        </TranslateTransform>
+                    </TransformGroup>
+                </Button.RenderTransform>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <coreControls:PresentationControl Key="ProjectManagement" Title="Project Management">
+                        <Grid>
+                            <Image Source="{DynamicResource ProjectManagement}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".4" Grid.RowSpan="2"/>
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource ProjectManagementIcon}" Margin="20" Width="70"/>
+                                    <TextBlock Text="Project Management" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                    <ScrollViewer.Resources>
+                                        <ResourceDictionary>
+                                            <ResourceDictionary.MergedDictionaries>
+                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                            </ResourceDictionary.MergedDictionaries>
+                                        </ResourceDictionary>
+                                    </ScrollViewer.Resources>
+
+
+                                    <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                    Microsoft Dynamics 365 Business Central provides all the
+                                    data you need to help manage your company's budgets 
+                                    and monitor progress on ongoing tasks and progress.
+                    
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    Use Timesheets to track machine and employee project hours
+                                    using timesheets, and access real-time data on available 
+                                    resources, such as tools, resources and machinery.
+                    
+                    
+                    
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    <LineBreak/>  
+                
+                    
+                                    · Develop, modify and control budgets to keep you well 
+                                    informed on your business' worth and capacities. 
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    · Create, manage and keep track of customer projects with
+                                    sofisticated job and process costing capabilities.
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    · Manage usage levels and profitability by planning capacity
+                                    and sales.
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    </TextBlock>
+                                </ScrollViewer>
+
+
+                            </Grid>
+                        </Grid>
+                    </coreControls:PresentationControl>
+                    
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+
+            <coreControls:RippleControlButton VerticalAlignment="Center" HorizontalAlignment="Center" Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource AuxBrush}" Padding="10" >
+                <StackPanel>
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="120" Height="120">
+                        <Image x:Name="OperationsManagementImage" Source="{DynamicResource OperationsManagementIcon}" Style="{DynamicResource ClearImage}" Height="70" RenderTransformOrigin=".5,.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                    </UserControl>
+                </StackPanel>
+
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform>
+                            <TranslateTransform.Y>
+                                <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="a/2">
+                                    <Binding ElementName="MotherEllipse" Path="ActualHeight"/>
+                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Button}" Path="ActualWidth"/>
+                                </MultiBinding>
+                            </TranslateTransform.Y>
+                        </TranslateTransform>
+                    </TransformGroup>
+                </Button.RenderTransform>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <coreControls:PresentationControl Key="OperationsManagement" Title="Operations Management">
+                        <Grid>
+                            <Image Source="{DynamicResource OperationsManagement}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".4" Grid.RowSpan="2"/>
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource OperationsManagementIcon}" Margin="20" Width="70"/>
+                                    <TextBlock Text="Operations Management" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                    <ScrollViewer.Resources>
+                                        <ResourceDictionary>
+                                            <ResourceDictionary.MergedDictionaries>
+                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                            </ResourceDictionary.MergedDictionaries>
+                                        </ResourceDictionary>
+                                    </ScrollViewer.Resources>
+
+
+                                    <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                        Microsoft Dynamics 365 Business Central optimizes your business operations by giving
+                                        you the ability to manage forecasts, run your warehouse in an efficient manner
+                                        and reach optimal output levels.
+                    
+                                        <LineBreak/>
+                                        <LineBreak/>
+                                        <LineBreak/>
+                                        · Create, manage and edit production plans with insights on
+                                        your manufacturing capacities.
+                                        <LineBreak/>
+                                        <LineBreak/>
+                                        · Effectively manage your warehouse with insights and information
+                                        on your company's production output.
+
+
+                                    </TextBlock>
+                                </ScrollViewer>
+
+
+                            </Grid>
+                        </Grid>
+                    </coreControls:PresentationControl>
+                </coreControls:RippleControlButton.TransitionContent>
+                
+            </coreControls:RippleControlButton>
+
+            <coreControls:RippleControlButton VerticalAlignment="Center" HorizontalAlignment="Center" Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource AuxBrush}" Padding="10">
+                <StackPanel>
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="120" Height="120">
+                        <Image x:Name="SupplyChainManagementImage" Source="{DynamicResource SuplyChainManagementIcon}" Style="{DynamicResource ClearImage}" Height="70" RenderTransformOrigin=".5,.5" >
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                    </UserControl>
+                </StackPanel>
+
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform>
+                            <TranslateTransform.X>
+                                <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="a/2.5">
+                                    <Binding ElementName="MotherEllipse" Path="ActualWidth"/>
+                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Button}" Path="ActualWidth"/>
+                                </MultiBinding>
+                            </TranslateTransform.X>
+                            <TranslateTransform.Y>
+                                <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="a/4">
+                                    <Binding ElementName="MotherEllipse" Path="ActualHeight"/>
+                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Button}" Path="ActualWidth"/>
+                                </MultiBinding>
+                            </TranslateTransform.Y>
+                        </TranslateTransform>
+                    </TransformGroup>
+                </Button.RenderTransform>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <coreControls:PresentationControl Key="SupplyManamgment" Title="Supply Manamgment">
+                        <Grid>
+                            <Image Source="{DynamicResource SupplyManamgment}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".4" Grid.RowSpan="2"/>
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource SuplyChainManagementIcon}" Margin="20" Width="70"/>
+                                    <TextBlock Text="Supply Management" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                    <ScrollViewer.Resources>
+                                        <ResourceDictionary>
+                                            <ResourceDictionary.MergedDictionaries>
+                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                            </ResourceDictionary.MergedDictionaries>
+                                        </ResourceDictionary>
+                                    </ScrollViewer.Resources>
+
+
+                                    <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                    Microsoft Dynamics 365 Business Central allows you to customize and
+                                    control your business' supply chain, keeping you well connected to 
+                                    your business partners in the best possible way.
+                    
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    · Get insights on your inventory needs and your available vendors.
+                                    <LineBreak/>
+                                    <LineBreak/>
+                    
+                                    · Stay connected to your business partners, make stock orders and track
+                                    shipment and distribution of your products.
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    · Manage and get comprehensive reports on returns and cancellations.
+                                    </TextBlock>
+                                </ScrollViewer>
+
+
+                            </Grid>
+                        </Grid>
+                    </coreControls:PresentationControl>
+                </coreControls:RippleControlButton.TransitionContent>
+            </coreControls:RippleControlButton>
+
+            <coreControls:RippleControlButton VerticalAlignment="Center" HorizontalAlignment="Center" Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource AuxBrush}" Padding="10">
+                <StackPanel>
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="120" Height="120">
+                        <Image x:Name="RepotsAndAnalyticsImage" Source="{DynamicResource ReportsAndAnalyticsIcon}" Style="{DynamicResource ClearImage}" Height="70" RenderTransformOrigin=".5,.5" >
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+
+                            </Image.RenderTransform>
+                        </Image>
+                    </UserControl>
+                </StackPanel>
+
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform>
+                            <TranslateTransform.X>
+                                <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="-a/2.5">
+                                    <Binding ElementName="MotherEllipse" Path="ActualWidth"/>
+                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Button}" Path="ActualWidth"/>
+                                </MultiBinding>
+                            </TranslateTransform.X>
+                            <TranslateTransform.Y>
+                                <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="a/4">
+                                    <Binding ElementName="MotherEllipse" Path="ActualHeight"/>
+                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Button}" Path="ActualWidth"/>
+                                </MultiBinding>
+                            </TranslateTransform.Y>
+                        </TranslateTransform>
+                    </TransformGroup>
+                </Button.RenderTransform>
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <coreControls:PresentationControl Key="ReportsAndAnalytics" Title="Reports And Analytics">
+                        <Grid>
+                            <Image Source="{DynamicResource Reports}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".4" Grid.RowSpan="2"/>
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource ReportsAndAnalyticsIcon}" Margin="20" Width="70"/>
+                                    <TextBlock Text="Reports And Analytics" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                    <ScrollViewer.Resources>
+                                        <ResourceDictionary>
+                                            <ResourceDictionary.MergedDictionaries>
+                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                            </ResourceDictionary.MergedDictionaries>
+                                        </ResourceDictionary>
+                                    </ScrollViewer.Resources>
+
+
+                                    <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                      Microsoft Dynamics 365 Business Central centralizes your financial management 
+                                      data across accounting, sales, purchasing, inventory and customer interactions 
+                                      giving you an up-to-date, full view of your business.  
+                    
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    <LineBreak/>  
+                                    <LineBreak/>  
+                
+                                    Make faster, more informed decisions when you're guided by 
+                                    connected processes, predictive analytics, and real-time data.
+                    
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    <LineBreak/>  
+                    
+                                    · Create informative charts on your business performance in real time
+                                    using Microsoft Power BI integration.
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    · Easily track your Key Performance Indicators (KPIs) by creating your own 
+                                    analysis on generated data.
+                                    <LineBreak/><LineBreak/>
+                                    · Accurately predict your cash flow using built-in Cortana Intelligence
+                                    <LineBreak/><LineBreak/>
+                                    · Easily generate reports and charts using Office 365 integration.
+                                    </TextBlock>
+                                </ScrollViewer>
+
+
+                            </Grid>
+                        </Grid>
+                    </coreControls:PresentationControl>
+                    
+                </coreControls:RippleControlButton.TransitionContent>
+                
+            </coreControls:RippleControlButton>
+
+            <coreControls:RippleControlButton VerticalAlignment="Center" HorizontalAlignment="Center" Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource AuxBrush}" Padding="10">
+                <StackPanel>
+                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="120" Height="120">
+                        <Image x:Name="SalesAndServicesImage" Source="{DynamicResource SalesAndServicesManagement}" Style="{DynamicResource ClearImage}" Height="70" RenderTransformOrigin=".5,.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                    </UserControl>
+                </StackPanel>
+
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform>
+                            <TranslateTransform.X>
+                                <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="a/2.5">
+                                    <Binding ElementName="MotherEllipse" Path="ActualWidth"/>
+                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Button}" Path="ActualWidth"/>
+                                </MultiBinding>
+                            </TranslateTransform.X>
+                            <TranslateTransform.Y>
+                                <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="-a/4">
+                                    <Binding ElementName="MotherEllipse" Path="ActualHeight"/>
+                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Button}" Path="ActualWidth"/>
+                                </MultiBinding>
+                            </TranslateTransform.Y>
+                        </TranslateTransform>
+                    </TransformGroup>
+                </Button.RenderTransform>
+
+
+                <coreControls:RippleControlButton.TransitionContent>
+                    <coreControls:PresentationControl Title="Sales And Services Management">
+                        <Grid>
+                            <Image Source="{DynamicResource HappyShopping}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".4" Grid.RowSpan="2"/>
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource SalesAndServicesManagement}" Margin="20" Width="70"/>
+                                    <TextBlock Text="Sales And Service Management" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+
+                                <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                Microsoft Dynamics 365 Business Central provides faster and effective 
+                                sales processes. Act quickly on sales-related enquiries right from 
+                                Microsoft Outlook. Easily handle multiple ship-to 
+                                and bill-to addresses per customer, including direct shipment
+                                and invoice addresses.
+
+                
+                                <LineBreak/>
+                                <LineBreak/>
+                                <LineBreak/>
+                                · Get a complete overview of interactions and track
+                                current customer status, from email to order
+                                to invoice.
+                                <LineBreak/>
+                                <LineBreak/>
+                                · Make negociations and keep track of special 
+                                agreements with individual customers, including
+                                discount structures.
+                                <LineBreak/>
+                                <LineBreak/>
+                                · Create and post sales right from Microsft Outlook,
+                                and send invoices as PDF attachments that include a PayPal
+                                link to expedite payments.
+                                <LineBreak/>
+                                <LineBreak/>
+                                · Process payments, create and manage invoices faster.
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </coreControls:PresentationControl>
+                </coreControls:RippleControlButton.TransitionContent>
+
+            </coreControls:RippleControlButton>
+        </Grid>
+
+
+
+        <coreControls:RippleControlButton VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" FontSize="20" FontFamily="Helectiva" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource MainBrush}">
+            <StackPanel x:Name="BusinessCentral">
+                <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="120" Height="120">
+                    <Image Source="{DynamicResource BusinessCentralLogoTeal}" Style="{DynamicResource ClearImage}" Height="60" Opacity=".7"/>
+                </UserControl>
+            </StackPanel>
+
+            <coreControls:RippleControlButton.TransitionContent>
+                <coreControls:PresentationControl Title="Business Central Definition">
+                    <Grid>
+                        <Image Source="{DynamicResource BusinessCentralDevices}" Style="{DynamicResource ClearImage}" Stretch="Uniform" Opacity=".7" Grid.RowSpan="2" VerticalAlignment="Bottom"/>
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+
+                            <StackPanel Orientation="Horizontal">
+                                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoTeal}" Margin="20" Width="70"/>
+                                <TextBlock Text="Business Central" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource AuxBrush}" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+
+                            <TextBlock FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                            Microsoft Dynamics 365 Business Central is a single comprehensive solution, 
+                            pulling systems and processes together to manage your business. It simply allows
+                            you to securely connect, manage your business, make smarter decisions, and grow.
+                            
+                            <LineBreak/>
+                            <LineBreak/>
+
+
+                            </TextBlock>
+                        </Grid>
+                    </Grid>
+                </coreControls:PresentationControl>
+            </coreControls:RippleControlButton.TransitionContent>
+        </coreControls:RippleControlButton>
+        
+        <!--
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" TextWrapping="Wrap" FontSize="20" FontFamily="Helectiva" Foreground="{DynamicResource AuxBrush}" TextAlignment="Center" Grid.Row="1">
+            Microsoft 
+            Dynamics 365
+            Business Central
+        </TextBlock>
+        -->
+    </Grid>
+    
+</coreControls:RippleControl>

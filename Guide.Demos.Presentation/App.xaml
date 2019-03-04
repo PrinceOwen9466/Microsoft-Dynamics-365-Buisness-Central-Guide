@@ -1,0 +1,9 @@
+﻿<Application x:Class="Guide.Demos.Presentation.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Guide.Demos.Presentation"
+             StartupUri="Views/Shell.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

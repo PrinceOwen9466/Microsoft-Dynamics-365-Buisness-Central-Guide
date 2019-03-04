@@ -1,0 +1,252 @@
+﻿<coreControls:RippleControl x:Class="Guide.ContentLibrary.Views.Introduction.WhyBusinessCentral"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
+             xmlns:coreEffects="clr-namespace:Guide.Common.Infrastructure.Resources.Shaders;assembly=Guide.Common.Infrastructure"
+             xmlns:coreModels="clr-namespace:Guide.Common.Infrastructure.Models;assembly=Guide.Common.Infrastructure"
+             mc:Ignorable="d" Template="{DynamicResource RippleControlTemplate}"
+             d:DesignHeight="450" d:DesignWidth="800" Background="{DynamicResource MainBrush}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" ClipToBounds="True">
+            <Grid Margin="20">
+                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoTeal}" Width="70" Height="70" Opacity="1"/>
+                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoWhite}" Width="70" Height="70" Opacity="0" />
+            </Grid>
+            <Grid VerticalAlignment="Center">
+                <TextBlock x:Name="Central" Text="Why Business Central?" FontSize="40" FontFamily="Helectiva" FontWeight="Light"  Foreground="{DynamicResource AuxBrush}"/>
+                <Border x:Name="border" VerticalAlignment="Top"  Height="4" Background="{DynamicResource AuxBrush}" CornerRadius="5" RenderTransformOrigin="0.5,0.5">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform>
+                                <TranslateTransform.Y>
+                                    <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="a-b">
+                                        <MultiBinding.Bindings>
+                                            <Binding ElementName="Central" Path="ActualHeight"/>
+                                            <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Border}" Path="ActualHeight"/>
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </TranslateTransform.Y>
+                            </TranslateTransform>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+
+                </Border>
+            </Grid>
+        </StackPanel>
+
+        <Grid Margin="100 20"  Grid.Row="1" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <StackPanel>
+                <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource AuxBrush}" Padding="10">
+                    <StackPanel x:Name="Modern">
+                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="120" Height="120">
+                            <Image Source="{DynamicResource ModernIcon}" Style="{DynamicResource ClearImage}" Height="70" />
+                        </UserControl>
+                    </StackPanel>
+
+                    <coreControls:RippleControlButton.TransitionContent>
+                        <Grid>
+                            <Image Source="{DynamicResource BusinessCentralPreview}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".4" Grid.RowSpan="2"/>
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource ModernIcon}" Margin="20" Width="70"/>
+                                    <TextBlock Text="Modern" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+
+                                <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                Microsoft Dynamics 365 Business Central is designed with a 
+                                cutting edge modern user interface that is common on all devices.
+                                With a Phone, Tablet or Web Client, get easy access to your business 
+                                anywhere, anytime.
+            
+                                <LineBreak/>
+                                <LineBreak/>
+                                <LineBreak/>
+            
+                                Drive your business with world class applications that make use 
+                                of modern technologies like Artificial intelligence (AI) and
+                                Mixed Reality for more rapid and innovative business decisions.
+
+
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                        
+                    </coreControls:RippleControlButton.TransitionContent>
+                </coreControls:RippleControlButton>
+
+                <TextBlock Text="Modern" FontFamily="Helectiva" TextAlignment="Center" Foreground="{DynamicResource AuxBrush}" FontSize="20" Padding="10"/>
+
+                
+            </StackPanel>
+
+
+            <StackPanel Grid.Column="1">
+                <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource AuxBrush}" Padding="10" Grid.Column="1">
+                    <StackPanel x:Name="Unified">
+                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="120" Height="120">
+                            <Image Source="{DynamicResource UnifiedIcon}" Style="{DynamicResource ClearImage}" Height="70" />
+                        </UserControl>
+                    </StackPanel>
+
+                    <coreControls:RippleControlButton.TransitionContent>
+                        <Grid>
+                            <Image Source="{DynamicResource TeamAgreement}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".2" Grid.RowSpan="2"/>
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource UnifiedIcon}" Margin="20" Width="70"/>
+                                    <TextBlock Text="Unified" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+
+                                <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                    Microsoft Dynamics 365 improves productivity and workflow by
+                                    unifying relationships, processes and data by providing comprehensive
+                                    business applications and services all available and connected through the 
+                                    Microsoft Cloud platform.
+                
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    Microsoft Dynamics 365 Business Central is fully integrated across
+                                    across other Microsoft stack of products like Office 365, Dynamics
+                                    365 sales, PowerBI and more.
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </coreControls:RippleControlButton.TransitionContent>
+                    
+                </coreControls:RippleControlButton>
+
+                <TextBlock Text="Unified" FontFamily="Helectiva" TextAlignment="Center" Foreground="{DynamicResource AuxBrush}" FontSize="20" Padding="10"/>
+                
+                
+                
+            </StackPanel>
+
+
+            <StackPanel Grid.Column="2">
+                <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource AuxBrush}" Padding="10" Grid.Column="2">
+                    <StackPanel x:Name="Intelligent">
+                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="120" Height="120">
+                            <Image Source="{DynamicResource IntelligentIcon}" Style="{DynamicResource ClearImage}" Height="70" />
+                        </UserControl>
+                    </StackPanel>
+
+                    <coreControls:RippleControlButton.TransitionContent>
+                        <Grid>
+                            <Image Source="{DynamicResource AIConnections}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".3" Grid.RowSpan="2">
+                                
+                            </Image>
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource IntelligentIcon}" Margin="20" Width="70"/>
+                                    <TextBlock Text="Intelligent" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+
+                                <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                    Microsoft Dynamics 365 Business Central provides your business
+                                    with insights leveraging from leading Artificial Intelligence (AI) to 
+                                    provide business decision makers with right information on the go.
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </coreControls:RippleControlButton.TransitionContent>
+                </coreControls:RippleControlButton>
+
+                <TextBlock Text="Intelligent" FontFamily="Helectiva" TextAlignment="Center" Foreground="{DynamicResource AuxBrush}" FontSize="20" Padding="10"/>
+            </StackPanel>
+
+
+
+            <StackPanel Grid.Column="3">
+                <coreControls:RippleControlButton Template="{DynamicResource ContentOnlyTemplate}" Background="{DynamicResource AuxBrush}" Padding="10" Grid.Column="3">
+                    <StackPanel x:Name="Adaptable">
+                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="120" Height="120">
+                            <Image Source="{DynamicResource AdaptableIcon}" Style="{DynamicResource ClearImage}" Height="100" />
+                        </UserControl>
+                    </StackPanel>
+
+
+                    <coreControls:RippleControlButton.TransitionContent>
+                        <Grid>
+                            <Image Source="{DynamicResource AdaptableComputer}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".2" Grid.RowSpan="2"/>
+                            <Grid Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource AdaptableIcon}" Margin="20" Width="80"/>
+                                    <TextBlock Text="Adaptable" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+
+                                <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+            
+                                    Microsoft Dynamics 365 Business Central provides a flexible,
+                                    scalable and secure platform that supports extensibility and 
+                                    integration into other platforms. This makes it easy to 
+                                    add extra features and build new solutions for your business
+                                    whenever the need arises.
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </coreControls:RippleControlButton.TransitionContent>
+                </coreControls:RippleControlButton>
+                <TextBlock Text="Adaptable" FontFamily="Helectiva" TextAlignment="Center" Foreground="{DynamicResource AuxBrush}" FontSize="20" Padding="10"/>
+            </StackPanel>
+            
+        </Grid>
+    </Grid>
+</coreControls:RippleControl>
