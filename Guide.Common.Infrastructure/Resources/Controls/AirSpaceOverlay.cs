@@ -1,40 +1,51 @@
 ﻿using Guide.Common.Infrastructure.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace Guide.Common.Infrastructure.Resources.Controls
 {
+    
     public class AirSpaceOverlay : Decorator
     {
         #region Properties
-
-        #region Events
-        public event RoutedEventHandler ChildClicked;
-        #endregion
 
         #region Dependency Properties
         public object OverlayChild
         {
             get => WindowHost.Content;
-            set
-            {
-                WindowHost.Content = value;
-
-                if (value is Button)
-                {
-                    var element = (Button)value;
-                    element.Click += (s, e) => ChildClicked?.Invoke(this, e);
-                }
-            }
+            set => OverlayContainer.Content = value;
         }
-        #endregion
 
+
+
+        public AirSpaceOverlayContainer OverlayContainer
+        {
+            get { return (AirSpaceOverlayContainer)GetValue(OverlayContainerProperty); }
+            private set { SetValue(OverlayContainerProperty, value); }
+        }
+
+        public static readonly DependencyProperty OverlayContainerProperty =
+            DependencyProperty.Register("OverlayContainer", typeof(AirSpaceOverlayContainer), typeof(AirSpaceOverlay), new UIPropertyMetadata(null));
+
+
+        public UIElement ParentControl
+        {
+            get { return (UIElement)GetValue(ParentControlProperty); }
+            private set { SetValue(ParentControlProperty, value); }
+        }
+        public static readonly DependencyProperty ParentControlProperty =
+            DependencyProperty.Register("ParentControl", typeof(UIElement), typeof(AirSpaceOverlay), new UIPropertyMetadata(null));
+
+
+        #endregion
 
         #region Internals
 
@@ -52,32 +63,40 @@ namespace Guide.Common.Infrastructure.Resources.Controls
         #region Constructors
         public AirSpaceOverlay()
         {
+            OverlayContainer = new AirSpaceOverlayContainer(this);
             WindowHost = new Window()
             {
-                Background = Brushes.Transparent,
+                Background = null,
                 AllowsTransparency = true,
                 WindowStyle = WindowStyle.None,
                 ShowInTaskbar = false,
-                Focusable = false
+                Focusable = false, 
+                Content = OverlayContainer,
+                Owner = Application.Current.MainWindow,
             };
-
+            
             IsActive = WindowHost != null;
-
             if (IsActive)
             {
                 WindowHost.PreviewMouseDown += (s, e) => { if (ParentWindow != null) ParentWindow.Focus(); };
+                Loaded += (s, e) =>
+                {
+                    ParentControl = this.FindParent<UserControl>(true);
+                };
+                /*
                 IsVisibleChanged += (s, e) =>
                 {
                     if (!IsVisible) WindowHost.Close();
                 };
+                */
             }
         }
         #endregion
 
-
         #region Methods
 
         #region Overrides
+
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
             base.OnRenderSizeChanged(sizeInfo);
@@ -98,6 +117,7 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             ParentWindow.LocationChanged += (s, e) => UpdateOverlaySize();
             ParentWindow.SizeChanged += (s, e) => UpdateOverlaySize();
             ParentWindow.Closed += (s, e) => WindowHost.Close();
+            this.FindParent<Panel>().SizeChanged += (s, e) => UpdateOverlaySize();
         }
         #endregion
 
@@ -111,6 +131,32 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             WindowHost.Height = ActualHeight;
         }
 
+        #endregion
+    }
+
+    public class AirSpaceOverlayContainer: ContentControl
+    {
+        #region Properties
+
+        #region Dependency Properties
+        public AirSpaceOverlay OverlayParent
+        {
+            get { return (AirSpaceOverlay)GetValue(OverlayParentProperty); }
+            set { SetValue(OverlayParentProperty, value); }
+        }
+
+        public static readonly DependencyProperty OverlayParentProperty =
+            DependencyProperty.Register("OverlayParent", typeof(AirSpaceOverlay), typeof(AirSpaceOverlayContainer), new PropertyMetadata(null));
+        #endregion
+
+        #endregion
+
+        #region Constructors
+        public AirSpaceOverlayContainer() { }
+        public AirSpaceOverlayContainer(AirSpaceOverlay overlayParent)
+        {
+            OverlayParent = overlayParent;
+        }
         #endregion
     }
 }

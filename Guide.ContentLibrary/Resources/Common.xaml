@@ -3,6 +3,7 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Media.xaml"/>
+        <ResourceDictionary Source="Links.xaml"/>
         <ResourceDictionary Source="/Guide.Common.Infrastructure;component/Resources/Common.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     

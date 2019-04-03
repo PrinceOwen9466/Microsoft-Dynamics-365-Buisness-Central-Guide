@@ -28,6 +28,7 @@ namespace Guide.Desktop.ViewModels
         #region Commands
         public ICommand PreviousCommand { get; }
         public ICommand NextCommand { get; }
+        public ICommand TogglePlayCommand { get; }
         #endregion
 
         #endregion
@@ -42,6 +43,7 @@ namespace Guide.Desktop.ViewModels
 
             PreviousCommand = new DelegateCommand(OnPrevious);
             NextCommand = new DelegateCommand(OnNext);
+            TogglePlayCommand = new DelegateCommand(OnTogglePlay);
         }
         #endregion
 
@@ -60,6 +62,14 @@ namespace Guide.Desktop.ViewModels
         {
             Presenter.SwipeDirection = Direction.Right;
             Presenter.Next();
+        }
+
+        void OnTogglePlay()
+        {
+            if (Presenter.Player == null) return;
+
+            if (Presenter.Player.IsPlaying) Presenter.Player.Pause();
+            else Presenter.Player.Play();
         }
         #endregion
 

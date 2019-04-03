@@ -7,7 +7,7 @@
              xmlns:contentCore="clr-namespace:Guide.ContentLibrary"
              xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
              mc:Ignorable="d" Template="{StaticResource RippleControlTemplate}"
-             d:DesignHeight="450" d:DesignWidth="800" Background="{DynamicResource MainBrush}">
+             d:DesignHeight="450" d:DesignWidth="800" Background="{DynamicResource MainBrush}" Title="Setting Up Inventory">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -60,50 +60,52 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid ClipToBounds="True">
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                        <coreControls:PresentationControl Title="Inventory Setup">
+                            <Grid ClipToBounds="True">
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <StackPanel VerticalAlignment="Center" Margin="5">
-                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
-                                            <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
-                                        </UserControl>
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <StackPanel VerticalAlignment="Center" Margin="5">
+                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                                <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                            </UserControl>
+                                        </StackPanel>
+
+
+
+                                        <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        Inventory Setup
+                                        </TextBlock>
                                     </StackPanel>
 
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                        <ScrollViewer.Resources>
+                                            <ResourceDictionary>
+                                                <ResourceDictionary.MergedDictionaries>
+                                                    <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                                </ResourceDictionary.MergedDictionaries>
+                                            </ResourceDictionary>
+                                        </ScrollViewer.Resources>
 
-
-                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                                        Inventory Setup
-                                    </TextBlock>
-                                </StackPanel>
-
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
-                                    <ScrollViewer.Resources>
-                                        <ResourceDictionary>
-                                            <ResourceDictionary.MergedDictionaries>
-                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
-                                            </ResourceDictionary.MergedDictionaries>
-                                        </ResourceDictionary>
-                                    </ScrollViewer.Resources>
-
-                                    <StackPanel Grid.Row="1">
-                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                        <StackPanel Grid.Row="1">
+                                            <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                            Before inventory items can be created and managed in Microsoft Dynamics 365 Business Central, 
                                            the Inventory Setup page has to be configured. The Inventory Setup can be located in 
                                            the Manual Setup Section.
-                                        </TextBlock>
+                                            </TextBlock>
 
-                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Inventory Setup.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
-                                        </Border>
-                                    </StackPanel>
-                                </ScrollViewer>
+                                            <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                                <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Inventory Setup.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
 
                 </coreControls:RippleControlButton>
@@ -120,53 +122,55 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid ClipToBounds="True">
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                        <coreControls:PresentationControl Title="Locations">
+                            <Grid ClipToBounds="True">
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <StackPanel VerticalAlignment="Center" Margin="5">
-                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
-                                            <TextBlock Text="2" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
-                                        </UserControl>
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <StackPanel VerticalAlignment="Center" Margin="5">
+                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                                <TextBlock Text="2" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                            </UserControl>
+                                        </StackPanel>
+
+
+
+                                        <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        Locations
+                                        </TextBlock>
                                     </StackPanel>
 
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                        <ScrollViewer.Resources>
+                                            <ResourceDictionary>
+                                                <ResourceDictionary.MergedDictionaries>
+                                                    <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                                </ResourceDictionary.MergedDictionaries>
+                                            </ResourceDictionary>
+                                        </ScrollViewer.Resources>
 
-
-                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                                        Locations
-                                    </TextBlock>
-                                </StackPanel>
-
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
-                                    <ScrollViewer.Resources>
-                                        <ResourceDictionary>
-                                            <ResourceDictionary.MergedDictionaries>
-                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
-                                            </ResourceDictionary.MergedDictionaries>
-                                        </ResourceDictionary>
-                                    </ScrollViewer.Resources>
-
-                                    <StackPanel Grid.Row="1">
-                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                        <StackPanel Grid.Row="1">
+                                            <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                            Locations refer to places where you buy, store or sell items. Locations
                                            can be accessed in the Manual Setup page or by simply using Tell Me.
                                            <LineBreak/>
                                            <LineBreak/>
                                             The video below demonstrates how to create locations in Microsoft Dynamics 365 Business
                                             Central.
-                                        </TextBlock>
+                                            </TextBlock>
 
-                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Locations.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
-                                        </Border>
-                                    </StackPanel>
-                                </ScrollViewer>
+                                            <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                                <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Locations.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
 
                 </coreControls:RippleControlButton>
@@ -183,38 +187,39 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid ClipToBounds="True">
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                        <coreControls:PresentationControl Title="New Items">
+                            <Grid ClipToBounds="True">
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <StackPanel VerticalAlignment="Center" Margin="5">
-                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
-                                            <TextBlock Text="3" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
-                                        </UserControl>
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <StackPanel VerticalAlignment="Center" Margin="5">
+                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                                <TextBlock Text="3" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                            </UserControl>
+                                        </StackPanel>
+
+
+
+                                        <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        New Items
+                                        </TextBlock>
                                     </StackPanel>
 
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                        <ScrollViewer.Resources>
+                                            <ResourceDictionary>
+                                                <ResourceDictionary.MergedDictionaries>
+                                                    <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                                </ResourceDictionary.MergedDictionaries>
+                                            </ResourceDictionary>
+                                        </ScrollViewer.Resources>
 
-
-                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                                        New Items
-                                    </TextBlock>
-                                </StackPanel>
-
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
-                                    <ScrollViewer.Resources>
-                                        <ResourceDictionary>
-                                            <ResourceDictionary.MergedDictionaries>
-                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
-                                            </ResourceDictionary.MergedDictionaries>
-                                        </ResourceDictionary>
-                                    </ScrollViewer.Resources>
-
-                                    <StackPanel Grid.Row="1">
-                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                        <StackPanel Grid.Row="1">
+                                            <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                            Items refer to the goods and services that you trade with. They can 
                                            be of type Inventory, Service or Non-Inventory. The unit of measure 
                                            should also be specified when creating an item. For example, an item can
@@ -225,27 +230,28 @@
                                             Item Templates make the process of creating items easier and faster.
                                             Templates define default values for new items. The video below demonstrates
                                             how an item template can be created.
-                                        </TextBlock>
+                                            </TextBlock>
 
-                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Item Templates.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="1.5" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
-                                        </Border>
+                                            <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                                <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Item Templates.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="1.5" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                            </Border>
 
-                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                            <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                            Once an item template is created, the process of creating items require a lot 
                                            less effort, since a lot of fields have already been filled in the template.
                                             <LineBreak/>
                                             <LineBreak/>
                                             The video below demonstrates how to create a new item.
-                                        </TextBlock>
+                                            </TextBlock>
 
-                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/New Items.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="1.5" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
-                                        </Border>
-                                    </StackPanel>
-                                </ScrollViewer>
+                                            <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                                <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/New Items.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="1.5" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
 
                 </coreControls:RippleControlButton>

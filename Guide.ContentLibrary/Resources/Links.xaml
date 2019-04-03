@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Guide.ContentLibrary"
+                    xmlns:coreModels="clr-namespace:Guide.Common.Infrastructure.Models;assembly=Guide.Common.Infrastructure">
+    
+    <!--#region Links-->
+    <coreModels:Linker x:Key="Name" Tags="Sales, Help">
+    </coreModels:Linker>
+    <!--#endregion-->
+    
+</ResourceDictionary>

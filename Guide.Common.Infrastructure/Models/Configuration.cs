@@ -28,7 +28,8 @@ namespace Guide.Common.Infrastructure.Models
         public bool ContentAnalyzed { get => _contentAnalyzed; set => SetProperty(ref _contentAnalyzed, value); }
 
         Page _recentPage = null;
-        public Page RecentPage { get => _recentPage; set => SetProperty(ref _recentPage, value); }
+        public Page RecentPage
+        { get => _recentPage; set => SetProperty(ref _recentPage, value); }
 
         ObservableCollection<Page> _readPages = new ObservableCollection<Page>();
         public ObservableCollection<Page> ReadPages { get => _readPages; set => SetProperty(ref _readPages, value); }
@@ -47,9 +48,13 @@ namespace Guide.Common.Infrastructure.Models
         public Configuration() { }
         public Configuration(Configuration configuration)
         {
+            ContentAnalyzed = configuration.ContentAnalyzed;
             RecentPage = configuration.RecentPage;
             for (int i = 0; i < configuration.ReadPages.Count; i++)
                 ReadPages.Add(new Page(configuration.ReadPages[i]));
+
+            for (int i = 0; i < configuration.Sections.Count; i++)
+                Sections.Add(new Section(configuration.Sections[i]));
 
             RefreshProgress();
         }
@@ -59,9 +64,25 @@ namespace Guide.Common.Infrastructure.Models
 
         public void RefreshProgress()
         {
+            Progress.Clear();
+            for (int i = 0; i < Sections.Count; i++)
+            {
+                double count = ReadPages.Count(p => p.SectionID == Sections[i].Index.ToString());
+
+                Progress.Add(new ProgressWrapper
+                {
+                    Progress = (count / Sections[i].TotalPages) * 100,
+                    Section = Sections[i]
+                });
+            }
+
+            Section section = Sections.FirstOrDefault(s => RecentPage.SectionID == s.Index.ToString());
+            if (RecentPage != null && !string.IsNullOrWhiteSpace(RecentPage.SectionID))
+                RecentProgress = Progress.FirstOrDefault(p => p.Section.Index.ToString() == RecentPage.SectionID).Progress;
+
             /*
             IPresenter presenter = ServiceLocator.Current.GetInstance<IPresenter>();
-             if (presenter.Content == null) return;
+            if (presenter.Content == null) return;
             var sections = presenter.Content.Sections;
 
             if (RecentPage == null)

@@ -1,7 +1,10 @@
 ﻿using CommonServiceLocator;
+using Guide.Common.Infrastructure.Extensions;
 using Guide.Common.Infrastructure.Models.Interfaces;
 using Guide.Common.Infrastructure.Services.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -60,7 +63,16 @@ namespace Guide.Common.Infrastructure.Resources.Controls
         }
        
         public static readonly DependencyProperty IsFullPageProperty =
-            DependencyProperty.Register("IsFullPage", typeof(bool), typeof(PresentationControl), new UIPropertyMetadata(false));
+            DependencyProperty.Register("IsFullPage", typeof(bool), typeof(PresentationControl), new UIPropertyMetadata(false, (s, e) =>
+            {
+                /*
+                var control = (PresentationControl)s;
+
+                Core.Log.Debug(e.NewValue);
+                if (control.Presenter != null)
+                    control.Presenter.FullPageActive = (bool)e.NewValue;
+                */
+            }));
 
         public bool AutoOpen
         {
@@ -106,6 +118,17 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             DependencyProperty.Register("CompletedCount", typeof(int), typeof(PresentationControl), new PropertyMetadata(1));
 
 
+
+        public bool IsContent
+        {
+            get { return (bool)GetValue(IsContentProperty); }
+            set { SetValue(IsContentProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsContentProperty =
+            DependencyProperty.Register("IsContent", typeof(bool), typeof(PresentationControl), new UIPropertyMetadata(true));
+
+
         #endregion
 
         #endregion
@@ -119,7 +142,8 @@ namespace Guide.Common.Infrastructure.Resources.Controls
         #endregion
 
         #region Internals
-        IPresenter Presenter { get; }
+        IConfigurationManager ConfigurationManager { get; }
+        IPresenter Presenter => ServiceLocator.Current.GetInstance<IPresenter>();
         #endregion
 
         #endregion
@@ -141,17 +165,51 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             IsVisibleChanged += (s, e) =>
             {
                 if (!IsVisible) return;
-                //Presenter.
+                if (!IsContent) return;
+                /*
+                 ID = page.ID;
+                    SectionID = page.SectionID;
+                    Title = page.Title;
+                    Content = page.Content;
+                    PageReferenceName = page.PageReferenceName;
+                 */
+
+                List<PresentationControl> controls = new List<PresentationControl>();
+                PresentationControl control = this;
+
+                while (control != null && control.IsContent)
+                {
+                    controls.Add(control);
+                    control = control.FindParent<PresentationControl>();
+                }
+
+                controls.Reverse();
+                string key = string.Join("-", controls.Select(c => c.Key));
+
+                if (this.Section == null)
+                    this.Section = this.FindParent<PresentationControl>().Section;
+
+                Models.Page page = new Models.Page()
+                {
+                    ID = key,
+                    Title = this.Title,
+                    PageReferenceName = this.GetType().AssemblyQualifiedName,
+                    SectionID = this.Section != null ? this.Section.Index.ToString() : ""
+                };
+                ConfigurationManager.Open(page);
             };
+            ConfigurationManager = ServiceLocator.Current.GetInstance<IConfigurationManager>();
         }
         #endregion
 
         #region Methods
         public void Open()
         {
-            Opening?.Invoke(this, EventArgs.Empty);
+            if (!IsOpened) Opening?.Invoke(this, EventArgs.Empty);
+            else OnOpen();
             Core.Log.Debug($"Opening Presentation Control {AutoOpen}");
             if (!OpenAnimationActive) OnOpen();
+            
             /*
             if (!OpenDuration.HasTimeSpan) Opened?.Invoke(this, EventArgs.Empty);
             else
@@ -177,6 +235,9 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             Core.Log.Debug("Presentation Control Opened Event thrown, {0}", this);
             IsOpened = true;
             Opened?.Invoke(this, EventArgs.Empty);
+
+            if (Presenter != null)
+                Presenter.FullPageActive = IsFullPage;
         }
 
         public void OnClose()
@@ -185,7 +246,7 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             Closed?.Invoke(this, EventArgs.Empty);
         }
 
-        public void Close()
+        public virtual void Close()
         {
             Closing?.Invoke(this, EventArgs.Empty);
 

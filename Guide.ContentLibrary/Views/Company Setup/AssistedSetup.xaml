@@ -4,9 +4,15 @@
                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
-                            xmlns:contentCore="clr-namespace:Guide.ContentLibrary"
-                            mc:Ignorable="d" Template="{DynamicResource RippleControlTemplate}"
-             d:DesignHeight="450" d:DesignWidth="800">
+                            xmlns:contentCore="clr-namespace:Guide.ContentLibrary" Template="{StaticResource PlayerRippleControlTemplate}"
+                            mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid ClipToBounds="True">
         <Grid Margin="20">
             <Grid.RowDefinitions>
@@ -106,8 +112,8 @@
 
                     </StackPanel>
 
-                    <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Assisted Setup.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                    <Border BorderThickness="1" BorderBrush="{DynamicResource PolarBrush}">
+                        <coreControls:MediaPlayer Media="{DynamicResource AssistedSetupMedia}"/>
                     </Border>
 
                     

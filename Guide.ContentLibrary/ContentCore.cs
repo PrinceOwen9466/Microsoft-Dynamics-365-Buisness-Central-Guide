@@ -16,6 +16,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Guide.ContentLibrary
@@ -39,10 +40,17 @@ namespace Guide.ContentLibrary
             if (Initialized) return;
             Initialized = true;
 
+            string assemblyName = typeof(ContentCore).Assembly.GetName().Name;
+            ResourceDictionary resources = new ResourceDictionary();
+            resources.Source = new Uri($@"/{assemblyName};component/Resources/Common.xaml", UriKind.RelativeOrAbsolute);
+            Application.Current.Resources.MergedDictionaries.Add(resources);
+
+            /*
             SettingUpANewCompany sd = new SettingUpANewCompany();
 
             foreach (var child in sd.FindAllRippleButtons())
                 Core.Log.Debug(child);
+            */
 
             Presentation c = new Presentation();
             c.Initialize(typeof(Sections), typeof(SectionHome));

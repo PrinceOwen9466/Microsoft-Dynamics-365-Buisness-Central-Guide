@@ -4,7 +4,7 @@
                     xmlns:c="clr-namespace:Guide.Common.Infrastructure.Resources.Containers;assembly=Guide.Common.Infrastructure"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <c:MediaSource x:Key="AppLauncher" UriSource="Videos/App Launcher.mp4">
+    <c:MediaSource x:Key="AppLauncherMedia" UriSource="Videos/App Launcher.mp4">
         <c:MediaSource.Context>
             <c:MediaContext Title="Using the app launcher">
                 <c:MediaContext.Description>
@@ -13,34 +13,489 @@
                     Dynamics 365 applications and allows you to pin add-ins and extensions.
                 </c:MediaContext.Description>
                 <c:MediaContext.Placemarks>
-                    <c:MediaPlacemark Start="00:00:00" End="00:00:00" Title="Click on the top right corner of Business Central to open the app launcher.">
-                        The app launcher is a common feature in the Dynamics 365 Platform.
+                    <c:MediaPlacemark Start="00:00:02.496" End="00:00:02.496" Title="Click on the top right corner of Business Central to open the app launcher.">
+                        The app launcher is a common feature in the Dynamics 365 Platform. It was designed to provide easier access to 
+                        other apps and extensions available in your microsoft account.
+                        &lt;br&gt;&lt;/br&gt;To learn more about the app launcher, click &lt;a&gt;{https://support.office.com/en-us/article/meet-the-office-365-app-launcher-79f12104-6fed-442f-96a0-eb089a3f476a}here&lt;/a&gt;.
+                        &lt;br&gt;&lt;/br&gt;To watch an introductory video on the office 365 app launcher, click &lt;a&gt;{https://www.youtube.com/watch?v=c7vBum4O_mQ}here&lt;/a&gt;.
                     </c:MediaPlacemark>
-                    <c:MediaPlacemark Start="00:00:06" End="00:00:08" Title="Once open, the app launcher gives direct access to Office and Dynamics 365.">
-                        
-                    </c:MediaPlacemark>
-                    <c:MediaPlacemark Start="00:00:08" End="00:00:10" Title="All pinned apps will appear here.">
-                        Pinned applications and extensions will be neatly arranged in that area, until you're manually unpin them.
+                    <c:MediaPlacemark Start="00:00:06" End="00:00:08" Title="Once open, the app launcher gives direct access to Office and Dynamics 365."/>
+                    <c:MediaPlacemark Start="00:00:08" End="00:00:10" Title="Dynamics 365 Applications can be pinned on this area.">
+                        The 'My Apps' section was designed to accomodate your favourite apps and extensions. Tools your 
+                        are more likely to use will be neatly arranged in this area, once they are pinned.
                     </c:MediaPlacemark>
 
-                    <c:MediaPlacemark Start="00:00:12" End="00:00:10" Title="The All apps section gives you access to all your Dynamics 365 applications and extensions.">
-                        From this section, you can simply search for your extensions and pin them to your workspace
+                    <c:MediaPlacemark Start="00:00:12" End="00:00:12" Title="Click on 'All Apps' at the bottom of the app launcher to view all your Dynamics 365 applications.">
+                        The All apps section gives you access to all your Dynamics 365 applications and extensions. 
+                        Use the search bar in this section to easily find Add-Ins and Applications.
                     </c:MediaPlacemark>
+
+                    <c:MediaPlacemark Start="00:00:14.569" End="00:00:14.569" Title="Use the search bar to easily find your Dynamics 365 applications."/>
+
+                    <c:MediaPlacemark Start="00:00:16.608" End="00:00:16.608" Title="Click on the ellipsis at the right end of an app or extension to view brief information about it."/>
+
+                    <c:MediaPlacemark Start="00:00:19.033" End="00:00:19.033" Title="Click on the 'Pin this app' button to pin the app to your 'My Apps' page."/>
+
+                    <c:MediaPlacemark Start="00:00:23.049" End="00:00:23.049" Title="Click on the 'Back to pinned apps' button to go back to your 'My Apps' page."/>
+
+                    <c:MediaPlacemark Start="00:00:25.232" End="00:00:25.232" Title="Click on 'Get More Apps' button to open up the Dynamics 365 app store.">
+                        In the app store, you can find apps and extensions that have been designed to accomplish custom tasks in Business Central.
+                        &lt;br/&gt;For direct access to the microsoft app store, click &lt;a&gt;{https://appsource.microsoft.com/en-US/}here&lt;/a&gt;.
+                    </c:MediaPlacemark>
+
                 </c:MediaContext.Placemarks>
             </c:MediaContext>
         </c:MediaSource.Context>
     </c:MediaSource>
+
+    <c:MediaSource x:Key="TellMeMedia" UriSource="Videos/Tell Me.mp4">
+        <c:MediaContext Title="Introducing Tell Me" Speed="2">
+            <c:MediaContext.Description>
+                Microsoft Tell Me gives you the ability to search through actions and features in Microsoft Dynamics 365.
+                
+                In case you missed it in the tour, &lt;a&gt;{https://docs.microsoft.com/en-us/dynamics365/business-central/ui-search}here's&lt;/a&gt; a link 
+                to an article with more information on Microsoft Tell Me.
+            </c:MediaContext.Description>
+
+            <c:MediaPlacemark Start="00:00:04" End="00:00:04" Title="Click on the light bulb icon at the top to access Tell Me.">
+                Alternatively, you can press ALT + Q on your keyboard. 
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:11.892" End="00:00:11.892" Title="Search for what you are looking for.">
+                You can search for anything! For example: 'Sales', 'Company Information', 'Invoice'. 
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:19.478" End="00:00:19.478" Title="Click on any of the results to view their respective content.">
+                Results that are generated during the search divided in to multiple sections:
+                
+                &lt;br/&gt;&lt;br/&gt;&lt;br/&gt;*&#160;The 'On Current Page' section provides search results that can be found on your current page.
+                This feature can be very useful if you can find a certain action on your current page.
+                
+                &lt;br/&gt;&lt;br&gt;&lt;/br&gt;*&#160;The 'Go to Pages and Tasks' section lets you perform certain tasks and provides access to other 
+                pages based on your search.
+                
+                &lt;br/&gt; &lt;br&gt;&lt;/br&gt;*&#160;The ‘Go to Reports and Analysis’ section provides search result from reports and archived documents.
+                
+                &lt;br/&gt;&lt;br&gt;&lt;/br&gt;*&#160;Finally, the 'Documentation' section provides results on documentation
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:34.195" End="00:00:34.195" Title="Edit the search and try other keywords if you are unable to find the expected result">
+                Microsoft Tell Me does not search for data, such as items, customers, or transactions. To find data, go to the respective page and click the search
+                icon at the top left. 
+                &lt;br/&gt;
+                &lt;br/&gt;For example, if you wanted to find a customer named 'John Snow', you would need to do the following:
+                &lt;br/&gt;
+                &lt;br/&gt;
+                &lt;br/&gt;* Open up Microsoft Tell Me. (Click on the light bulb icon or press ALT + Q).
+                &lt;br/&gt;
+                &lt;br/&gt;* Type in 'Customers'.
+                &lt;br/&gt;
+                &lt;br/&gt;* Select the 'Customers' option in the 'Go to Pages and Tasks' section (Normally, this would be the first result of the search).
+                &lt;br/&gt;
+                &lt;br/&gt;* The 'Customer' page will appear with a list of customers stored in your company.
+                &lt;br/&gt;
+                &lt;br/&gt;* Click on the 'Search' button at the top left of the page.
+                &lt;br/&gt;
+                &lt;br/&gt;* Search for the customer.
+                &lt;br/&gt;
+            </c:MediaPlacemark>
+        </c:MediaContext>
+    </c:MediaSource>
+
+    <c:MediaSource x:Key="ToggleLayoutMedia" UriSource="Videos/Expanding Layout.mp4">
+        <c:MediaContext Title="Toggling Layouts" Speed="2">
+            <c:MediaContext.Description>
+                The toggle layout button gives you the ability to increase or reduce the current layout’s width, based on your preference. When the layout is wider, it easier to view more content on the page.
+            </c:MediaContext.Description>
+
+            <c:MediaPlacemark Start="00:00:02.302" End="00:00:02.302" Title="To enter wide layout view, click on the 'Expand Layout' icon at the top right section."/>
+            <c:MediaPlacemark Start="00:00:06.213" End="00:00:06.213" Title="Click on it again to exit the wide layout view."/>
+            <c:MediaPlacemark Start="00:00:06.213" End="00:00:06.213" Title="The 'Toggle Layout' button can also be found in other pages."/>
+            <c:MediaPlacemark Start="00:00:13.008" End="00:00:13.008" Title="Click on the 'Toggle Layout' button to exit the wide layout view"/>
+        </c:MediaContext>
+    </c:MediaSource>
+
+    <c:MediaSource x:Key="ActionsMedia" UriSource="Videos/Actions.mp4">
+        <c:MediaContext Title="Using Actions" Speed="2">
+            <c:MediaContext.Description>
+                Actions in Business Central are headings with a down arrowhead '˅'. When an action is clicked, it a dropdown menu appears with a list of options to choose from.
+            </c:MediaContext.Description>
+
+            <c:MediaPlacemark Start="00:00:04.881" End="00:00:04.881" Title="A typical action is the 'Activities' action. You can find it in the activities section in your home page.">
+                Cues in Business Central are indicators that give immediate insight on the state of the company.
+                
+                &lt;br/&gt;
+                &lt;br/&gt;For example: A cue could be configured to be the color red when a certain value is bad for the company 
+                and another cue could be configured to be the color green when there are improvements in certain values in the company.
+                
+                &lt;br/&gt;
+                &lt;br/&gt;Click on ‘Set up Cues’ to configure how these indicators should work.
+                
+                &lt;br/&gt;
+                &lt;br/&gt;You can find more information on Cues in the tour provided in the previous page of this guide.
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:10" End="00:00:10" Title="Click on an action again, to hide the provided action."/>
+
+            <c:MediaPlacemark Start="00:00:36.848" End="00:00:36.848" Title="In the 'Insights' section, click on the 'Business Assistance' section to view more options on how insights should be displayed.">
+                The ‘Insights’ section in Business Central provides business insights and suggests actions for your business.
+                &lt;br/&gt;
+                &lt;br/&gt;To view an introductory video on business insights, click &lt;a&gt;{https://www.youtube.com/watch?v=rJA4PQogM0Q}here&lt;/a&gt;.
+                &lt;br/&gt;To view a tutorial video on how you could get started with business insights, click &lt;a&gt;{https://www.youtube.com/watch?v=kVEGx1iCvss}here&lt;/a&gt;.
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:45.159" End="00:00:45.159" Title="Click on previous/next chart to view other charts."/>
+
+            <c:MediaPlacemark Start="00:01:13.904" End="00:01:13.904" Title="Feel free to explore as many actions as you like in the demonstration company (CRONUS)."/>
+
+        </c:MediaContext>
+    </c:MediaSource>
+
+    <c:MediaSource x:Key="PinMedia" UriSource="Videos/Pin.mp4">
+        <c:MediaContext Title="Pinning The Dropdown Menu" Speed="1">
+            <c:MediaContext.Description>
+                The pin button allows you to pin-in a dropdown of available options, so that you can have easier access to them.
+            </c:MediaContext.Description>
+            <c:MediaPlacemark Start="00:00:03.306" End="00:00:03.306" Title="Click on any action button at the top of your role center to display a dropdown menu of actions.">
+                The pin button is located at the far right end of the dropdown menu.
+            </c:MediaPlacemark>
+            <c:MediaPlacemark Start="00:00:09.904" End="00:00:09.904" Title="Select an option from the dropdown menu to go to its respective page."/>
+
+            <c:MediaPlacemark Start="00:00:15.648" End="00:00:15.648" Title="Once, in the page you're williing to work in, click on the action you would like to pin"/>
+
+            <c:MediaPlacemark Start="00:00:20.838" End="00:00:20.838" Title="Click on the pin button to pin the dropdown menu"/>
+
+            <c:MediaPlacemark Start="00:00:26.016" End="00:00:26.016" Title="Now you can access the dropdown menu items at any given moment"/>
+
+            <c:MediaPlacemark Start="00:00:28.675" End="00:00:28.675" Title="Click the button again to unpin the dropdown menu"/>
+
+            <c:MediaPlacemark Start="00:00:33" End="00:00:33" Title="You can try this with any of the action button's at the top."/>
+        </c:MediaContext>
+    </c:MediaSource>
+
+    <c:MediaSource x:Key="ItemSelectMedia" UriSource="Videos/Item Select.mp4">
+        <c:MediaContext Title="Selecting Multiple Items" Speed="2">
+            <c:MediaContext.Description>
+                In Business Central, vertical ellipsis on an item indicate that it is part of a list of other items.
+                Once, this ellipsis is clicked, a set of options will be provided. One of these options is the 'Select More'
+                option.
+                &lt;br/&gt;
+                &lt;br/&gt;Selecting multiple items gives you the ability to perform a single task on all the selected items at the same time.
+            </c:MediaContext.Description>
+
+            <c:MediaPlacemark Start="00:00:11.261" End="00:00:11.261" Title="Click on the vertical ellipsis to get a dropdown of options for an item."/>
+
+            <c:MediaPlacemark Start="00:00:15.701" End="00:00:15.701" Title="A list of options will appear based on actions you can perform on the item."/>
+
+            <c:MediaPlacemark Start="00:00:017" End="00:00:017" Title="Click on select more to select multiple items."/>
+
+            <c:MediaPlacemark Start="00:00:019.265" End="00:00:019.265" Title="A checkbox would be provided for each item to make them each selectable."/>
+
+            <c:MediaPlacemark Start="00:00:20.753" End="00:00:20.753" Title="Simply click on a checkbox to select an extra item."/>
+
+            <c:MediaPlacemark Start="00:00:28.899" End="00:00:28.899" Title="Click on the ellipsis again to get a list of actions that can be performed on the selected set of items."/>
+        </c:MediaContext>
+    </c:MediaSource>
+
+
+    <c:MediaSource x:Key="ItemLayoutsMedia" UriSource="Videos/Item Layouts.mp4">
+        <c:MediaContext Title="Item Layouts" Speed="2">
+            <c:MediaContext.Description>
+                Entities such as items, customers and vendors in business central are often presented in lists. 
+                For better clarity and efficiency during work, business central provides layouts to better display these entities.
+            </c:MediaContext.Description>
+
+            <c:MediaPlacemark Start="00:00:00" End="00:00:00" Title="Click on 'Items' in your homescreen, or simply for 'Items' in Microsoft Tell Me to get to this page."/>
+
+            <c:MediaPlacemark Start="00:00:04.646" End="00:00:04.646" Title="Click on the 'Item Layout' button at the top right corner of the page.">
+                The 'Item Layout' icon changes based on the layout currently being used. In this walkthrough, the items are in the 'Tall Tiles' layout.
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:12.400" End="00:00:12.400" Title="The 'Tiles' layout provides smaller images with basic information on each item.">
+                This layout is useful when you would like to view more items at once, and still be able to view their image description.
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:24.200" End="00:00:24.200" Title="The 'List' layout provides a tabulated list of the items.">
+                The 'List' layout is great for sorting data, presenting reports and analysing data.
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:37" End="00:00:37" Title="The 'Tall Tiles' layout provides larger images with basic information on each item."/>
+
+            <c:MediaPlacemark Start="00:00:42" End="00:00:42" Title="This can be repeated when dealing with customers, vendors and other entities."/>
+        </c:MediaContext>
+    </c:MediaSource>
+
+    <c:MediaSource x:Key="FilteringMedia" UriSource="Videos/Filtering.mp4">
+        <c:MediaContext Title="Filtering Data" Speed="2">
+            <c:MediaContext.Description>
+                When entities in Dynamics 365 Business Central are being viewed, 
+                there may be need to filter out a batch, to make only relevant entities to be displayed. 
+                The filter pane was designed for this type of scenario and can be activated by clicking on the filter button.
+            </c:MediaContext.Description>
+
+            <c:MediaPlacemark Start="00:00:04.237" End="00:00:04.237" Title="Click on 'Items' in the homepage to go to the items page."/>
+
+            <c:MediaPlacemark Start="00:00:06.204" End="00:00:06.204" Title="To make this walkthrough easier, make sure your items are displayed using the 'List' layout.">
+                Incase you missed the walkthrough on layouts, the 'Item Layout' button can be found at the top right corner of the screen. Click on it and select 'List'
+                to view the items with the list layout.
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:12.550" End="00:00:12.550" Title="Click on the 'Filter Pane' button to activate the filter pane."/>
+
+            <c:MediaPlacemark Start="00:00:17.270" End="00:00:17.270" Title="We are going to use 'Filter List By' for a basic demonstration in this walkthrough"/>
+
+            <c:MediaPlacemark Start="00:00:19.400" End="00:00:19.400" Title="Click on the filter button to get a list of properties the items can be filtered by."/>
+
+            <c:MediaPlacemark Start="00:00:24" End="00:00:24" Title="We'll use the 'Quantity at hand' property for this walkthrough."/>
+
+            <c:MediaPlacemark Start="00:00:28.564" End="00:00:28.564" Title="Type in the property you would like to filter with and then press Enter."/>
+
+            <c:MediaPlacemark Start="00:00:32.666" End="00:00:32.666" Title="Once, the property is selected, a textbox will appear. Now you can type in conditions for filtering each item."/>
+
+            <c:MediaPlacemark Start="00:00:36.738" End="00:00:36.738" Title="Type in a value, to filter out other items">
+                Filtering out items based on their property has been made quite trivial by business central. 
+                
+                &lt;br/&gt;
+                &lt;br/&gt;For example: If we were trying to find stock items that have been completely exhausted 
+                from our company’s inventory (just like we’re doing in this walkthrough), we would simply type in ‘0’ into the textbox.
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:42.340" End="00:00:42.340" Title="As you can see, only items with '0' as their quantity at hand are displayed."/>
+
+            <c:MediaPlacemark Start="00:00:49.600" End="00:00:49.600" Title="Now let's try some conditions.">
+                Learning how to filter with conditions can be a little technical, but it’s still a great skill.
+                &lt;br/&gt;
+                &lt;br/&gt;
+                &lt;br/&gt;Common symbols used are:
+                &lt;br/&gt;
+                &lt;br/&gt;* The Less Than Symbol ('&lt;')
+                &lt;br/&gt;* The greater Than Symbol ('&gt;')
+            </c:MediaPlacemark>
+
+
+            <c:MediaPlacemark Start="00:00:54" End="00:00:54" Title="Only items with a 'Quantity At Hand' that is less than 10 will be displayed."/>
+
+            <c:MediaPlacemark Start="00:01:09.052" End="00:01:09.052" Title="Switching the sign to the greater than sign will make the opposite set of items to be displayed."/>
+
+            <c:MediaPlacemark Start="00:01:11.061" End="00:01:11.061" Title="Only items with a 'Quantity At Hand' that is greater than 10 will be displayed."/>
+
+            <c:MediaPlacemark Start="00:01:16.139" End="00:01:16.139" Title="Click on the 'X' beside the property to cancel all filter conditions."/>
+
+            <c:MediaPlacemark Start="00:01:19.635" End="00:01:19.635" Title="And now we have our data back to normal."/>
+        </c:MediaContext>
+    </c:MediaSource>
+
+    <c:MediaSource x:Key="FactBoxMedia" UriSource="Videos/Fact Box.mp4">
+        <c:MediaContext Title="Fact Box" Speed="2">
+            <c:MediaContext.Description>
+                The Fact Box provides analytical and statistical information about entities in Business Central.
+            </c:MediaContext.Description>
+
+
+            <c:MediaPlacemark Start="00:00:00" End="00:00:00" Title="Click on 'Items' in your homescreen, or simply for 'Items' in Microsoft Tell Me to get to this page."/>
+
+            <c:MediaPlacemark Start="00:00:04.862" End="00:00:04.862" Title="For better clarity, we are going to use the 'List' layout in this walkthrough."/>
+
+            <c:MediaPlacemark Start="00:00:15.820" End="00:00:15.820" Title="Select an item from the list.">
+                The fact box displays information based on the selected item.
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:20.762" End="00:00:20.762" Title="Click on the fact box button at the top right of the page."/>
+
+            <c:MediaPlacemark Start="00:00:33.455" End="00:00:33.455" Title="On the fact box, you can view more information about the item."/>
+
+            <c:MediaPlacemark Start="00:00:41.591" End="00:00:41.591" Title="Selecting a different item will change the information on the fact box."/>
+
+            <c:MediaPlacemark Start="00:00:58.544" End="00:00:58.544" Title="Click on the fact box button again to hide the fact box."/>
+        </c:MediaContext>
+    </c:MediaSource>
+
+    <c:MediaSource x:Key="MoreOptionsMedia" UriSource="Videos/More Options.mp4">
+        <c:MediaContext Title="More Options" Speed="1">
+            <c:MediaContext.Description>
+                The horizontal ellipsis in business central are used to signify more options. 
+                This symbol is more available when you are not currently using the wide layout in business central.
+            </c:MediaContext.Description>
+
+            <c:MediaPlacemark Start="00:00:02.558" End="00:00:02.558" Title="If you're not already there, click on 'Items' from the home page."/>
+
+            <c:MediaPlacemark Start="00:00:11.252" End="00:00:11.252" Title="If you're currently using the wide layout view, you might not see the more options button.">
+                Click on the toggle layout button at the top right to leave the wide layout view.
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:13.753" End="00:00:13.753" Title="Click on the horizontal ellipsis to view more options."/>
+
+            <c:MediaPlacemark Start="00:00:29.507" End="00:00:29.507" Title="Click on 'Less Options' hide the actions in this area."/>
+        </c:MediaContext>
+    </c:MediaSource>
+
+    <c:MediaSource x:Key="ToggleEditMedia" UriSource="Videos/Toggle Edit.mp4">
+        <c:MediaContext Title="Toggling Edits" Speed="1">
+            <c:MediaContext.Description>
+                Editing values of an entity in business central is quite instant. 
+                Every value or change that is made, is synced into your online account, 
+                there and then without you having to press a save button. Because of this, 
+                it is important to prevent inputting values that are invalid into a field, 
+                as this may cause unwanted errors when business central tries to automatically save the changes.
+                
+                &lt;br/&gt;
+                &lt;br/&gt;The ‘Toggle Edit’ button was designed to toggle edits on/off for a page so 
+                that you can simply view data when you like and edit them only when you are sure you have the right kind of data.
+            </c:MediaContext.Description>
+
+            <c:MediaPlacemark Start="00:00:02.819" End="00:00:02.819" Title="Let's use customers in this walkthrough for a change. Click on 'Customers' in your home page."/>
+
+            <c:MediaPlacemark Start="00:00:08" End="00:00:08" Title="Click on any customer of your choice."/>
+
+            <c:MediaPlacemark Start="00:00:13.047" End="00:00:13.047" Title="Click any plain field to edit it.">
+                Greyed out fields in business central cannot be edited.
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:15.525" End="00:00:15.525" Title="Click on the 'Edit' button at the top of the page."/>
+
+            <c:MediaPlacemark Start="00:00:17.108" End="00:00:17.108" Title="All the text fields will be greyed out once edits are turned off."/>
+
+            <c:MediaPlacemark Start="00:00:21.842" End="00:00:21.842" Title="Text Fields can no longer be edited.">
+                Turning off edits make it easier to simply view data and make presentations.
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:30.383" End="00:00:30.383" Title="Click on the 'Edit' button again to enable edits."/>
+        </c:MediaContext>
+    </c:MediaSource>
+
+    <c:MediaSource x:Key="NewMedia" UriSource="Videos/New.mp4">
+        <c:MediaContext Title="Creating New Entities" Speed="2">
+            <c:MediaContext.Description>
+                While viewing entities (Customers, Items or vendors) in business central, new ones can be easily added by clicking on the new button.
+            </c:MediaContext.Description>
+
+            <c:MediaPlacemark Start="00:00:00" End="00:00:00" Title="To get to the page, click on 'Customers' in the home page and click any customer."/>
+
+            <c:MediaPlacemark Start="00:00:03.300" End="00:00:03.300" Title="Click on the plus (+) icon at the top of the page"/>
+
+            <c:MediaPlacemark Start="00:00:07.665" End="00:00:07.665" Title="Click 'OK' to select a template.">
+                Later in this guide, we will discuss templates and how to create new entities. For now, simply follow the walkthrough.
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:17.529" End="00:00:17.529" Title="Fill in information about the new entity.">
+                Items marked with a (*) are required and must be filled before the entity can be saved.
+            </c:MediaPlacemark>
+
+            <c:MediaPlacemark Start="00:00:28" End="00:00:28" Title="Click on the back button at the top left of the page to save."/>
+        </c:MediaContext>
+    </c:MediaSource>
+
+    <c:MediaSource x:Key="DeleteMedia" UriSource="Videos/Delete.mp4">
+        <c:MediaContext Title="Deleting Entities" Speed="1.5">
+            <c:MediaContext.Description>
+                In business central, once a new entity is created (using the ‘Add’ button), the entity is assigned an ID number and automatically saved into the database.
+                &lt;br/&gt;
+                &lt;br/&gt;In an event where you created an entity by mistake, click the delete button to remove it.
+            </c:MediaContext.Description>
+
+            <c:MediaPlacemark Start="00:00:00" End="00:00:00" Title="To recreate this walkthrough scenario, click on 'Customers' in your home page, click any customer and then click the Add (+) button at the top."/>
+            <c:MediaPlacemark Start="00:00:15.526" End="00:00:15.526" Title="Click the delete button at the top of the page."/>
+            <c:MediaPlacemark Start="00:00:19.634" End="00:00:19.634" Title="The new customer will be deleted."/>
+        </c:MediaContext>
+    </c:MediaSource>
+
+    <c:MediaSource x:Key="BackMedia" UriSource="Videos/Back.mp4">
+        <c:MediaContext Title="Using the back button" Speed="1">
+            <c:MediaContext.Description>
+                Clicking the back button in business central simply signifies that you are done editing or creating the current entity. 
+                All new data is immediately saved in business central, simply click the back button to exit and view the previous page.
+            </c:MediaContext.Description>
+
+            <c:MediaPlacemark Start="00:00:00" End="00:00:00" Title="To recreate this walkthrough scenario, click on 'Customers' in your home page, click any customer and then click the Add (+) button at the top."/>
+
+            <c:MediaPlacemark Start="00:00:08.190" End="00:00:08.190" Title="Fill in the field with available information."/>
+
+            <c:MediaPlacemark Start="00:00:16.439" End="00:00:16.439" Title="Click the back button once, you are done filling up the fields."/>
+
+            <c:MediaPlacemark Start="00:00:20.364" End="00:00:20.364" Title="Changes will be automatically saved."/>
+        </c:MediaContext>
+    </c:MediaSource>
+
+    <c:MediaSource x:Key="NewCompanyMedia" UriSource="Videos/New Company.mp4">
+        <c:MediaContext Title="Creating a new company" Speed="1">
+            <c:MediaContext.Description>
+                Microsoft Dynamics 365 Business Central is designed to manage and multiple companies.
+
+                &lt;br/&gt;
+                &lt;br/&gt;Companies in Business Central are normally created for either evaluation or production. 
+                Evaluation companies are designed for tests and analysis, on the other hand, Production companies are designed for companies that are going to be used for real life production.
+
+                &lt;br/&gt;
+                &lt;br/&gt;While creating a new company business central also provides an option to create the company with no data. 
+                This option is only recommended if you are fully aware on how to manually setup areas in Business Central that would be required to have a fully functional company.
+            </c:MediaContext.Description>
+
+            <c:MediaPlacemark Start="00:00:05.371" End="00:00:05.371" Title="Click on the 'Settings' button on the top right corner of your page."/>
+            <c:MediaPlacemark Start="00:00:09.000" End="00:00:09.000" Title="Click on the 'My Settings' option on the dropdown menu."/>
+            <c:MediaPlacemark Start="00:00:19.531" End="00:00:19.531" Title="Click on the ellipses on the right of the current selected company."/>
+            <c:MediaPlacemark Start="00:00:27.419" End="00:00:27.419" Title="Click on any of the displayed companies to change you current company."/>
+            <c:MediaPlacemark Start="00:00:33.554" End="00:00:33.554" Title="Click on 'New' at the top left of the popup."/>
+            <c:MediaPlacemark Start="00:00:37.738" End="00:00:37.738" Title="Click on 'Create New Company'."/>
+            <c:MediaPlacemark Start="00:00:44.027" End="00:00:44.027" Title="A popup should appear to guide you through the company creation process."/>
+            <c:MediaPlacemark Start="00:00:46.500" End="00:00:46.500" Title="Click on 'Next' to move to the next page."/>
+            <c:MediaPlacemark Start="00:00:57.155" End="00:00:57.155" Title="Select the type of company and how much data you would like to already be setup."/>
+            <c:MediaPlacemark Start="00:01:11.458" End="00:01:11.458" Title="Enter your company name."/>
+        </c:MediaContext>
+    </c:MediaSource>
+
+
+    <c:MediaSource x:Key="AssistedSetupMedia" UriSource="Videos/Assisted Setup.mp4">
+        <c:MediaContext Title="Assisted Setup" Speed="2">
+            <c:MediaContext.Description>
+                The Assisted Setup Section of Business Central is a collection of common areas in your company
+                that can easily be setup up with simple step by step wizards.
+            </c:MediaContext.Description>
+            <c:MediaPlacemark Start="00:00:03.148" End="00:00:03.148" Title="Click on the 'Tell Me' on the top right of your role center."/>
+            <c:MediaPlacemark Start="00:00:10.883" End="00:00:10.883" Title="Type in 'Assisted Setup'."/>
+            <c:MediaPlacemark Start="00:00:22.549" End="00:00:22.549" Title="Select 'Assisted Setup' from the search results."/>
+            <c:MediaPlacemark Start="00:00:24.287" End="00:00:24.287" Title="Let's try another method. Click on the 'X' to close the search bar."/>
+            <c:MediaPlacemark Start="00:00:31.800" End="00:00:31.800" Title="Click on 'Setup &amp; Extensions' at the top of your role center."/>
+            <c:MediaPlacemark Start="00:00:35.673" End="00:00:35.673" Title="Click on 'Assisted Setup'."/>
+            <c:MediaPlacemark Start="00:00:43.461" End="00:00:43.461" Title="Migrating Business Data is a quite common task used in Assisted Setup."/>
+            <c:MediaPlacemark Start="00:00:48.542" End="00:00:48.542" Title="Follow the instructions in the wizard, step-by-step to migrate your data."/>
+        </c:MediaContext>
+    </c:MediaSource>
+    
+    
+    
     
     
     
     <c:MediaSource x:Key="AccountingPeriods" UriSource="Videos/Accounting Periods.mp4"/>
-    <c:MediaSource x:Key="Actions" UriSource="Videos/Actions.mp4"/>
+
     
-    <c:MediaSource x:Key="AssistedSetup" UriSource="Videos/Assisted Setup.mp4"/>
-    <c:MediaSource x:Key="Back" UriSource="Videos/Back.mp4"/>
-    <c:MediaSource x:Key="BankAccounts" UriSource="Videos/Bank Accounts.mp4"/>
+    <c:MediaSource x:Key="BankAccounts" UriSource="Videos/Bank Accounts.mp4">
+        <c:MediaContext Title="Setting Up Bank Accounts" Speed="1.5">
+            <c:MediaContext.Description>
+                In Business Central, Bank accounts are used to keep track of all your
+                company's banking transactions. Once your accounts are all
+                set up, you can print checks directly from business central.
+                
+                The procedure of setting up your company’s bank accounts and linking 
+                them to the bank is normally part one of the first procedures that Microsoft Dynamics 365 
+                Business Central attempts to guide you through immediately after your 
+                company has been successfully created.
+            </c:MediaContext.Description>
+
+            <c:MediaPlacemark Start="00:00:01.458" End="00:00:01.458" Title="Click on 'Tell Me' at the top right of your role center."/>
+            <c:MediaPlacemark Start="00:00:06.055" End="00:00:06.055" Title="Type in 'Bank Accounts'."/>
+            <c:MediaPlacemark Start="00:00:12.145" End="00:00:12.145" Title="Select 'Bank Accounts' from the Pages and Tasks Section."/>
+            <c:MediaPlacemark Start="00:00:18.154" End="00:00:18.154" Title="The 'Bank Accounts' page would be displayed.">
+                Here, you can create and manage your company’s bank accounts.
+            </c:MediaPlacemark>
+            <c:MediaPlacemark Start="00:00:20.901" End="00:00:20.901" Title="Click on 'New' to create a new bank account."/>
+            <c:MediaPlacemark Start="00:00:30.253" End="00:00:30.253" Title="Fill in information about your bank account."/>
+            <c:MediaPlacemark Start="00:00:44.940" End="00:00:44.940" Title="Click on 'Bank Statement Service'."/>
+            <c:MediaPlacemark Start="00:00:48.129" End="00:00:48.129" Title="Click on 'Link to Online Bank Account' to link the account to your bank."/>
+        </c:MediaContext>
+    </c:MediaSource>
     <c:MediaSource x:Key="CashFlowSettingUpAccounts" UriSource="Videos/Cash Flow (Setting Up Accounts).mp4"/>
     <c:MediaSource x:Key="CashFlowFinalizing" UriSource="Videos/Cash Flow (Finalizing).mp4"/>
     
 
-</ResourceDictionary>
+</ResourceDictionary>  

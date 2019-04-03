@@ -180,11 +180,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Videos\App Launcher.mp4" />
-    <EmbeddedResource Include="Resources\Videos\Back.mp4" />
-    <EmbeddedResource Include="Resources\Videos\Filtering.mp4" />
-    <EmbeddedResource Include="Resources\Videos\More Options.mp4" />
+    <Resource Include="Resources\Videos\Back.mp4" />
+    <Resource Include="Resources\Videos\Filtering.mp4" />
+    <Resource Include="Resources\Videos\More Options.mp4" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\Links.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Media.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -322,23 +326,23 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Videos\Creating Users.mp4" />
-    <EmbeddedResource Include="Resources\Videos\Assisted Setup.mp4" />
+    <Resource Include="Resources\Videos\Assisted Setup.mp4" />
     <EmbeddedResource Include="Resources\Videos\Excel Data Migration.mp4" />
     <EmbeddedResource Include="Resources\Videos\Manual Setup.mp4" />
-    <EmbeddedResource Include="Resources\Videos\New Company.mp4" />
+    <Resource Include="Resources\Videos\New Company.mp4" />
     <EmbeddedResource Include="Resources\Videos\Role Centers and Personalization.mp4" />
     <EmbeddedResource Include="Resources\Videos\Setup and Help Resources.mp4" />
-    <EmbeddedResource Include="Resources\Videos\Delete.mp4" />
-    <EmbeddedResource Include="Resources\Videos\Expanding Layout.mp4" />
+    <Resource Include="Resources\Videos\Delete.mp4" />
+    <Resource Include="Resources\Videos\Expanding Layout.mp4" />
     <EmbeddedResource Include="Resources\Videos\Company Information.mp4" />
-    <EmbeddedResource Include="Resources\Videos\Fact Box.mp4" />
-    <EmbeddedResource Include="Resources\Videos\Item Select.mp4" />
-    <EmbeddedResource Include="Resources\Videos\New.mp4" />
-    <EmbeddedResource Include="Resources\Videos\Pin.mp4" />
-    <EmbeddedResource Include="Resources\Videos\Toggle Edit.mp4" />
-    <EmbeddedResource Include="Resources\Videos\Tell Me.mp4" />
-    <EmbeddedResource Include="Resources\Videos\Actions.mp4" />
-    <EmbeddedResource Include="Resources\Videos\Item Layouts.mp4" />
+    <Resource Include="Resources\Videos\Fact Box.mp4" />
+    <Resource Include="Resources\Videos\Item Select.mp4" />
+    <Resource Include="Resources\Videos\New.mp4" />
+    <Resource Include="Resources\Videos\Pin.mp4" />
+    <Resource Include="Resources\Videos\Toggle Edit.mp4" />
+    <Resource Include="Resources\Videos\Tell Me.mp4" />
+    <Resource Include="Resources\Videos\Actions.mp4" />
+    <Resource Include="Resources\Videos\Item Layouts.mp4" />
     <Resource Include="Resources\Images\Workspace View.jpg" />
     <Resource Include="Resources\Images\Microsoft Sign in.png" />
     <Resource Include="Resources\Images\Email Marketing.png" />
@@ -375,7 +379,6 @@
     <Resource Include="Resources\Images\Back Arrow.png" />
     <Resource Include="Resources\Images\Excel Icon.png" />
     <Resource Include="Resources\Images\New Business.jpg" />
-    <Resource Include="Resources\Pages\index.html" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Bank Notes.jpg" />
@@ -385,7 +388,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Videos\Accounting Periods.mp4" />
-    <EmbeddedResource Include="Resources\Videos\Bank Accounts.mp4" />
+    <Resource Include="Resources\Videos\Bank Accounts.mp4" />
     <EmbeddedResource Include="Resources\Videos\Cash Flow %28Finalizing%29.mp4" />
     <EmbeddedResource Include="Resources\Videos\Cash Flow %28Setting Up Accounts%29.mp4" />
     <EmbeddedResource Include="Resources\Videos\Chart Of Accounts.mp4" />
@@ -407,6 +410,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Videos\Zip Codes.mp4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pages\old_index.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pages\index.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

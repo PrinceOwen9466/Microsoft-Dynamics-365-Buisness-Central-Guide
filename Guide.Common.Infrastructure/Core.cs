@@ -3,12 +3,17 @@ using NLog;
 using NLog.Config;
 using NLog.Targets;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Baml2006;
 
 namespace Guide.Common.Infrastructure
 {
@@ -91,7 +96,7 @@ namespace Guide.Common.Infrastructure
             Log.Info("Welcome to the {0} Debugger", PRODUCT_NAME);
 #endif
 
-            CreateDirectories(Core.WORK_DIR, Core.TEMP_DIR, Core.LOG_DIR, Core.DATABASE_DIR);
+            CreateDirectories(Core.WORK_DIR, Core.TEMP_DIR, Core.LOG_DIR, Core.DATABASE_DIR, Core.SEARCH_INDEX_DIR);
             ClearDirectory(Core.TEMP_DIR);
         }
 
@@ -157,6 +162,34 @@ namespace Guide.Common.Infrastructure
             LogManager.Configuration = config;
 
             LogManager.ReconfigExistingLoggers();
+        }
+
+        public static ResourceDictionary GetResourceDictionary(string assemblyName)
+        {
+            Assembly asm = Assembly.LoadFrom(assemblyName);
+
+            using (Stream stream = asm.GetManifestResourceStream(asm.GetName().Name + ".g.resources"))
+            using (ResourceReader reader = new ResourceReader(stream))
+            {
+                foreach (DictionaryEntry entry in reader)
+                {
+                    try
+                    {
+                        var readStream = entry.Value as Stream;
+                        Baml2006Reader bamlReader = new Baml2006Reader(readStream);
+                        var loadedObject = System.Windows.Markup.XamlReader.Load(bamlReader);
+
+                        if (loadedObject is ResourceDictionary)
+                            return loadedObject as ResourceDictionary;
+                    }
+                    catch (Exception ex)
+                    {
+                        Core.Log.Error(ex);
+                    }
+                    
+                }
+            }
+            return null;
         }
 
         #endregion

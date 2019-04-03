@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
              xmlns:local="clr-namespace:Guide.ContentLibrary.Views.Getting_Started"
-             mc:Ignorable="d" Background="{DynamicResource AuxBrush}"
+             mc:Ignorable="d" Background="{DynamicResource AuxBrush}" Title="Accessing Business Central"
              d:DesignHeight="650" d:DesignWidth="1000" Template="{DynamicResource RippleControlTemplate}">
     <UserControl.Resources>
         <ResourceDictionary>

@@ -13,7 +13,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:awesome="http://schemas.awesomium.com/winfx"
              mc:Ignorable="d" prism:ViewModelLocator.AutoWireViewModel="True" IsFullPage="True"
-             d:DesignHeight="450" d:DesignWidth="800" IsAnimatable="False">
+             d:DesignHeight="450" d:DesignWidth="800" IsAnimatable="False" Title="Home Page">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

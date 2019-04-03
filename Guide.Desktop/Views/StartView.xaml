@@ -9,7 +9,7 @@
              xmlns:prism="http://prismlibrary.com/" AutoOpen="true" 
              xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
              mc:Ignorable="d" prism:ViewModelLocator.AutoWireViewModel="True"
-             d:DesignHeight="450" d:DesignWidth="800" OpenAnimationActive="true">
+             d:DesignHeight="450" d:DesignWidth="800" OpenAnimationActive="true" IsContent="False">
     <UserControl.Resources>
         <Storyboard x:Key="BrushFadeStart" BeginTime="0:0:01">
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="MainGrid">

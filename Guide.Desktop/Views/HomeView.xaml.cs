@@ -1,4 +1,5 @@
-﻿using Guide.Common.Infrastructure.Resources.Controls;
+﻿using Guide.Common.Infrastructure;
+using Guide.Common.Infrastructure.Resources.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,5 +26,6 @@ namespace Guide.Desktop.Views
         {
             InitializeComponent();
         }
+
     }
 }

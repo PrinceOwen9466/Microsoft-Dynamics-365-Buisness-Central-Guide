@@ -6,18 +6,20 @@
              xmlns:local="clr-namespace:Guide.Desktop.Views"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-             xmlns:prism="http://prismlibrary.com/" Name="ParentControl"
+             xmlns:prism="http://prismlibrary.com/" x:Name="ParentControl"
              xmlns:core="clr-namespace:Guide.Common.Infrastructure;assembly=Guide.Common.Infrastructure"
              xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
              xmlns:coreBehaviors="clr-namespace:Guide.Common.Infrastructure.Resources.Behaviors;assembly=Guide.Common.Infrastructure"
              xmlns:cap="clr-namespace:Guide.Common.Infrastructure.Resources.AttachedProperties;assembly=Guide.Common.Infrastructure"
              xmlns:debug="clr-namespace:System.Diagnostics;assembly=WindowsBase"
              xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:coreModels="clr-namespace:Guide.Common.Infrastructure.Models;assembly=Guide.Common.Infrastructure"
              mc:Ignorable="d" prism:ViewModelLocator.AutoWireViewModel="True" AutoOpen="true"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" IsContent="False">
     <UserControl.Resources>
         <!--
         <Storyboard x:Key="Assemble">
+        
             <DoubleAnimationUsingKeyFrames BeginTime="0:0:0.2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="TitlePanel">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
@@ -233,6 +235,9 @@
                     <!--
                     <ContentControl prism:RegionManager.RegionName="{x:Static core:Core.CONTENT_REGION}"/>
                     -->
+
+                    <coreControls:NavigationControl Name="NavigationControl"/>
+                    <!--
                     <Control>
                         <Control.Template>
                             <ControlTemplate>
@@ -245,20 +250,125 @@
 
                                     <coreControls:SwipeContainer x:Name="ContentContainer" Content="{Binding Presenter.CurrentView, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SwipeDirection="{Binding Presenter.SwipeDirection, Mode=OneWay}" Grid.ColumnSpan="3"/>
 
+                                    <coreControls:AirSpaceOverlay x:Name="OverlayLeft" Width="{Binding ElementName=LeftButtonPanel, Path=ActualWidth}" Height="{Binding ElementName=LeftButtonPanel, Path=ActualHeight}" Visibility="{Binding ElementName=ContentContainer, Path=Content.IsAnimatable, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                                        <Grid>
+                                            <Button VerticalAlignment="Center" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20">
+                                                <coreControls:SvgContainer SvgSource="{DynamicResource CircledLeftArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
+                                            </Button>
+                                        </Grid>
+                                        <coreControls:AirSpaceOverlay.OverlayChild>
+                                            <Grid x:Name="OverlayLeftGrid">
+                                                <Button x:Name="LeftControlOverlayButton" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=coreControls:AirSpaceOverlayContainer}, Path=OverlayParent.ParentControl.DataContext.PreviousCommand}" VerticalAlignment="Center" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20">
+                                                    <Button.RenderTransform>
+                                                        <TransformGroup>
+                                                            <ScaleTransform/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform X="0"/>
+                                                        </TransformGroup>
+                                                    </Button.RenderTransform>
 
+                                                    <coreControls:SvgContainer SvgSource="{DynamicResource CircledLeftArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
+                                                </Button>
+                                                
+                                                !!!
+                                                <Button x:Name="LeftOverlayButton" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=coreControls:AirSpaceOverlayContainer}, Path=OverlayParent.ParentControl.DataContext.PreviousCommand}" VerticalAlignment="Center" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20">
+                                                    <coreControls:SvgContainer SvgSource="{DynamicResource CircledLeftArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
+                                                </Button>
+                                                !!!
 
-                                    <!--
-                        <coreControls:AirSpaceOverlay>
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="ChildClicked">
-                                    <prism:InvokeCommandAction Command="{Binding ElementName=ParentControl, Path=DataContext.PreviousCommand}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <coreControls:AirSpaceOverlay.OverlayChild>
-                                <Button VerticalAlignment="Center" Content="Previous" />
-                            </coreControls:AirSpaceOverlay.OverlayChild>
-                        </coreControls:AirSpaceOverlay>
-                        -->
+                                                !!!
+                                                <Control>
+                                                    <Control.Template>
+                                                        <ControlTemplate>
+                                                            <Grid>
+                                                                <Button x:Name="LeftControlOverlayButton" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=coreControls:AirSpaceOverlayContainer}, Path=OverlayParent.ParentControl.DataContext.PreviousCommand}" VerticalAlignment="Center" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20">
+                                                                    <Button.RenderTransform>
+                                                                        <TransformGroup>
+                                                                            <ScaleTransform/>
+                                                                            <SkewTransform/>
+                                                                            <RotateTransform/>
+                                                                            <TranslateTransform X="0"/>
+                                                                        </TransformGroup>
+                                                                    </Button.RenderTransform>
+
+                                                                    <coreControls:SvgContainer SvgSource="{DynamicResource CircledLeftArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
+                                                                </Button>
+                                                            </Grid>
+
+                                                            <ControlTemplate.Resources>
+                                                                <ResourceDictionary>
+                                                                    <Storyboard x:Key="OverlayPopInNavigation">
+                                                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="LeftControlOverlayButton">
+                                                                            <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="20">
+                                                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                                                    <ExponentialEase EasingMode="EaseInOut"/>
+                                                                                </EasingDoubleKeyFrame.EasingFunction>
+                                                                            </EasingDoubleKeyFrame>
+                                                                            <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                                                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                                                    <ExponentialEase EasingMode="EaseInOut"/>
+                                                                                </EasingDoubleKeyFrame.EasingFunction>
+                                                                            </EasingDoubleKeyFrame>
+                                                                        </DoubleAnimationUsingKeyFrames>
+                                                                    </Storyboard>
+
+                                                                    <Storyboard x:Key="OverlayPopOutNavigation">
+                                                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="LeftControlOverlayButton">
+                                                                            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                                                            <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+                                                                            <EasingDoubleKeyFrame KeyTime="0:0:2" Value="-100"/>
+                                                                        </DoubleAnimationUsingKeyFrames>
+                                                                    </Storyboard>
+                                                                </ResourceDictionary>
+                                                            </ControlTemplate.Resources>
+
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Trigger.EnterActions>
+                                                                        <StopStoryboard BeginStoryboardName="BeginPopOutNavigationOverlay"/>
+                                                                        <BeginStoryboard x:Name="BeginPopInNavigationOverlay" Storyboard="{StaticResource OverlayPopInNavigation}"/>
+                                                                    </Trigger.EnterActions>
+                                                                    <Trigger.ExitActions>
+                                                                        <BeginStoryboard x:Name="BeginPopOutNavigationOverlay" Storyboard="{StaticResource OverlayPopOutNavigation}"/>
+                                                                        <StopStoryboard BeginStoryboardName="BeginPopInNavigationOverlay"/>
+                                                                    </Trigger.ExitActions>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Control.Template>
+                                                </Control>
+                                                !!!
+                                            </Grid>
+                                        </coreControls:AirSpaceOverlay.OverlayChild>
+                                    </coreControls:AirSpaceOverlay>
+
+                                    <coreControls:AirSpaceOverlay Width="{Binding ElementName=LeftButtonPanel, Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Control}, Path=ActualHeight}" Grid.Column="2" Visibility="{Binding ElementName=ContentContainer, Path=Content.IsAnimatable, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                                        <Grid cap:Hits.RecordHits="True">
+                                            <Button VerticalAlignment="Center" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20">
+                                                <coreControls:SvgContainer SvgSource="{DynamicResource CircledRightArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
+                                            </Button>
+                                        </Grid>
+                                        <coreControls:AirSpaceOverlay.OverlayChild>
+                                            !!!
+                                                cap:Hits.HitElement="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=coreControls:AirSpaceOverlayContainer}, Path=OverlayParent}" debug:PresentationTraceSources.TraceLevel="High" cap:Hits.RecordHits="True"   
+                                            !!!
+                                            <Grid x:Name="DemoGrid" Background="Transparent">
+                                                <Button x:Name="RightOverlayButton" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=coreControls:AirSpaceOverlayContainer}, Path=OverlayParent.ParentControl.DataContext.NextCommand}" VerticalAlignment="Center" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20">
+                                                    <Button.RenderTransform>
+                                                        <TransformGroup>
+                                                            <ScaleTransform/>
+                                                            <SkewTransform/>
+                                                            <RotateTransform/>
+                                                            <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=coreControls:AirSpaceOverlayContainer}, Path=OverlayParent.ParentControl.RightButton.RenderTransform.Children[3].X}" debug:PresentationTraceSources.TraceLevel="High"/>
+                                                        </TransformGroup>
+                                                    </Button.RenderTransform>
+                                                    <coreControls:SvgContainer SvgSource="{DynamicResource CircledRightArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
+                                                </Button>
+                                            </Grid>
+                                        </coreControls:AirSpaceOverlay.OverlayChild>
+                                    </coreControls:AirSpaceOverlay>
+
 
                                     <Grid x:Name="LeftButtonPanel" Background="{x:Null}" Margin="0 0 0 0" cap:Hits.RecordHits="true" Visibility="{Binding ElementName=ContentContainer, Path=Content.VideoActive, Converter={StaticResource BoolToVisibilityConverter}}">
                                         <Button x:Name="LeftButton" VerticalAlignment="Center" Command="{Binding PreviousCommand}" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20" RenderTransformOrigin="0.5,0.5">
@@ -275,13 +385,13 @@
                                     </Grid>
 
                                     <Grid x:Name="RightButtonPanel" Background="{x:Null}" Grid.Column="2" cap:Hits.RecordHits="true">
-                                        <Button x:Name="RightButton" VerticalAlignment="Center" Grid.Column="2" Command="{Binding NextCommand}" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20">
+                                        <Button Name="RightButton" VerticalAlignment="Center" Grid.Column="2" Command="{Binding NextCommand}" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20">
                                             <Button.RenderTransform>
                                                 <TransformGroup>
                                                     <ScaleTransform/>
                                                     <SkewTransform/>
                                                     <RotateTransform/>
-                                                    <TranslateTransform X="100"/>
+                                                    <TranslateTransform x:Name="TranslateTransformRightButtonPanel" X="100"/>
                                                 </TransformGroup>
                                             </Button.RenderTransform>
                                             <coreControls:SvgContainer SvgSource="{DynamicResource CircledRightArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
@@ -332,6 +442,48 @@
                                                 <EasingDoubleKeyFrame KeyTime="0:0:2" Value="100"/>
                                             </DoubleAnimationUsingKeyFrames>
                                         </Storyboard>
+
+                                        <Storyboard x:Key="OverlayPopInNavigation">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="LeftOverlayButton">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="20">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <ExponentialEase EasingMode="EaseInOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <ExponentialEase EasingMode="EaseInOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="RightOverlayButton">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-20">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <ExponentialEase EasingMode="EaseInOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <ExponentialEase EasingMode="EaseInOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+
+                                        <Storyboard x:Key="OverlayPopOutNavigation">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="LeftOverlayButton">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="-100"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="RightOverlayButton">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="100"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                        
+                                        
                                     </ResourceDictionary>
                                 </ControlTemplate.Resources>
 
@@ -339,11 +491,22 @@
                                     <Trigger SourceName="LeftButtonPanel" Property="cap:Hits.MouseOver" Value="True">
                                         <Trigger.EnterActions>
                                             <StopStoryboard BeginStoryboardName="BeginPopOutNavigation"/>
+                                            
                                             <BeginStoryboard x:Name="BeginPopInNavigation" Storyboard="{StaticResource PopInNavigation}"/>
+                                            !!!
+                                            <StopStoryboard BeginStoryboardName="BeginPopOutNavigationOverlay"/>
+                                            <BeginStoryboard x:Name="BeginPopInNavigationOverlay" Storyboard="{StaticResource OverlayPopInNavigation}"/>
+                                            !!!
                                         </Trigger.EnterActions>
                                         <Trigger.ExitActions>
+                                            !!!
+                                            <BeginStoryboard x:Name="BeginPopOutNavigationOverlay" Storyboard="{StaticResource OverlayPopOutNavigation}"/>
+                                            <StopStoryboard BeginStoryboardName="BeginPopInNavigationOverlay"/>
+                                            !!!
                                             <BeginStoryboard x:Name="BeginPopOutNavigation" Storyboard="{StaticResource PopOutNavigation}"/>
+                                            
                                             <StopStoryboard BeginStoryboardName="BeginPopInNavigation"/>
+                                            
                                         </Trigger.ExitActions>
                                     </Trigger>
 
@@ -357,12 +520,14 @@
                                             <StopStoryboard BeginStoryboardName="BeginPopInNavigation1"/>
                                         </Trigger.ExitActions>
                                     </Trigger>
-                                    <!--
+
+                                    
+                                    !!!
                                     <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                                         <BeginStoryboard Storyboard="{StaticResource PopInNavigation}"/>
                                     </EventTrigger>
-                                    -->
-                                    <!--
+                                    !!!
+                                    !!!
                                     <Trigger SourceName="LeftButtonPanel" Property="IsMouseOver" Value="True">
                                         <Trigger.EnterActions>
                                             <StopStoryboard BeginStoryboardName="BeginPopOutNavigation"/>
@@ -384,13 +549,14 @@
                                             <StopStoryboard BeginStoryboardName="BeginPopInNavigation1"/>
                                         </Trigger.ExitActions>
                                     </Trigger>
-                                    -->
+                                    !!!
 
                                 </ControlTemplate.Triggers>
 
                             </ControlTemplate>
                         </Control.Template>
                     </Control>
+                    -->
 
                 </Border>
 
@@ -452,7 +618,14 @@
                 </Grid>
             </Border>
 
-
+            <coreControls:TitleControl SearchActive="{Binding SearchActive}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SearchClosed">
+                        <prism:InvokeCommandAction Command="{Binding SearchClosedCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </coreControls:TitleControl>
+            <!--
             <Control>
                 <Control.Template>
                     <ControlTemplate>
@@ -494,41 +667,41 @@
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder2">
                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <!--
+                                !!!
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder3">
                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                -->
+                                !!!
                             </Storyboard>
 
                             <Storyboard x:Key="UndockTitle" x:Name="UndockTitle">
-                                <!--
+                                !!!
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder3">
                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                -->
+                                !!!
                             </Storyboard>
 
                             <Storyboard x:Key="ActivateTitle" x:Name="ActivateTitle">
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <!--
+                                !!!
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder2">
                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                -->
+                                !!!
                             </Storyboard>
 
                             <Storyboard x:Key="DeactivateTitle" x:Name="DeactivateTitle">
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <!--
+                                !!!
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder2">
                                     <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                -->
+                                !!!
                             </Storyboard>
 
                             <Storyboard x:Key="ActivateSearch" x:Name="ActivateSearch">
@@ -641,9 +814,9 @@
                                                     <MultiBinding.Bindings>
                                                         <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Grid}" Path="ActualHeight"/>
                                                         <Binding ElementName="TitleBarDummyBorder" Path="ActualWidth"/>
-                                                        <!--
+                                                        !!!
                                                         <Binding ElementName="TitleBarDummyBorder2" Path="ActualWidth"/>
-                                                        -->
+                                                        !!!
                                                     </MultiBinding.Bindings>
                                                 </MultiBinding>
                                             </TranslateTransform.Y>
@@ -693,7 +866,7 @@
                                     </UniformGrid>
                                 </Button>
                                 <DockPanel x:Name="TitlePanel" RenderTransformOrigin="0.5,0.5" Background="#000000">
-                                    <!--
+                                    !!!
                                     <DockPanel.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform/>
@@ -702,7 +875,7 @@
                                             <TranslateTransform Y="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DockPanel}, Path=ActualHeight, Converter={StaticResource NegativeConverter}}"/>
                                         </TransformGroup>
                                     </DockPanel.RenderTransform>
-                                    -->
+                                    !!!
 
                                     <Button Foreground="{StaticResource MainBrush}" Style="{DynamicResource TransparentButton}" DockPanel.Dock="Right" Width="34" BorderBrush="{DynamicResource MainBrush}" BorderThickness=".5 0 0 0" Padding="5 0">
                                         <i:Interaction.Triggers>
@@ -724,11 +897,11 @@
 
                                     <Border BorderThickness=".5 0 0 0" DockPanel.Dock="Right" BorderBrush="#FFFFFF" Padding="3 0" >
                                         <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5 0" Orientation="Horizontal">
-                                            <!--
+                                            !!!
                                             <Button Style="{DynamicResource RoundButton}" Margin="10 0" Command="{Binding PreviousCommand}">
                                                 <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource LeftArrow}" Width="30"/>
                                             </Button>
-                                            -->
+                                            !!!
                                             
                                             <ToggleButton Width="30" Height="30" Style="{DynamicResource RoundToggleButton}" Margin="5 0" Padding="0 5" IsChecked="{Binding SearchActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                 <coreControls:SvgContainer SvgSource="{DynamicResource TellMeSvg}" Style="{DynamicResource ClearImage}"/>
@@ -742,11 +915,11 @@
                                                 <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource PushPinIcon}"/>
                                             </ToggleButton>
 
-                                            <!--
+                                            !!!
                                             <Button Style="{DynamicResource RoundButton}" Margin="10 0" Command="{Binding NextCommand}">
                                                 <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource RightArrow}" Width="30"/>
                                             </Button>
-                                            -->
+                                            !!!
                                         </StackPanel>
                                     </Border>
 
@@ -767,7 +940,7 @@
                             </DockPanel>
 
                             <Grid ClipToBounds="True" Grid.Row="1" Margin="50 0">
-                                <DockPanel x:Name="SearchPanel" Margin="10 0 10 10" Background="{DynamicResource MainBrush}" RenderTransformOrigin="0.5,0.5" cap:Directions.VerticalDirection="-1.5" >
+                                <DockPanel x:Name="SearchPanel" Margin="10 0 10 10" MaxHeight="450" Background="{DynamicResource MainBrush}" RenderTransformOrigin="0.5,0.5" cap:Directions.VerticalDirection="-1.5" >
                                     <DockPanel.Resources>
                                         <ResourceDictionary>
                                             <ResourceDictionary.MergedDictionaries>
@@ -795,8 +968,23 @@
                                         <DropShadowEffect BlurRadius="10" ShadowDepth="2" Color="Black" Direction="315"/>
                                     </Panel.Effect>
                                     <TextBlock DockPanel.Dock="Top" Margin="20 20 20 2" Text="WHAT WOULD YOU LIKE TO KNOW?" FontWeight="Light" Background="#00FFFFFF" FontFamily="Helectiva" FontSize="20"/>
-                                    <TextBox DockPanel.Dock="Top" Margin="20 4" Padding="0"/>
-                                    <ListBox Margin="20 2" BorderThickness="0">
+                                    <TextBox DockPanel.Dock="Top" Margin="20 4" Padding="0" Text="{Binding SearchEngine.Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <ListBox Margin="20 2" BorderThickness="0" ItemsSource="{Binding SearchEngine.Results, UpdateSourceTrigger=PropertyChanged}">
+                                        <ListBox.Resources>
+                                            <DataTemplate DataType="{x:Type coreModels:MediaLink}">
+                                                <DockPanel>
+                                                    <coreControls:SvgContainer Style="{DynamicResource ClearImage}" DockPanel.Dock="Left" Width="32" SvgSource="{DynamicResource VideoPlaySvg}"/>
+                                                    <TextBlock Margin="10 0" Text="{Binding Title}" VerticalAlignment="Center"/>
+                                                </DockPanel>
+                                            </DataTemplate>
+
+                                            <DataTemplate DataType="{x:Type coreModels:Page}">
+                                                <DockPanel>
+                                                    <coreControls:SvgContainer Style="{DynamicResource ClearImage}" DockPanel.Dock="Left" Width="32" SvgSource="{DynamicResource BookmarkPageSvg}"/>
+                                                    <TextBlock Margin="10 0" Text="{Binding Title}" VerticalAlignment="Center"/>
+                                                </DockPanel>
+                                            </DataTemplate>
+                                        </ListBox.Resources>
                                     </ListBox>
                                 </DockPanel>
                             </Grid>
@@ -805,6 +993,7 @@
                     </ControlTemplate>
                 </Control.Template>
             </Control>
+            -->
         </Grid>
 
 

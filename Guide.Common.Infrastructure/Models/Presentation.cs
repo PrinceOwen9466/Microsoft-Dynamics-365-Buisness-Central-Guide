@@ -103,7 +103,7 @@ namespace Guide.Common.Infrastructure.Models
                 if (i == 2) Application.Current.Dispatcher.Invoke(() => View = Pages[i]);
             }
 
-            AnalyzePages();
+            // AnalyzePages();
         }
 
         public async Task Next()
@@ -160,7 +160,7 @@ namespace Guide.Common.Infrastructure.Models
             };
         }
 
-        public async void OpenSection(ISection section)
+        public async Task OpenSection(ISection section)
         {
             if (section == null || IsBusy) return;
             IsBusy = true;
@@ -187,17 +187,121 @@ namespace Guide.Common.Infrastructure.Models
             };
         }
 
-        public async void GoToPage(Page page)
+        public async Task NavigateTo(Page page)
         {
-            PresentationControl control = await ResolveControl(page.PageReference);
-            RippleControlButton button = null;
+            if (IsBusy) return;
+            IsBusy = true;
 
-            foreach (var id in page.IterateIDs().Skip(1))
+            // Clear the pages
+            for (int i = 0; i < Pages.Length; i++) Pages[i] = null;
+
+            PresentationControl control = await ResolveControl(page.PageReference);
+            int mainIndex = Pages.Length / 2;
+            Index = PageMap.FindIndex(p => p.TargetPageAssemblyName == page.PageReferenceName);
+            Pages[mainIndex] = control;
+
+            List<string> ids = new List<string>(page.IterateIDs());
+            int index = 1;
+            RoutedEventHandler loaded = null;
+            loaded = async (s, e) =>
             {
-                button = control.FindLogicalChildren<RippleControlButton>(false).
-                    FirstOrDefault(b => ReferenceKey.GetKey(b) == id);
+                await Task.Delay(500);
+                if (!(s is PresentationControl)) return;
+                PresentationControl c = (PresentationControl)s;
+
+                if (index >= ids.Count)
+                {
+                    await LoadPages();
+                    Application.Current.Dispatcher.Invoke(() => IsBusy = false);
+                    return;
+                }
+
+                string targetId = ids[index++];
+                RippleControlButton button = c.FindLogicalChildren<RippleControlButton>(false).
+                    FirstOrDefault(b => ((PresentationControl)b.TransitionContent).Key == targetId);
+                if (button == null) return;
+                ((PresentationControl)button.TransitionContent).Loaded += loaded;
                 button.Activate();
+            };
+
+            EventHandler opened = null;
+            opened = async (s, e) =>
+            {
+                await Task.Delay(500);
+                if (!(s is PresentationControl)) return;
+                PresentationControl c = (PresentationControl)s;
+                c.Opened -= opened;
+
+                if (index >= ids.Count)
+                {
+                    await LoadPages();
+                    Application.Current.Dispatcher.Invoke(() => IsBusy = false);
+                    return;
+                }
+
+                string targetId = ids[index++];
+                RippleControlButton button = c.FindLogicalChildren<RippleControlButton>(false).
+                    FirstOrDefault(b => ((PresentationControl)b.TransitionContent).Key == targetId);
+                if (button == null) return;
+                ((PresentationControl)button.TransitionContent).Loaded += loaded;
+                button.Activate();
+            };
+
+
+            control.Opened += opened;
+            await Application.Current.Dispatcher.InvokeAsync(() => View = control);
+        }
+
+        public async Task NavigateTo(LinkBase link)
+        {
+            if (IsBusy) return;
+            IsBusy = true;
+
+            // Clear the pages
+            for (int i = 0; i < Pages.Length; i++) Pages[i] = null;
+
+            #region Resolve The Control
+            RippleControl control = await ResolveControl(link.PageReferenceName);
+            control.PlayerActive
+            #endregion
+        }
+
+        public async void NavigateTo(int index, bool waitTillOpen = true)
+        {
+            if (IsBusy) return;
+            IsBusy = true;
+
+            // Clear the pages
+            for (int i = 0; i < Pages.Length; i++) Pages[i] = null;
+
+            if (Index < 0) Index = 0;
+            else if (Index >= PageMap.Count) Index = PageMap.Count - 1;
+
+            int mainIndex = Pages.Length / 2;
+            Pages[mainIndex] = await ResolveReference(PageMap[Index]);
+
+            await Application.Current.Dispatcher.InvokeAsync(() => View = Pages[mainIndex]);
+
+            EventHandler openedHandler = null;
+            if (!waitTillOpen)
+            {
+                Application.Current.Dispatcher.WaitTillIdle(200);
+                var watch = Stopwatch.StartNew();
+                await LoadPages();
+                watch.Stop();
+                Core.Log.Debug($"Took {watch.Elapsed} to LoadPages");
+                IsBusy = false;
             }
+            else View.Opened += openedHandler = async (s, e) =>
+            {
+                View.Opened -= openedHandler;
+                Application.Current.Dispatcher.WaitTillIdle(200);
+                var watch = Stopwatch.StartNew();
+                await LoadPages();
+                watch.Stop();
+                Core.Log.Debug($"Took {watch.Elapsed} to LoadPages");
+                IsBusy = false;
+            };
         }
         #endregion
 
@@ -334,49 +438,107 @@ namespace Guide.Common.Infrastructure.Models
                 if (currentSection == null || currentSection.Name != page.TargetSection.Name)
                     currentSection = page.TargetSection;
 
-                var reference = (DependencyObject)await ResolveReference(page);
+                var reference = (PresentationControl)await ResolveReference(page);
 
-                //currentSection.TotalPages += UIHelper.FindAllRippleButtons(reference).Count();
-                DisplayText(reference);
+                if (page.IsSecton) reference.DataContext = page;
+                List<Page> pages = new List<Page>(reference.FindPages(reference.Key, reference.GetType().AssemblyQualifiedName, page.TargetSection.Index, true));
+                foreach (var p in pages)
+                {
+                    Core.Log.Debug(p.Content);
+                    /*
+                    if (p.SectionID == "4" && p.IterateIDs().LastOrDefault() == "PostingGroups")
+                        GoToPage(p);
+                    */
+                }
             }
             watch.Stop();
             Core.Log.Debug($"Finished in {watch.Elapsed}");
         }
 
-        IEnumerable<Page> Analyze()
+        public async Task<List<Section>> Analyze()
         {
-            return null;
-            /*
-            var watch = Stopwatch.StartNew();
+            List<Section> sections = new List<Section>();
             Section currentSection = null;
-
+            int index = 0;
             foreach (var page in PageMap)
             {
-                var reference = (DependencyObject)await ResolveReference(page);
-                
-                foreach (var r in reference.FindLogicalChildren<RippleControlButton>())
+                if (currentSection == null)
                 {
-                    if (r.TransitionContent is PresentationControl)
-                    {
-                        ((PresentationControl)r.TransitionContent).
-                    }
+                    currentSection = page.TargetSection;
+                    sections.Add(currentSection);
+                    index = 0;
                 }
 
-
-                foreach (var p in reference.FindAllPages())
+                if (currentSection.Index != page.TargetSection.Index)
                 {
-                    string content = string.Empty;
-                    foreach (var textBlock in p.FindLogicalChildren<TextBlock>())
-                        content += textBlock.Text + "\n";
-                    string title = p.Title;
-                    
-                    //string content = p.FindLogicalChildren<TextBlock>().
-                    //yield return new Page() { I}
+                    currentSection = page.TargetSection;
+                    sections.Add(currentSection);
+                    index = 0;
+                }
+
+                var reference = (PresentationControl)await ResolveReference(page);
+
+                if (page.IsSecton)
+                    reference.DataContext = page;
+
+                
+                foreach (var p in reference.FindPages(reference.Key, reference.GetType().AssemblyQualifiedName, currentSection.Index, true))
+                {
+                    if (index == 0)
+                    {
+                        p.Title = currentSection.Name;
+                        p.ID = currentSection.Index.ToString();
+                    }
+                    currentSection.PageList.Add(p);
+                    index++;
+                }
+
+                var linkables = reference.FindLinkables(reference.Key, reference.GetType().AssemblyQualifiedName, currentSection.Index, true);
+
+                foreach (var linkable in linkables)
+                    Core.Log.Debug(linkable.Title);
+            }
+            return sections;
+        }
+
+        public async Task<IEnumerable<ILinkable>> AnalyzeLinks()
+        {
+            List<ILinkable> linkables = new List<ILinkable>();
+
+            Section currentSection = null;
+            int index = 0;
+            foreach (var page in PageMap)
+            {
+                if (currentSection == null)
+                {
+                    currentSection = page.TargetSection;
+                    index = 0;
+                }
+
+                if (currentSection.Index != page.TargetSection.Index)
+                {
+                    currentSection = page.TargetSection;
+                    index = 0;
+                }
+
+                var reference = (PresentationControl)await ResolveReference(page);
+
+                if (page.IsSecton)
+                    reference.DataContext = page;
+
+                foreach (var link in reference.FindLinkables(reference.Key, reference.GetType().AssemblyQualifiedName, currentSection.Index, true))
+                {
+                    if (index == 0)
+                    {
+                        link.Title = currentSection.Name;
+                        link.ID = currentSection.Index.ToString();
+                    }
+
+                    linkables.Add(link);
+                    index++;   
                 }
             }
-
-            watch.Stop();
-            */
+            return linkables;
         }
 
         void DisplayText(DependencyObject obj)
@@ -384,6 +546,8 @@ namespace Guide.Common.Infrastructure.Models
             foreach (var block in UIHelper.FindLogicalChildren<TextBlock>(obj))
                 Core.Log.Debug($"{obj} : \n{block.Text}");
         }
+
+
         #endregion
     }
 }

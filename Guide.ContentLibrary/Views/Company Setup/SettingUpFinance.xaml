@@ -64,38 +64,39 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid ClipToBounds="True">
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                        <coreControls:PresentationControl Title="Accounting Periods">
+                            <Grid ClipToBounds="True">
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <StackPanel VerticalAlignment="Center" Margin="5">
-                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
-                                            <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
-                                        </UserControl>
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <StackPanel VerticalAlignment="Center" Margin="5">
+                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                                <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                            </UserControl>
+                                        </StackPanel>
+
+
+
+                                        <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        Accounting Periods
+                                        </TextBlock>
                                     </StackPanel>
 
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                        <ScrollViewer.Resources>
+                                            <ResourceDictionary>
+                                                <ResourceDictionary.MergedDictionaries>
+                                                    <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                                </ResourceDictionary.MergedDictionaries>
+                                            </ResourceDictionary>
+                                        </ScrollViewer.Resources>
 
-
-                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                                        Accounting Periods
-                                    </TextBlock>
-                                </StackPanel>
-
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
-                                    <ScrollViewer.Resources>
-                                        <ResourceDictionary>
-                                            <ResourceDictionary.MergedDictionaries>
-                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
-                                            </ResourceDictionary.MergedDictionaries>
-                                        </ResourceDictionary>
-                                    </ScrollViewer.Resources>
-
-                                    <StackPanel Grid.Row="1">
-                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                        <StackPanel Grid.Row="1">
+                                            <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                             Accounting Periods are specified periods of time at which a company 
                                             or organization generates and analyzes it's financial reports.
                                             Typically, accounting periods refer to a company's fiscal year,
@@ -109,17 +110,18 @@
                                             The video below demonstrates how to create a 
                                             new fiscal year in Microsoft Dynamics 365 
                                             Business Central.
-                                            
-                                            
-                                        </TextBlock>
 
-                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Accounting Periods.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
-                                        </Border>
-                                    </StackPanel>
-                                </ScrollViewer>
+
+                                            </TextBlock>
+
+                                            <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                                <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Accounting Periods.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
 
                 </coreControls:RippleControlButton>
@@ -136,38 +138,39 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid ClipToBounds="True">
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                        <coreControls:PresentationControl Title="Chart Of Accounts">
+                            <Grid ClipToBounds="True">
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <StackPanel VerticalAlignment="Center" Margin="5">
-                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
-                                            <TextBlock Text="2" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
-                                        </UserControl>
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <StackPanel VerticalAlignment="Center" Margin="5">
+                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                                <TextBlock Text="2" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                            </UserControl>
+                                        </StackPanel>
+
+
+
+                                        <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        Chart Of Accounts
+                                        </TextBlock>
                                     </StackPanel>
 
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                        <ScrollViewer.Resources>
+                                            <ResourceDictionary>
+                                                <ResourceDictionary.MergedDictionaries>
+                                                    <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                                </ResourceDictionary.MergedDictionaries>
+                                            </ResourceDictionary>
+                                        </ScrollViewer.Resources>
 
-
-                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                                        Chart Of Accounts
-                                    </TextBlock>
-                                </StackPanel>
-
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
-                                    <ScrollViewer.Resources>
-                                        <ResourceDictionary>
-                                            <ResourceDictionary.MergedDictionaries>
-                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
-                                            </ResourceDictionary.MergedDictionaries>
-                                        </ResourceDictionary>
-                                    </ScrollViewer.Resources>
-
-                                    <StackPanel Grid.Row="1">
-                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                        <StackPanel Grid.Row="1">
+                                            <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                             The chart of accounts displays all the accounts in the general
                                             ledger. General Ledger accounts can be added, managed or deleted 
                                             in the chart of accounts page. 
@@ -188,15 +191,16 @@
                                             <coreControls:ActiveHyperlink Foreground="{DynamicResource MainBrush}" NavigateUri="https://www.accountingcoach.com/chart-of-accounts/explanation">
                                                 here.
                                             </coreControls:ActiveHyperlink>
-                                        </TextBlock>
+                                            </TextBlock>
 
-                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Chart Of Accounts.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
-                                        </Border>
-                                    </StackPanel>
-                                </ScrollViewer>
+                                            <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                                <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Chart Of Accounts.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
 
                 </coreControls:RippleControlButton>
@@ -213,38 +217,39 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid ClipToBounds="True">
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                        <coreControls:PresentationControl Title="Payment Methods">
+                            <Grid ClipToBounds="True">
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <StackPanel VerticalAlignment="Center" Margin="5">
-                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
-                                            <TextBlock Text="3" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
-                                        </UserControl>
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <StackPanel VerticalAlignment="Center" Margin="5">
+                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                                <TextBlock Text="3" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                            </UserControl>
+                                        </StackPanel>
+
+
+
+                                        <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        Payment Methods
+                                        </TextBlock>
                                     </StackPanel>
 
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                        <ScrollViewer.Resources>
+                                            <ResourceDictionary>
+                                                <ResourceDictionary.MergedDictionaries>
+                                                    <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                                </ResourceDictionary.MergedDictionaries>
+                                            </ResourceDictionary>
+                                        </ScrollViewer.Resources>
 
-
-                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                                        Payment Methods
-                                    </TextBlock>
-                                </StackPanel>
-
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
-                                    <ScrollViewer.Resources>
-                                        <ResourceDictionary>
-                                            <ResourceDictionary.MergedDictionaries>
-                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
-                                            </ResourceDictionary.MergedDictionaries>
-                                        </ResourceDictionary>
-                                    </ScrollViewer.Resources>
-
-                                    <StackPanel Grid.Row="1">
-                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                        <StackPanel Grid.Row="1">
+                                            <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                             Payments Methods specify ways in which payments
                                             can be made or received. Typical payment methods
                                             are cash, check or bank payments.
@@ -253,15 +258,16 @@
                                             Payment Methods can be assigned to customers and vendors
                                             so that the same method is used when a sales or purchase 
                                             document is created.
-                                        </TextBlock>
+                                            </TextBlock>
 
-                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Payment Methods.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
-                                        </Border>
-                                    </StackPanel>
-                                </ScrollViewer>
+                                            <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                                <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Payment Methods.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
 
 
@@ -279,38 +285,39 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid ClipToBounds="True">
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                        <coreControls:RippleControl Title="Bank Accounts">
+                            <Grid ClipToBounds="True">
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <StackPanel VerticalAlignment="Center" Margin="5">
-                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
-                                            <TextBlock Text="4" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
-                                        </UserControl>
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <StackPanel VerticalAlignment="Center" Margin="5">
+                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                                <TextBlock Text="4" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                            </UserControl>
+                                        </StackPanel>
+
+
+
+                                        <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        Bank Accounts
+                                        </TextBlock>
                                     </StackPanel>
 
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                        <ScrollViewer.Resources>
+                                            <ResourceDictionary>
+                                                <ResourceDictionary.MergedDictionaries>
+                                                    <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                                </ResourceDictionary.MergedDictionaries>
+                                            </ResourceDictionary>
+                                        </ScrollViewer.Resources>
 
-
-                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                                        Bank Accounts
-                                    </TextBlock>
-                                </StackPanel>
-
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
-                                    <ScrollViewer.Resources>
-                                        <ResourceDictionary>
-                                            <ResourceDictionary.MergedDictionaries>
-                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
-                                            </ResourceDictionary.MergedDictionaries>
-                                        </ResourceDictionary>
-                                    </ScrollViewer.Resources>
-
-                                    <StackPanel Grid.Row="1">
-                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                        <StackPanel Grid.Row="1">
+                                            <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                             Integrating your bank accounts in Business Central would
                                             help you keep track of your banking transactions. 
                                             
@@ -319,15 +326,16 @@
                                             To fully integrate into a bank account, you have to link 
                                             it to an online account. The video below shows steps
                                             on how to achieve this.
-                                        </TextBlock>
+                                            </TextBlock>
 
-                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Bank Accounts.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
-                                        </Border>
-                                    </StackPanel>
-                                </ScrollViewer>
+                                            <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                                <coreControls:MediaPlayer Media="{DynamicResource BankAccounts}"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:RippleControl>
                     </coreControls:RippleControlButton.TransitionContent>
 
                 </coreControls:RippleControlButton>

@@ -7,7 +7,7 @@
              xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
              xmlns:contentCore="clr-namespace:Guide.ContentLibrary"
              mc:Ignorable="d" Template="{DynamicResource RippleControlTemplate}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Title="Manual Setup">
     <Grid ClipToBounds="True">
 
         <Grid Margin="20">
@@ -65,41 +65,42 @@
                                 </UserControl>
 
                                 <coreControls:RippleControlButton.TransitionContent>
-                                    <Grid ClipToBounds="True">
+                                    <coreControls:PresentationControl Title="Number Series">
+                                        <Grid ClipToBounds="True">
 
-                                        <Grid Margin="20">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="*"/>
-                                            </Grid.RowDefinitions>
+                                            <Grid Margin="20">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
 
 
 
-                                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                                <StackPanel VerticalAlignment="Center" Margin="5">
-                                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
-                                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                                    </UserControl>
+                                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                                    <StackPanel VerticalAlignment="Center" Margin="5">
+                                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                        </UserControl>
+                                                    </StackPanel>
+
+
+
+                                                    <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                                    Number Series
+                                                    </TextBlock>
                                                 </StackPanel>
 
+                                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                                    <ScrollViewer.Resources>
+                                                        <ResourceDictionary>
+                                                            <ResourceDictionary.MergedDictionaries>
+                                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                                            </ResourceDictionary.MergedDictionaries>
+                                                        </ResourceDictionary>
+                                                    </ScrollViewer.Resources>
 
-
-                                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                                                    Number Series
-                                                </TextBlock>
-                                            </StackPanel>
-
-                                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
-                                                <ScrollViewer.Resources>
-                                                    <ResourceDictionary>
-                                                        <ResourceDictionary.MergedDictionaries>
-                                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
-                                                        </ResourceDictionary.MergedDictionaries>
-                                                    </ResourceDictionary>
-                                                </ScrollViewer.Resources>
-
-                                                <StackPanel Grid.Row="1">
-                                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                                    <StackPanel Grid.Row="1">
+                                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
                                                         A unique identification code system for areas in 
                                                         your company such as invoices, customer and vendor accounts
                                                         and other documents is important to set up when creating your company.
@@ -112,22 +113,23 @@
                                                         series. It is recommended to use the same number series codes provided
                                                         in CRONUS as there are a few settings in Business Central depending on 
                                                         the number series codes.
-                                                    </TextBlock>
+                                                        </TextBlock>
 
-                                                    <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                                                    <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Number Series.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2" />
-                                                    </Border>
+                                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Number Series.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2" />
+                                                        </Border>
 
 
-                                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
                                                         Setting up Number Series is a very important part of your company setup. The 
                                                         number systems you create, will be used to set up areas like Sales And Receivables, 
                                                         Purchases And Payables and Inventory Setup.
-                                                    </TextBlock>
-                                                </StackPanel>
-                                            </ScrollViewer>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </ScrollViewer>
+                                            </Grid>
                                         </Grid>
-                                    </Grid>
+                                    </coreControls:PresentationControl>
                                 </coreControls:RippleControlButton.TransitionContent>
                                 
                             </coreControls:RippleControlButton>
@@ -144,41 +146,42 @@
                                 </UserControl>
 
                                 <coreControls:RippleControlButton.TransitionContent>
-                                    <Grid ClipToBounds="True">
+                                    <coreControls:PresentationControl Title="Posting Groups">
+                                        <Grid ClipToBounds="True">
 
-                                        <Grid Margin="20">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="*"/>
-                                            </Grid.RowDefinitions>
+                                            <Grid Margin="20">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
 
 
 
-                                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                                <StackPanel VerticalAlignment="Center" Margin="5">
-                                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
-                                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                                    </UserControl>
+                                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                                    <StackPanel VerticalAlignment="Center" Margin="5">
+                                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                        </UserControl>
+                                                    </StackPanel>
+
+
+
+                                                    <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                                    Posting Groups
+                                                    </TextBlock>
                                                 </StackPanel>
 
+                                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                                    <ScrollViewer.Resources>
+                                                        <ResourceDictionary>
+                                                            <ResourceDictionary.MergedDictionaries>
+                                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                                            </ResourceDictionary.MergedDictionaries>
+                                                        </ResourceDictionary>
+                                                    </ScrollViewer.Resources>
 
-
-                                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                                                    Posting Groups
-                                                </TextBlock>
-                                            </StackPanel>
-
-                                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
-                                                <ScrollViewer.Resources>
-                                                    <ResourceDictionary>
-                                                        <ResourceDictionary.MergedDictionaries>
-                                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
-                                                        </ResourceDictionary.MergedDictionaries>
-                                                    </ResourceDictionary>
-                                                </ScrollViewer.Resources>
-
-                                                <StackPanel Grid.Row="1">
-                                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                                    <StackPanel Grid.Row="1">
+                                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
                                                         Posting groups connect items, customers, vendors and others
                                                         to general ledger accounts. Posting groups save time and help 
                                                         avoid mistakes when transactions are posted.
@@ -194,23 +197,24 @@
                                                         <LineBreak/>
                                                         The demonstration below presents how to create posting groups in
                                                         Business Central.
-                                                    </TextBlock>
+                                                        </TextBlock>
 
-                                                    <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
-                                                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Posting Groups.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2" />
-                                                    </Border>
+                                                        <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
+                                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Posting Groups.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2" />
+                                                        </Border>
 
-                                                    <!--
+                                                        <!--
                                                     <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
                                                         Setting up Number Series is a very important part of your company setup. The 
                                                         number systems you create, will be used to set up areas like Sales And Receivables, 
                                                         Purchases And Payables and Inventory Setup.
                                                     </TextBlock>
                                                     -->
-                                                </StackPanel>
-                                            </ScrollViewer>
+                                                    </StackPanel>
+                                                </ScrollViewer>
+                                            </Grid>
                                         </Grid>
-                                    </Grid>
+                                    </coreControls:PresentationControl>
                                 </coreControls:RippleControlButton.TransitionContent>
 
                             </coreControls:RippleControlButton>
@@ -227,60 +231,62 @@
                                 </UserControl>
 
                                 <coreControls:RippleControlButton.TransitionContent>
-                                    <Grid ClipToBounds="True">
+                                    <coreControls:PresentationControl Title="Company Information">
+                                        <Grid ClipToBounds="True">
 
-                                        <Grid Margin="20">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="*"/>
-                                            </Grid.RowDefinitions>
+                                            <Grid Margin="20">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
 
 
 
-                                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                                <StackPanel VerticalAlignment="Center" Margin="5">
-                                                    <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
-                                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                                    </UserControl>
+                                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                                    <StackPanel VerticalAlignment="Center" Margin="5">
+                                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}" Width="40" Height="40">
+                                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                        </UserControl>
+                                                    </StackPanel>
+
+                                                    <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                                    Company Information
+                                                    </TextBlock>
                                                 </StackPanel>
 
-                                                <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                                                    Company Information
-                                                </TextBlock>
-                                            </StackPanel>
+                                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                                    <ScrollViewer.Resources>
+                                                        <ResourceDictionary>
+                                                            <ResourceDictionary.MergedDictionaries>
+                                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                                            </ResourceDictionary.MergedDictionaries>
+                                                        </ResourceDictionary>
+                                                    </ScrollViewer.Resources>
 
-                                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
-                                                <ScrollViewer.Resources>
-                                                    <ResourceDictionary>
-                                                        <ResourceDictionary.MergedDictionaries>
-                                                            <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
-                                                        </ResourceDictionary.MergedDictionaries>
-                                                    </ResourceDictionary>
-                                                </ScrollViewer.Resources>
-
-                                                <StackPanel Grid.Row="1">
-                                                    <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                                    <StackPanel Grid.Row="1">
+                                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
                                                         The Company Information page contains general information about your 
                                                         company.
-                                                    </TextBlock>
+                                                        </TextBlock>
 
-                                                    <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
-                                                        
-                                                        <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Company Information.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2" />
-                                                      
-                                                    </Border>
+                                                        <Border BorderThickness="0" BorderBrush="{DynamicResource AuxBrush}">
 
-                                                    <!--
+                                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Company Information.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" Template="{DynamicResource MediaPlayerContainerTemplate}" SpeedRatio="2" />
+
+                                                        </Border>
+
+                                                        <!--
                                                     <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
                                                         Setting up Number Series is a very important part of your company setup. The 
                                                         number systems you create, will be used to set up areas like Sales And Receivables, 
                                                         Purchases And Payables and Inventory Setup.
                                                     </TextBlock>
                                                     -->
-                                                </StackPanel>
-                                            </ScrollViewer>
+                                                    </StackPanel>
+                                                </ScrollViewer>
+                                            </Grid>
                                         </Grid>
-                                    </Grid>
+                                    </coreControls:PresentationControl>
                                 </coreControls:RippleControlButton.TransitionContent>
 
                             </coreControls:RippleControlButton>

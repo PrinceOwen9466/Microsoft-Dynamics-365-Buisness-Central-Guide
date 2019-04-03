@@ -27,6 +27,11 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             RequestNavigate += OnRequestNavigate;
         }
 
+        public ActiveHyperlink(Inline childInline) : base(childInline)
+        {
+            RequestNavigate += OnRequestNavigate;
+        }
+
         #endregion
 
         #region Methods

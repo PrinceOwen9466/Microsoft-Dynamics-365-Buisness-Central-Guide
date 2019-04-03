@@ -15,6 +15,22 @@ namespace Guide.Common.Infrastructure.Resources.Controls
     {
         #region Properties
 
+
+        public bool Active
+        {
+            get { return (bool)GetValue(ActiveProperty); }
+            set { SetValue(ActiveProperty, value); }
+        }
+
+        public static readonly DependencyProperty ActiveProperty =
+            DependencyProperty.Register("Active", typeof(bool), typeof(ParticleControl), new UIPropertyMetadata(false, (s, e) =>
+            {
+                if (!(s is ParticleControl)) return;
+
+                if (!(bool)e.NewValue)
+                    ((ParticleControl)s).Emitter.particles.Clear();
+            }));
+
         #region Internals
 
         #region Elements
@@ -40,6 +56,7 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             CompositionTarget.Rendering += (s, e) =>
             {
                 if (!IsVisible) return;
+                if (!Active) return;
                 Emitter.Update();
 
                 Canvas.Children.Clear();

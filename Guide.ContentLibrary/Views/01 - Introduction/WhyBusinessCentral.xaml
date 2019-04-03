@@ -6,7 +6,7 @@
              xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
              xmlns:coreEffects="clr-namespace:Guide.Common.Infrastructure.Resources.Shaders;assembly=Guide.Common.Infrastructure"
              xmlns:coreModels="clr-namespace:Guide.Common.Infrastructure.Models;assembly=Guide.Common.Infrastructure"
-             mc:Ignorable="d" Template="{DynamicResource RippleControlTemplate}"
+             mc:Ignorable="d" Template="{DynamicResource RippleControlTemplate}" Title="Why Business Central"
              d:DesignHeight="450" d:DesignWidth="800" Background="{DynamicResource MainBrush}">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -69,23 +69,24 @@
                     </StackPanel>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid>
-                            <Image Source="{DynamicResource BusinessCentralPreview}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".4" Grid.RowSpan="2"/>
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                        <coreControls:PresentationControl Title="Modern">
+                            <Grid>
+                                <Image Source="{DynamicResource BusinessCentralPreview}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".4" Grid.RowSpan="2"/>
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
 
 
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource ModernIcon}" Margin="20" Width="70"/>
-                                    <TextBlock Text="Modern" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
-                                </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource ModernIcon}" Margin="20" Width="70"/>
+                                        <TextBlock Text="Modern" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
+                                    </StackPanel>
 
 
-                                <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                    <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                 Microsoft Dynamics 365 Business Central is designed with a 
                                 cutting edge modern user interface that is common on all devices.
                                 With a Phone, Tablet or Web Client, get easy access to your business 
@@ -100,10 +101,10 @@
                                 Mixed Reality for more rapid and innovative business decisions.
 
 
-                                </TextBlock>
+                                    </TextBlock>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                        
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
                 </coreControls:RippleControlButton>
 
@@ -122,23 +123,24 @@
                     </StackPanel>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid>
-                            <Image Source="{DynamicResource TeamAgreement}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".2" Grid.RowSpan="2"/>
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                        <coreControls:PresentationControl Title="Unified">
+                            <Grid>
+                                <Image Source="{DynamicResource TeamAgreement}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".2" Grid.RowSpan="2"/>
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
 
 
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource UnifiedIcon}" Margin="20" Width="70"/>
-                                    <TextBlock Text="Unified" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
-                                </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource UnifiedIcon}" Margin="20" Width="70"/>
+                                        <TextBlock Text="Unified" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
+                                    </StackPanel>
 
 
-                                <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                    <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                     Microsoft Dynamics 365 improves productivity and workflow by
                                     unifying relationships, processes and data by providing comprehensive
                                     business applications and services all available and connected through the 
@@ -150,9 +152,10 @@
                                     Microsoft Dynamics 365 Business Central is fully integrated across
                                     across other Microsoft stack of products like Office 365, Dynamics
                                     365 sales, PowerBI and more.
-                                </TextBlock>
+                                    </TextBlock>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
                     
                 </coreControls:RippleControlButton>
@@ -173,7 +176,8 @@
                     </StackPanel>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid>
+                        <coreControls:PresentationControl Title="Intelligent">
+                            <Grid>
                             <Image Source="{DynamicResource AIConnections}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".3" Grid.RowSpan="2">
                                 
                             </Image>
@@ -198,6 +202,7 @@
                                 </TextBlock>
                             </Grid>
                         </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
                 </coreControls:RippleControlButton>
 
@@ -216,32 +221,34 @@
 
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid>
-                            <Image Source="{DynamicResource AdaptableComputer}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".2" Grid.RowSpan="2"/>
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                        <coreControls:PresentationControl Title="Adaptable">
+                            <Grid>
+                                <Image Source="{DynamicResource AdaptableComputer}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".2" Grid.RowSpan="2"/>
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
 
 
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource AdaptableIcon}" Margin="20" Width="80"/>
-                                    <TextBlock Text="Adaptable" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
-                                </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource AdaptableIcon}" Margin="20" Width="80"/>
+                                        <TextBlock Text="Adaptable" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource MainBrush}" VerticalAlignment="Center"/>
+                                    </StackPanel>
 
 
-                                <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                    <TextBlock FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
             
                                     Microsoft Dynamics 365 Business Central provides a flexible,
                                     scalable and secure platform that supports extensibility and 
                                     integration into other platforms. This makes it easy to 
                                     add extra features and build new solutions for your business
                                     whenever the need arises.
-                                </TextBlock>
+                                    </TextBlock>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
                 </coreControls:RippleControlButton>
                 <TextBlock Text="Adaptable" FontFamily="Helectiva" TextAlignment="Center" Foreground="{DynamicResource AuxBrush}" FontSize="20" Padding="10"/>

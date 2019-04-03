@@ -1,4 +1,9 @@
-﻿using System;
+﻿using CommonServiceLocator;
+using Guide.Common.Infrastructure.Models.Interfaces;
+using Guide.Common.Infrastructure.Services.Interfaces;
+using Lucene.Net.Documents;
+using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,27 +12,37 @@ using System.Xml.Serialization;
 
 namespace Guide.Common.Infrastructure.Models
 {
-    public class Page
+    public class Page : LinkBase
     {
         #region Properties
+        Section _section = null;
         [XmlIgnore]
-        public Type PageReference { get; private set; }
-        public string PageReferenceName
+        public Section Section
         {
-            get => PageReference.AssemblyQualifiedName;
-            set => PageReference = Type.GetType(value);
-        }
-        public string ID { get; set; }
-        public string SectionID { get; set; }
-        public string Title { get; set; }
+            get
+            {
+                if (_section == null)
+                {
+                    var configurationManager = ServiceLocator.
+                        Current.GetInstance<IConfigurationManager>();
 
-        [XmlIgnore]
-        public string Content { get; set; }
+                    try
+                    {
+                        _section = configurationManager.CurrentConfiguration.
+                            Sections.FirstOrDefault(s => s.Index.ToString() == SectionID);
+                    }
+                    catch { }
+                }
+                return _section;
+            }
+        }
+
+        public override string TypeName { get; set; } = typeof(Page).AssemblyQualifiedName;
         #endregion
 
         #region Constructors
         public Page() { }
-        public Page(Page page)
+        public Page(Page page) : this()
         {
             ID = page.ID;
             SectionID = page.SectionID;
@@ -40,8 +55,14 @@ namespace Guide.Common.Infrastructure.Models
 
 
         #region Methods
+
         public void ConcatenateIDs(params string[] idHistory) => ID = string.Join("-", idHistory);
         public IEnumerable<string> IterateIDs() => ID.Split('-');
+
+        #region Overrides
+        public override string ToString() => Title;
+        #endregion
+
         #endregion
     }
 }

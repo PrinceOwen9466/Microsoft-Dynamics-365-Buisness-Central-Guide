@@ -64,7 +64,14 @@ namespace Guide.Common.Infrastructure.Models
             TargetSection = section;
             TargetPage = page;
         }
+        public UIReference(UIReference reference)
+        {
+            TargetPage = reference.TargetPage;
+            TargetSection = reference.TargetSection;
+            TargetPageIndex = reference.TargetPageIndex;
+            TargetPageName = reference.TargetPageName;
 
+        }
         #endregion
     }
 }

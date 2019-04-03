@@ -6,7 +6,7 @@
              xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
              xmlns:local="clr-namespace:Guide.ContentLibrary.Views.Business_Central_Overview"
              mc:Ignorable="d" Template="{DynamicResource RippleControlTemplate}" Background="{DynamicResource AuxBrush}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Title="Tour Introduction">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

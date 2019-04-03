@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
-             mc:Ignorable="d" Background="{DynamicResource AuxBrush}"
+             mc:Ignorable="d" Background="{DynamicResource AuxBrush}" Title="Registeration"
              d:DesignHeight="450" d:DesignWidth="800" Template="{DynamicResource RippleControlTemplate}">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -60,39 +60,40 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid>
-                            <Image Source="{DynamicResource MicrosoftSignIn}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".7" Grid.RowSpan="2" VerticalAlignment="Bottom"/>
-                            <!--
+                        <coreControls:PresentationControl Title="Get A Microsoft Account">
+                            <Grid>
+                                <Image Source="{DynamicResource MicrosoftSignIn}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".7" Grid.RowSpan="2" VerticalAlignment="Bottom"/>
+                                <!--
         <Image Source="{DynamicResource BusinessCentralDevices}" Style="{DynamicResource ClearImage}" Stretch="Uniform" Opacity=".5" Grid.RowSpan="2" VerticalAlignment="Bottom"/>
         -->
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
 
 
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <!--
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <!--
                 <Border Margin="10" CornerRadius="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" Background="{DynamicResource AuxBrush}" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
                     <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource MainBrush}"/>
                 </Border>
                 -->
-                                    <StackPanel VerticalAlignment="Center" Margin="5">
-                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
-                                            <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
-                                        </UserControl>
+                                        <StackPanel VerticalAlignment="Center" Margin="5">
+                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                                <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                            </UserControl>
+                                        </StackPanel>
+
+                                        <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        Get a microsoft account.
+                                        </TextBlock>
                                     </StackPanel>
 
-                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                                        Get a microsoft account.
-                                    </TextBlock>
-                                </StackPanel>
 
 
-
-                                <!--
+                                    <!--
             <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoTeal}" Margin="20" Width="70"/>
                 <TextBlock Text="Business Central" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource AuxBrush}" VerticalAlignment="Center"/>
@@ -100,7 +101,7 @@
             -->
 
 
-                                <TextBlock FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                    <TextBlock FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                     A microsoft account gives you access to all things
                                     digital. With just one account, you 
                                     get access to Outlook, Hotmail, Office 365, OneDrive,
@@ -111,9 +112,10 @@
                                     Click 
                                     <coreControls:ActiveHyperlink NavigateUri="https://account.microsoft.com">here</coreControls:ActiveHyperlink>, or visit account.microsoft.com 
                                     to register.
-                                </TextBlock>
+                                    </TextBlock>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
                 </coreControls:RippleControlButton>
 
@@ -129,42 +131,43 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid ClipToBounds="True">
-                            <Image Source="{DynamicResource EmailMarketing}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".7" Grid.RowSpan="2" VerticalAlignment="Bottom" RenderTransformOrigin=".5,.5" Margin="-600 0 0 0">
-                                <!--
+                        <coreControls:PresentationControl Title="Create a business email">
+                            <Grid ClipToBounds="True">
+                                <Image Source="{DynamicResource EmailMarketing}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".7" Grid.RowSpan="2" VerticalAlignment="Bottom" RenderTransformOrigin=".5,.5" Margin="-600 0 0 0">
+                                    <!--
             <Image.RenderTransform>
                 <TranslateTransform X="-200"/>
             </Image.RenderTransform>
             -->
-                            </Image>
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                                </Image>
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
 
 
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <!--
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <!--
                 <Border Margin="10" CornerRadius="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" Background="{DynamicResource AuxBrush}" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
                     <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource MainBrush}"/>
                 </Border>
                 -->
-                                    <StackPanel VerticalAlignment="Center" Margin="5">
-                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}">
-                                            <TextBlock Text="2" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource MainBrush}"/>
-                                        </UserControl>
+                                        <StackPanel VerticalAlignment="Center" Margin="5">
+                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}">
+                                                <TextBlock Text="2" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource MainBrush}"/>
+                                            </UserControl>
+                                        </StackPanel>
+
+                                        <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                    Create a business email
+                                        </TextBlock>
                                     </StackPanel>
 
-                                    <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                    Create a business email
-                                    </TextBlock>
-                                </StackPanel>
 
 
-
-                                <!--
+                                    <!--
             <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoTeal}" Margin="20" Width="70"/>
                 <TextBlock Text="Business Central" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource AuxBrush}" VerticalAlignment="Center"/>
@@ -172,7 +175,7 @@
             -->
 
 
-                                <TextBlock FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                    <TextBlock FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
                                     A business email is simply an email address specifically
                                     created for your business. To create one, you would
                                     need a company website. 
@@ -183,9 +186,10 @@
                                     <coreControls:ActiveHyperlink NavigateUri="https://www.zoho.com/mail/" Foreground="{DynamicResource AuxBrush}">Zoho</coreControls:ActiveHyperlink>
                                     or a paid one with 
                                     <coreControls:ActiveHyperlink NavigateUri="https://gsuite.google.com/solutions/new-business/" Foreground="{DynamicResource AuxBrush}">Google Suite</coreControls:ActiveHyperlink>.
-                                </TextBlock>
+                                    </TextBlock>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
                     
                 </coreControls:RippleControlButton>
@@ -202,42 +206,43 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid ClipToBounds="True">
-                            <Image Source="{DynamicResource BusinessCentralHomePreview}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".7" Grid.RowSpan="2" VerticalAlignment="Bottom" RenderTransformOrigin=".5,.5">
-                                <!--
+                        <coreControls:PresentationControl Title="Visit the Microsoft Dynamics 365 Business Central Home Page">
+                            <Grid ClipToBounds="True">
+                                <Image Source="{DynamicResource BusinessCentralHomePreview}" Style="{DynamicResource ClearImage}" Stretch="UniformToFill" Opacity=".7" Grid.RowSpan="2" VerticalAlignment="Bottom" RenderTransformOrigin=".5,.5">
+                                    <!--
             <Image.RenderTransform>
                 <TranslateTransform X="-200"/>
             </Image.RenderTransform>
             -->
-                            </Image>
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                                </Image>
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
 
 
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <!--
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <!--
                 <Border Margin="10" CornerRadius="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" Background="{DynamicResource AuxBrush}" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
                     <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource MainBrush}"/>
                 </Border>
                 -->
-                                    <StackPanel VerticalAlignment="Center" Margin="5">
-                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}">
-                                            <TextBlock Text="3" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource MainBrush}"/>
-                                        </UserControl>
+                                        <StackPanel VerticalAlignment="Center" Margin="5">
+                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource AuxBrush}">
+                                                <TextBlock Text="3" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource MainBrush}"/>
+                                            </UserControl>
+                                        </StackPanel>
+
+                                        <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                    Visit the Microsoft Dynamics 365 Business Central Home Page
+                                        </TextBlock>
                                     </StackPanel>
 
-                                    <TextBlock FontSize="20" Foreground="{DynamicResource AuxBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                    Visit the Microsoft Dynamics 365 Business Central Home Page
-                                    </TextBlock>
-                                </StackPanel>
 
 
-
-                                <!--
+                                    <!--
             <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource BusinessCentralLogoTeal}" Margin="20" Width="70"/>
                 <TextBlock Text="Business Central" FontFamily="Helectiva" FontWeight="Bold" FontSize="20" Foreground="{DynamicResource AuxBrush}" VerticalAlignment="Center"/>
@@ -245,14 +250,15 @@
             -->
 
 
-                                <TextBlock FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
+                                    <TextBlock FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource AuxBrush}" Grid.Row="1" Padding="20">
                                     Once you have both your microsoft account active, you are finally ready 
                                     to register for Microsoft Business Central!
                                     Visit dynamics.microsoft.com or click 
                                     <coreControls:ActiveHyperlink NavigateUri="https://dynamics.microsoft.com/">here</coreControls:ActiveHyperlink>, to get started.
-                                </TextBlock>
+                                    </TextBlock>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
                 </coreControls:RippleControlButton>
 

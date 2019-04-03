@@ -52,7 +52,21 @@ namespace Guide.Demo.ParticleEngine.Resources.Controls
             set { SetValue(ParticleColorProperty, value); }
         }
         public static readonly DependencyProperty ParticleColorProperty =
-            DependencyProperty.Register("ParticleColor", typeof(Color), typeof(ParticleControl), new PropertyMetadata(System.Windows.Media.Colors.White));
+            DependencyProperty.Register("ParticleColor", typeof(Color), typeof(ParticleControl), new UIPropertyMetadata(System.Windows.Media.Colors.White));
+
+
+
+
+
+
+        public bool Active
+        {
+            get { return (bool)GetValue(ActiveProperty); }
+            set { SetValue(ActiveProperty, value); }
+        }
+
+        public static readonly DependencyProperty ActiveProperty =
+            DependencyProperty.Register("Active", typeof(bool), typeof(ParticleControl), new UIPropertyMetadata(false));
 
 
 
@@ -90,9 +104,9 @@ namespace Guide.Demo.ParticleEngine.Resources.Controls
 
             CompositionTarget.Rendering += (s, e) =>
             {
-                
-                for (int i = 0; i < Particles.Count; i++)
-                    Particles[i].Update();
+                if (Active)
+                    for (int i = 0; i < Particles.Count; i++)
+                        Particles[i].Update();
             };
             /*
             Timer.Interval = TimeSpan.FromMilliseconds(20);

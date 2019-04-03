@@ -26,10 +26,5 @@ namespace Guide.ContentLibrary.Views.Introduction
         {
             InitializeComponent();
         }
-
-        private void Storyboard_Completed(object sender, EventArgs e)
-        {
-            Core.Log.Warn("StoryBoard Of Welcome to Business Central completed!!!");
-        }
     }
 }

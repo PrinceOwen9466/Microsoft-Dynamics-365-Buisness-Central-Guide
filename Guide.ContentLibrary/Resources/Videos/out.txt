@@ -1,0 +1,43 @@
+1:    Accounting Periods.mp4
+2:   Actions.mp4
+3:   App Launcher.mp4
+4:   Assisted Setup.mp4
+5:   Back.mp4
+6:   Bank Accounts.mp4
+7:   Cash Flow (Finalizing).mp4
+8:   Cash Flow (Setting Up Accounts).mp4
+9:   Chart Of Accounts.mp4
+10:  Company Information.mp4
+11:   Creating Users.mp4
+12:   Customer Templates.mp4
+13:   Delete.mp4
+14:   Excel Data Migration.mp4
+15:   Expanding Layout.mp4
+16:   Fact Box.mp4
+17:   Filtering.mp4
+18:   Inventory Setup.mp4
+19:   Item Layouts.mp4
+20:   Item Select.mp4
+21:    Item Templates.mp4
+22:    Locations.mp4
+23:   Manual Setup.mp4
+24:   More Options.mp4
+25:   New Company.mp4
+26:   New Customers.mp4
+27:   New Items.mp4
+28:   New Vendors.mp4
+29:   New.mp4
+30:   Number Series.mp4
+31:    Payment Methods.mp4
+32:   Payment Services.mp4
+33:   Pin.mp4
+34:   Posting Groups.mp4
+35:   Purchases and Payables.mp4
+36:   Role Centers and Personalization.mp4
+37:   Sales And Receivables.mp4
+38:   SalesPeople.mp4
+39:   Setup and Help Resources.mp4
+40:   Tell Me.mp4
+41:   Toggle Edit.mp4
+42:   Vendor Templates.mp4
+43:   Zip Codes.mp4

@@ -45,7 +45,6 @@ namespace Guide.ContentLibrary
             Introduction.Description = "An overview of Microsoft Dynamics 365 Business Central and it's benefits to your company";
             Introduction.PageMap = new List<Reference>()
             {
-                new Reference(Introduction, typeof(Views.DemoPage), "Demo Page"),
                 new Reference(Introduction, typeof(WelcomeToBusinessCentral), "Welcome To Business Central"),
                 new Reference(Introduction, typeof(WhyBusinessCentral), "Why Business Central"),
                 new Reference(Introduction, typeof(BusinessCentralOverview), "Business Central Overview"),

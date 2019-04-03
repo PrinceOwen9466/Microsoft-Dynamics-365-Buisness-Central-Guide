@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using Guide.Common.Infrastructure.Resources.Interfaces;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ using System.Windows.Markup;
 
 namespace Guide.Common.Infrastructure.Resources.Containers
 {
+    [ContentProperty("Placemarks")]
     public class MediaContext : BindableBase
     {
         #region Properties
@@ -22,15 +24,15 @@ namespace Guide.Common.Infrastructure.Resources.Containers
 
         string _description = string.Empty;
         public string Description { get => _description; set => SetProperty(ref _description, value); }
+
+        double _speed = 1;
+        public double Speed { get => _speed; set => SetProperty(ref _speed, value); }
         #endregion
 
         #endregion
 
         #region Constructors
-        public MediaContext()
-        {
-            
-        }
+        public MediaContext() { }
         #endregion
 
         #region Methods
@@ -38,9 +40,11 @@ namespace Guide.Common.Infrastructure.Resources.Containers
     }
 
     [ContentProperty("Description")]
-    public class MediaPlacemark : BindableBase
+    public class MediaPlacemark : BindableBase, IHitableContext
     {
         #region Properties
+        bool _mouseHit = false;
+        public bool MouseHit { get => _mouseHit; set => SetProperty(ref _mouseHit, value); }
 
         TimeSpan _start = TimeSpan.MinValue;
         public TimeSpan Start { get => _start; set => SetProperty(ref _start, value); }
@@ -53,8 +57,6 @@ namespace Guide.Common.Infrastructure.Resources.Containers
 
         string _description = string.Empty;
         public string Description { get => _description; set => SetProperty(ref _description, value); }
-
-
         #endregion
     }
 }

@@ -11,6 +11,9 @@
     <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     <converters:AndBooleanToVisibilityConverter x:Key="AndBooleanToVisibilityConverter"/>
     <converters:TimespanToDoubleConverter x:Key="TimespanToDoubleConverter"/>
+    <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+    <converters:NullToVisibilityConverter x:Key="InverseNullToVisibilityConverter" Inverse="True"/>
+    <converters:StringToArrayConverter x:Key="StringToArrayConverter"/>
     <!--#endregion-->
     
 </ResourceDictionary>

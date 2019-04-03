@@ -35,6 +35,8 @@ namespace Guide.Desktop.Views
         IUnityContainer Container { get; }
         #endregion
 
+        public NavigationControl NavControl => NavigationControl;
+
         #endregion
 
 
@@ -45,7 +47,6 @@ namespace Guide.Desktop.Views
             Logger = logger;
             RegionManager = regionManager;
             Container = container;
-
             RoutedEventHandler loaded = null;
             Loaded += loaded = (s, e) =>
             {

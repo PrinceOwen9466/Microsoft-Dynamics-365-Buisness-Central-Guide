@@ -19,12 +19,17 @@ namespace Guide.Common.Infrastructure.Models.Interfaces
         bool CanNext { get; }
         bool CanPrevious { get; }
         ObservableCollection<ISection> Sections { get; }
+        Task<List<Section>> Analyze();
         #endregion
 
         #region Methods
         Task Previous();
         Task Next();
-        void OpenSection(ISection section);
+        Task OpenSection(ISection section);
+
+        void NavigateTo(int index, bool waitTillIdle = true);
+        Task NavigateTo(Page page);
+        Task<IEnumerable<ILinkable>> AnalyzeLinks();
         #endregion
     }
 }

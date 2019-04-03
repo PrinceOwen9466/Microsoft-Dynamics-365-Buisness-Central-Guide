@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Guide.ContentLibrary.Views.Company_Setup"
              xmlns:contentCore="clr-namespace:Guide.ContentLibrary"
              xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
-             mc:Ignorable="d" Template="{StaticResource RippleControlTemplate}"
+             mc:Ignorable="d" Template="{StaticResource RippleControlTemplate}" Title="Setting Up Purchasing"
              d:DesignHeight="450" d:DesignWidth="800" Background="{DynamicResource MainBrush}">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -61,38 +61,39 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid ClipToBounds="True">
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                        <coreControls:PresentationControl Title="Purchases And Payables">
+                            <Grid ClipToBounds="True">
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <StackPanel VerticalAlignment="Center" Margin="5">
-                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
-                                            <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
-                                        </UserControl>
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <StackPanel VerticalAlignment="Center" Margin="5">
+                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                                <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                            </UserControl>
+                                        </StackPanel>
+
+
+
+                                        <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        Purchases And Payables
+                                        </TextBlock>
                                     </StackPanel>
 
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                        <ScrollViewer.Resources>
+                                            <ResourceDictionary>
+                                                <ResourceDictionary.MergedDictionaries>
+                                                    <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                                </ResourceDictionary.MergedDictionaries>
+                                            </ResourceDictionary>
+                                        </ScrollViewer.Resources>
 
-
-                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                                        Purchases And Payables
-                                    </TextBlock>
-                                </StackPanel>
-
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
-                                    <ScrollViewer.Resources>
-                                        <ResourceDictionary>
-                                            <ResourceDictionary.MergedDictionaries>
-                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
-                                            </ResourceDictionary.MergedDictionaries>
-                                        </ResourceDictionary>
-                                    </ScrollViewer.Resources>
-
-                                    <StackPanel Grid.Row="1">
-                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                        <StackPanel Grid.Row="1">
+                                            <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                            Similar to the Sales And Receivables Setup page, the 
                                            Purchases and Payables Setup Page configures the foundation
                                            on which purchases will be made in your company.
@@ -102,15 +103,16 @@
                                            The number series section must also be well configured in
                                            this section to enable the creation and proper numbering
                                            of Vendors, Purchases Invoices and Credit Memos.
-                                        </TextBlock>
+                                            </TextBlock>
 
-                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Purchases and Payables.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="1.5" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
-                                        </Border>
-                                    </StackPanel>
-                                </ScrollViewer>
+                                            <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                                <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Purchases and Payables.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="1.5" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
 
                 </coreControls:RippleControlButton>
@@ -127,38 +129,39 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid ClipToBounds="True">
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                        <coreControls:PresentationControl Title="New Vendors">
+                            <Grid ClipToBounds="True">
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <StackPanel VerticalAlignment="Center" Margin="5">
-                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
-                                            <TextBlock Text="2" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
-                                        </UserControl>
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <StackPanel VerticalAlignment="Center" Margin="5">
+                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                                <TextBlock Text="2" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                            </UserControl>
+                                        </StackPanel>
+
+
+
+                                        <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        New Vendors
+                                        </TextBlock>
                                     </StackPanel>
 
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                        <ScrollViewer.Resources>
+                                            <ResourceDictionary>
+                                                <ResourceDictionary.MergedDictionaries>
+                                                    <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                                </ResourceDictionary.MergedDictionaries>
+                                            </ResourceDictionary>
+                                        </ScrollViewer.Resources>
 
-
-                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                                        New Vendors
-                                    </TextBlock>
-                                </StackPanel>
-
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
-                                    <ScrollViewer.Resources>
-                                        <ResourceDictionary>
-                                            <ResourceDictionary.MergedDictionaries>
-                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
-                                            </ResourceDictionary.MergedDictionaries>
-                                        </ResourceDictionary>
-                                    </ScrollViewer.Resources>
-
-                                    <StackPanel Grid.Row="1">
-                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                        <StackPanel Grid.Row="1">
+                                            <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                             Vendors are your company's source of products. Just like customers
                                             they should be registered with enough information.
                                             <LineBreak/>
@@ -166,24 +169,25 @@
                                             Vendor Templates allow you to provide default values for vendors
                                             to make registeration easier. The video below demonstrates how to 
                                             create a Vendor Template.
-                                        </TextBlock>
+                                            </TextBlock>
 
-                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Vendor Templates.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
-                                        </Border>
+                                            <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                                <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Vendor Templates.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                            </Border>
 
-                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                            <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                             Once the Vendor Template is well configured, you can start the 
                                             process of registering vendors.
-                                        </TextBlock>
+                                            </TextBlock>
 
-                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/New Vendors.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
-                                        </Border>
-                                    </StackPanel>
-                                </ScrollViewer>
+                                            <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                                <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/New Vendors.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
 
                 </coreControls:RippleControlButton>

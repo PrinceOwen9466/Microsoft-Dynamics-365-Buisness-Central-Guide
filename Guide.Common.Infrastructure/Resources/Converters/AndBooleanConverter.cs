@@ -43,6 +43,10 @@ namespace Guide.Common.Infrastructure.Resources.Converters
                 {
                     boolValue = boolValue & (bool)value;
                 }
+                else if (value is Visibility)
+                {
+                    boolValue = boolValue && ((Visibility)value) == Visibility.Visible;
+                }
             }
             return boolValue;
         }

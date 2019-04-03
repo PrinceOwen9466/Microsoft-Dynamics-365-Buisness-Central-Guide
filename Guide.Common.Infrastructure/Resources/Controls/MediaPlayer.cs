@@ -1,21 +1,19 @@
 ﻿using Guide.Common.Infrastructure.Extensions;
 using Guide.Common.Infrastructure.Resources.Containers;
+using Guide.Common.Infrastructure.Resources.Interfaces;
+using Prism.Commands;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
 
 namespace Guide.Common.Infrastructure.Resources.Controls
 {
-    public class MediaPlayer : Control, INotifyPropertyChanged
+    public class MediaPlayer : Control, INotifyPropertyChanged, IPlayer
     {
         #region Properties
 
@@ -24,10 +22,11 @@ namespace Guide.Common.Infrastructure.Resources.Controls
         #region Events
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler BackInvoked;
+        public event EventHandler Activated;
         #endregion
 
         #region Statics
-        static double PLAY_INTERVAL = 50;
+        static double PLAY_INTERVAL = 100;
         static double JUMP_LENGTH = 10;
         #endregion
 
@@ -59,8 +58,13 @@ namespace Guide.Common.Infrastructure.Resources.Controls
                 if (e.OldValue is MediaSource) ((MediaSource)e.OldValue).ContextChanged -= player.ContextChanged;
                 mediaSource.ContextChanged += player.ContextChanged;
 
-                if (!player.Active) return;
-                player.Player.Pause();
+                if (!player.Active || !player.Player.IsLoaded) return;
+                try
+                {
+                    player.Pause();
+                } 
+                catch (Exception ex) { Core.Log.Debug($"An error occured while pausing media\n {ex}\n{player} --- {player.Player.LoadedBehavior}"); }
+                
                 player.Player.Position = TimeSpan.FromTicks(1);
             }));
 
@@ -137,6 +141,19 @@ namespace Guide.Common.Infrastructure.Resources.Controls
         public static readonly DependencyProperty HoverPointProperty =
             DependencyProperty.Register("HoverPoint", typeof(double), typeof(MediaPlayer), new PropertyMetadata(.0));
 
+
+
+        public MediaPlacemark HoverPlacemark
+        {
+            get { return (MediaPlacemark)GetValue(HoverPlacemarkProperty); }
+            set { SetValue(HoverPlacemarkProperty, value); }
+        }
+
+        public static readonly DependencyProperty HoverPlacemarkProperty =
+            DependencyProperty.Register("HoverPlacemark", typeof(MediaPlacemark), typeof(MediaPlayer), new UIPropertyMetadata(null));
+
+
+
         public double SpeedHoverPosition
         {
             get { return (double)GetValue(SpeedHoverPositionProperty); }
@@ -172,11 +189,35 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             DependencyProperty.Register("Loop", typeof(bool), typeof(MediaPlayer), new PropertyMetadata(true));
 
 
+
+        public MediaPlacemark CurrentPlacemark
+        {
+            get { return (MediaPlacemark)GetValue(CurrentPlacemarkProperty); }
+            set { SetValue(CurrentPlacemarkProperty, value); }
+        }
+
+        public static readonly DependencyProperty CurrentPlacemarkProperty =
+            DependencyProperty.Register("CurrentPlacemark", typeof(MediaPlacemark), typeof(MediaPlayer), new UIPropertyMetadata(null));
+
+
+        #endregion
+
+        #region Commands
+        public ICommand JumpCommand { get; }
         #endregion
 
         #region Internals
 
-        bool Active { get; set; }
+        bool _active = false;
+        bool Active
+        {
+            get => _active;
+            set
+            {
+                _active = value;
+                if (value) Activated?.Invoke(this, EventArgs.Empty);
+            }
+        }
         bool DragActive { get; set; }
         bool SpeedDragActive { get; set; }
         Timer PlayTimer { get; set; }
@@ -203,6 +244,7 @@ namespace Guide.Common.Infrastructure.Resources.Controls
         Button JumpForward { get; set; }
         Button JumpBackward { get; set; }
         Button IdeaButton { get; set; }
+        Button SpeedButton { get; set; }
         Button BackButton { get; set; }
         #endregion
 
@@ -251,6 +293,15 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             };
 
             ContextChanged = (s, e) => DataContext = e;
+
+            JumpCommand = new DelegateCommand<object>((obj) =>
+            {
+                if (obj is TimeSpan)
+                {
+                    Player.Position = ((TimeSpan)obj);
+                    InternalPosition = Player.Position;
+                }
+            });
         }
         #endregion
 
@@ -266,6 +317,9 @@ namespace Guide.Common.Infrastructure.Resources.Controls
                 Player = GetTemplateChild("PART_Player") as MediaElement;
                 Player.Position = TimeSpan.FromTicks(1);
                 Player.SpeedRatio = SpeedRatio;
+                Player.LoadedBehavior = MediaState.Manual;
+                Player.UnloadedBehavior = MediaState.Manual;
+                
 
                 if (Loop) Player.MediaEnded += MediaEndedHandler;
                 Player.MediaOpened += (s, e) => MediaDuration = Player.NaturalDuration.TimeSpan.TotalSeconds;
@@ -330,6 +384,7 @@ namespace Guide.Common.Infrastructure.Resources.Controls
                         Core.Log.Debug($"New value {Slider.Value}");
                     }
                     NewSliderValue = false;
+
                 };
 
                 Slider.IsMouseCaptureWithinChanged += (s, e) =>
@@ -353,6 +408,14 @@ namespace Guide.Common.Infrastructure.Resources.Controls
                     double position = (point.X / width) * Slider.Maximum;
                     HoverPosition = TimeSpan.FromSeconds(position);
                     HoverPoint = point.X;
+
+                    if (Media != null && Media.Context != null)
+                    {
+                        
+                        TimeSpan dif = TimeSpan.FromSeconds(1);
+                        HoverPlacemark = Media.Context.Placemarks.FirstOrDefault(p => p.MouseHit);
+                    }
+                    else HoverPlacemark = null;
                 };
                 #endregion
 
@@ -417,6 +480,15 @@ namespace Guide.Common.Infrastructure.Resources.Controls
                 };
                 #endregion
 
+                #region Speed Button
+                SpeedButton = GetTemplateChild("PART_SpeedButton") as Button;
+                SpeedButton.Click += (s, e) =>
+                {
+                    if (Media == null) return;
+                    SpeedRatio = Media.Context.Speed;
+                };
+                #endregion
+
                 #region Back Button
                 BackButton = GetTemplateChild("PART_BackButton") as Button;
                 BackButton.Click += (s, e) => BackInvoked?.Invoke(this, EventArgs.Empty);
@@ -429,12 +501,13 @@ namespace Guide.Common.Infrastructure.Resources.Controls
         #endregion
 
         #region Controls
-        public void Initialize()
+        public async void Initialize()
         {
             if (!Active) return;
             if (Media == null) return;
-            if (!Media.Construct()) return;
+            if (!await Media.Construct()) return;
             Player.Source = Media.LocalSource;
+            SpeedRatio = Media.Context.Speed;
             Player.Play();
             Player.Pause();
             InitializeTimer();
@@ -457,15 +530,23 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             IsPlaying = false;
         }
 
-        public void Stop(bool decontruct = true)
+        public async void Stop(bool decontruct = true)
         {
             if (!Active) return;
             if (Media == null) return;
 
-            Player.Stop();
+            try
+            {
+                Player.Stop();
+            }
+            catch (Exception ex)
+            {
+                Core.Log.Error($"Failed to stop a media. \n{ex}\n{Player.LoadedBehavior}");
+            }
+            
             Player.ClearValue(MediaElement.SourceProperty);
             IsPlaying = false;
-            if (decontruct) Media.Deconstruct();
+            if (decontruct) await Media.Deconstruct();
         }
         #endregion
 
@@ -475,7 +556,12 @@ namespace Guide.Common.Infrastructure.Resources.Controls
                 PlayTimer = new Timer((s) =>
                 {
                     if (DragActive) return;
-                    Context.Send((se) => { if (IsPlaying) InternalPosition = Player.Position; }, null);
+                    Context.Send((se) => 
+                    {
+                        if (!IsPlaying) return;
+                        InternalPosition = Player.Position;
+                        CurrentPlacemark = Media.Context.Placemarks.LastOrDefault(p => p.Start < InternalPosition);
+                    }, null);
                 }, null, TimeSpan.FromMilliseconds(0), TimeSpan.FromMilliseconds(PLAY_INTERVAL));
         }
 

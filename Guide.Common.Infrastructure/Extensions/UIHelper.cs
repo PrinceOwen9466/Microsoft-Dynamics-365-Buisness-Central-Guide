@@ -1,4 +1,7 @@
-﻿using Guide.Common.Infrastructure.Resources.AttachedProperties;
+﻿using Guide.Common.Infrastructure.Models;
+using Guide.Common.Infrastructure.Models.Interfaces;
+using Guide.Common.Infrastructure.Resources.AttachedProperties;
+using Guide.Common.Infrastructure.Resources.Containers;
 using Guide.Common.Infrastructure.Resources.Controls;
 using Prism.Regions;
 using System;
@@ -53,6 +56,14 @@ namespace Guide.Common.Infrastructure.Extensions
                 return parent;
             else
                 return FindParent<T>(parentObject, debug);
+        }
+
+        public static FrameworkElement FindAlphaParent(this FrameworkElement child)
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent(child);
+
+            if (parent == null || !(parent is FrameworkElement)) return child;
+            return FindAlphaParent((FrameworkElement)parent);
         }
 
         public static T FindChild<T>(this DependencyObject element, bool debug = false) where T : DependencyObject
@@ -146,31 +157,137 @@ namespace Guide.Common.Infrastructure.Extensions
             }
         }
 
-        public static IEnumerable<Models.Page> FindPages(this DependencyObject obj, string id, string referenceName)
+        public static IEnumerable<MediaLink> FindAllMedia(this PresentationControl obj, string referenceName)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (var player in obj.FindLogicalChildren<Resources.Controls.MediaPlayer>())
+            {
+                 if (player.IsFull) continue;
+
+                string key = (string)player.GetDynamicResourceKey(Resources.Controls.MediaPlayer.MediaProperty);
+                MediaSource media = (MediaSource)Application.Current.TryFindResource(key);
+
+                if (media == null) continue;
+                if (media.Context == null) continue;
+
+                var context = media.Context;
+
+                foreach (var placemark in context.Placemarks)
+                {
+                    builder.AppendLine(placemark.Title);
+                    builder.AppendLine(placemark.Description);
+                }
+
+                yield return new MediaLink()
+                {
+                    ID = obj.Key,
+                    Title = context.Title,
+                    PageReferenceName = referenceName,
+                    ResourceKey = key,
+                    // SectionID = sectionId >= 0 ? sectionId.ToString() : string.Empty,
+                    Content = builder.ToString()
+                };
+                builder.Clear();
+            }
+        }
+
+        public static IEnumerable<ILinkable> FindLinkables(this DependencyObject obj, string id, string referenceName, int sectionId = -1, bool checkOrigin = false)
         {
             if (obj != null)
             {
+                StringBuilder builder = new StringBuilder();
+
+                if (checkOrigin && obj is PresentationControl)
+                {
+                    PresentationControl origin = (PresentationControl)obj;
+                    foreach (var textBlock in origin.FindLogicalChildren<TextBlock>())
+                        builder.AppendLine(textBlock.Text);
+                    yield return new Models.Page()
+                    {
+                        ID = origin.Key,
+                        Content = builder.ToString(),
+                        Title = origin.Title,
+                        PageReferenceName = referenceName,
+                        SectionID = sectionId >= 0 ? sectionId.ToString() : string.Empty
+                    };
+                    builder.Clear();
+
+                    foreach (var mediaLink in origin.FindAllMedia(referenceName)) yield return mediaLink;
+                }
+
                 foreach (var control in obj.FindLogicalChildren<RippleControlButton>(false))
                 {
                     if (control.TransitionContent is PresentationControl)
                     {
                         PresentationControl c = (PresentationControl)control.TransitionContent;
-                        id = id + (string.IsNullOrWhiteSpace(id) ? "-" : "") + ReferenceKey.GetKey(c);
-                        StringBuilder builder = new StringBuilder();
+                        var cID = id + (!string.IsNullOrWhiteSpace(id) ? "-" : "") + c.Key;
                         foreach (var textBlock in c.FindLogicalChildren<TextBlock>())
                             builder.AppendLine(textBlock.Text);
 
                         Models.Page page = new Models.Page
                         {
-                            ID = id,
+                            ID = cID,
                             Content = builder.ToString(),
                             Title = c.Title,
-                            PageReferenceName = referenceName
+                            PageReferenceName = referenceName,
+                            SectionID = sectionId >= 0 ? sectionId.ToString() : string.Empty
                         };
-
+                        builder.Clear();
                         yield return page;
 
-                        foreach (var p in c.FindPages(id, referenceName))
+                        foreach (var mediaLink in c.FindAllMedia(referenceName)) yield return mediaLink;
+
+                        foreach (var p in c.FindPages(cID, referenceName, sectionId))
+                            yield return p;
+                    }
+                }
+            }
+        }
+
+        public static IEnumerable<Models.Page> FindPages(this DependencyObject obj, string id, string referenceName, int sectionId = -1, bool checkOrigin = false)
+        {
+            if (obj != null)
+            {
+                StringBuilder builder = new StringBuilder();
+                
+                if (checkOrigin && obj is PresentationControl)
+                {
+                    PresentationControl origin = (PresentationControl)obj;
+                    foreach (var textBlock in origin.FindLogicalChildren<TextBlock>())
+                        builder.AppendLine(textBlock.Text);
+                    yield return new Models.Page()
+                    {
+                        ID = origin.Key,
+                        Content = builder.ToString(),
+                        Title = origin.Title,
+                        PageReferenceName = referenceName,
+                        SectionID = sectionId >= 0 ? sectionId.ToString() : string.Empty
+                    };
+                    builder.Clear();
+                }
+
+                foreach (var control in obj.FindLogicalChildren<RippleControlButton>(false))
+                {
+                    if (control.TransitionContent is PresentationControl)
+                    {
+                        PresentationControl c = (PresentationControl)control.TransitionContent;
+                        var cID = id + (!string.IsNullOrWhiteSpace(id) ? "-" : "") + c.Key;
+                        foreach (var textBlock in c.FindLogicalChildren<TextBlock>())
+                            builder.AppendLine(textBlock.Text);
+
+
+                        Models.Page page = new Models.Page
+                        {
+                            ID = cID,
+                            Content = builder.ToString(),
+                            Title = c.Title,
+                            PageReferenceName = referenceName,
+                            SectionID = sectionId >= 0 ? sectionId.ToString() : string.Empty
+                        };
+                        builder.Clear();
+                        yield return page;
+
+                        foreach (var p in c.FindPages(cID, referenceName, sectionId))
                             yield return p;
                     }
                 }

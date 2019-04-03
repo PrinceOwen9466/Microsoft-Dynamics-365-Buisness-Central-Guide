@@ -5,6 +5,7 @@ using Prism.Logging;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace Guide.Common.Infrastructure.Services
         #region Services
         ILoggerFacade Logger { get; }
         IPresenter Presenter { get; }
+        ISearchEngine SearchEngine { get; }
         #endregion
 
         #region Internals
@@ -36,13 +38,15 @@ namespace Guide.Common.Infrastructure.Services
         #endregion
 
         #region Constructors
-        public XMLConfigurationManager(ILoggerFacade logger, IPresenter presenter)
+        public XMLConfigurationManager(ILoggerFacade logger, IPresenter presenter, ISearchEngine searchEngine)
         {
             Logger = logger;
             Presenter = presenter;
+            SearchEngine = searchEngine;
             LoadConfiguration();
-
+            
             RegisterPresenter();
+            
         }
         #endregion
 
@@ -85,6 +89,35 @@ namespace Guide.Common.Infrastructure.Services
                 CurrentConfiguration = new Configuration(Configuration.DefaultConfiguration);
                 Save();
             }
+
+            if (!CurrentConfiguration.ContentAnalyzed)
+            {
+                Presenter.Initialized += async (s, e) =>
+                {
+                    List<Section> sections = await Presenter.Content.Analyze();
+                    CurrentConfiguration.Sections = new ObservableCollection<Section>(sections);
+
+                    SearchEngine.GenerateIndex(await Presenter.Content.AnalyzeLinks());
+                    CurrentConfiguration.ContentAnalyzed = true;
+                    Save();
+                };
+            }
+        }
+        
+        public void Open(Page page)
+        {
+            if (string.IsNullOrEmpty(page.SectionID))
+                try { page.SectionID = CurrentConfiguration.Sections.FirstOrDefault().PageList.FirstOrDefault(p => p.Title == page.Title).SectionID; }
+                catch { }
+
+            Core.Log.Debug($"Opened {page.Title}");
+            CurrentConfiguration.RecentPage = page;
+
+            
+            if (CurrentConfiguration.ReadPages.FirstOrDefault(p => p.ID == page.ID) == null)
+                CurrentConfiguration.ReadPages.Add(page);
+            Save();
+            CurrentConfiguration.RefreshProgress();
         }
 
         #region Registerations

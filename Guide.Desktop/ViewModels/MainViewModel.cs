@@ -49,6 +49,7 @@ namespace Guide.Desktop.ViewModels
         IRegionManager RegionManager { get; }
         IUnityContainer Container { get; }
         public IPresenter Presenter { get; }
+        public ISearchEngine SearchEngine { get; }
         #endregion
 
         #region Events
@@ -108,7 +109,10 @@ namespace Guide.Desktop.ViewModels
         public bool SearchActive
         {
             get => _searchActive;
-            set => SetProperty(ref _searchActive, value);
+            set
+            {
+                SetProperty(ref _searchActive, value);    
+            }
         }
 
 
@@ -128,6 +132,7 @@ namespace Guide.Desktop.ViewModels
         public ICommand NextCommand { get; }
         public ICommand SidebarNavigateCommand { get; }
         public ICommand HomeCommand { get; set; }
+        public ICommand SearchClosedCommand { get; set; }
         #endregion
 
         #region Internals
@@ -137,20 +142,23 @@ namespace Guide.Desktop.ViewModels
         #endregion
 
         #region Constructors
-        public MainViewModel(ILoggerFacade logger, IRegionManager regionManager, IPresenter presenter, IUnityContainer container, IShell shell)
+        public MainViewModel(ILoggerFacade logger, IRegionManager regionManager, IPresenter presenter, ISearchEngine searchEngine, IUnityContainer container, IShell shell)
         {
             RegionManager = regionManager;
             Presenter = presenter;
             Logger = logger;
             Shell = shell;
             Container = container;
+            SearchEngine = searchEngine;
 
             OpenSlideBarCommand = new DelegateCommand(OnOpenSlideBar);
             CloseSlideBarCommand = new DelegateCommand(OnCloseSlideBar);
             MinimizeCommand = new DelegateCommand(OnMinimize);
             MoveCommand = new DelegateCommand(OnMove);
             CloseCommand = new DelegateCommand(OnClose);
+            HomeCommand = new DelegateCommand(OnGoHome);
 
+            //MainView view; view.NavigationControl
             MouseMoveTitleBarCommand = new DelegateCommand(OnMouseEnterTitleBar);
             MouseLeaveTitleBarCommand = new DelegateCommand(OnMouseLeaveTitleBar);
 
@@ -159,6 +167,8 @@ namespace Guide.Desktop.ViewModels
             NextCommand = new DelegateCommand(OnNext);
 
             SidebarNavigateCommand = new DelegateCommand<object>(OnSidebarNavigate);
+
+            SearchClosedCommand = new DelegateCommand(OnSearchClosed);
         }
         #endregion
 
@@ -209,6 +219,7 @@ namespace Guide.Desktop.ViewModels
 
         void OnPrevious()
         {
+            if (Presenter.VideoActive) return;
             Presenter.SwipeDirection = Direction.Left;
             SlideBarActive = false;
             Presenter.Previous();
@@ -219,6 +230,7 @@ namespace Guide.Desktop.ViewModels
 
         void OnNext()
         {
+            if (Presenter.VideoActive) return;
             Presenter.SwipeDirection = Direction.Right;
             SlideBarActive = false; 
             Presenter.Next();
@@ -227,20 +239,20 @@ namespace Guide.Desktop.ViewModels
             RaisePropertyChanged(nameof(Presenter));
         }
 
+
+
         void OnSidebarNavigate(object obj)
         {
             if (!(obj is Section)) return;
-
-            Presenter.SwipeDirection = Direction.Down;
-            Presenter.Content.OpenSection((Section)obj);
+            Presenter.NavigateToSection((Section)obj);
             SlideBarActive = false;
             RaisePropertyChanged(nameof(FullPageActive));
         }
 
-        void OnGoHome()
-        {
-            
-        }
+        void OnGoHome() => Presenter.NavigateHome();
+
+        void OnSearchClosed() => SearchEngine.Search = string.Empty;
+
         #endregion
 
         #endregion

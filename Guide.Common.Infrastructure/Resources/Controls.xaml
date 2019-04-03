@@ -4,7 +4,9 @@
                     xmlns:behaviors="clr-namespace:Guide.Common.Infrastructure.Resources.Behaviors"
                     xmlns:controls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls"
                     xmlns:converters="clr-namespace:Guide.Common.Infrastructure.Resources.Converters"
-                    xmlns:ap="clr-namespace:Guide.Common.Infrastructure.Resources.AttachedProperties">
+                    xmlns:ap="clr-namespace:Guide.Common.Infrastructure.Resources.AttachedProperties"
+                    xmlns:models="clr-namespace:Guide.Common.Infrastructure.Models"
+                    xmlns:prism="http://prismlibrary.com/">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Skins/Official/Skin.xaml"/>
     </ResourceDictionary.MergedDictionaries>
@@ -12,39 +14,11 @@
     <!--#region Converters -->
     <converters:MathConverter x:Key="ControlsMathConverter"/>
     <BooleanToVisibilityConverter x:Key="ControlsBoolToVisibilityConverter"/>
+    <converters:InverseBoolToVisibilityConverter x:Key="ControlsInverseBoolToVisibilityConverter"/>
 
     <!--#endregion-->
     
-    <!--#region Custom Styles-->
-
-    <Style x:Key="CardWindow" TargetType="{x:Type Window}">
-        <Setter Property="WindowStyle" Value="None"/>
-        <Setter Property="ResizeMode" Value="CanMinimize"/>
-        <Setter Property="AllowsTransparency" Value="True"/>
-    </Style>
-
-    <Style x:Key="ClearImage" TargetType="{x:Type Image}">
-        <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
-        <Setter Property="Stretch" Value="Uniform"/>
-        <Setter Property="RenderOptions.EdgeMode" Value="Aliased"/>
-    </Style>
-
-    <Style TargetType="{x:Type controls:ActiveHyperlink}">
-        <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Foreground" Value="{DynamicResource MainBrush}"/>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="TextBlock.TextDecorations" Value="{x:Static TextDecorations.Underline}"/>
-                <Setter Property="Foreground" Value="#dddddd"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
     
-
-
-    <!--#endregion-->
     
     <!--#region Style Overrides-->
     
@@ -205,7 +179,13 @@
     <!--#region Control Templates-->
     <ControlTemplate x:Key="GeckoBrowserTemplate" TargetType="{x:Type controls:GeckoBrowser}">
         <Grid x:Name="PART_GRID">
-            <WindowsFormsHost x:Name="PART_HOST"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <WindowsFormsHost x:Name="PART_HOST" Grid.ColumnSpan="3"/>
         </Grid>
     </ControlTemplate>
 
@@ -559,12 +539,606 @@
         </Grid>
     </ControlTemplate>
 
+    <ControlTemplate x:Key="NavigationControlTemplate" TargetType="{x:Type controls:NavigationControl}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="WestColumn" Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition x:Name="EastColumn" Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <controls:SwipeContainer x:Name="ContentContainer" Content="{Binding Presenter.CurrentView, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SwipeDirection="{Binding Presenter.SwipeDirection, Mode=OneWay}" Grid.ColumnSpan="3"/>
+
+            <controls:AirSpaceOverlay x:Name="OverlayLeft" Width="{Binding ElementName=LeftButtonPanel, Path=ActualWidth}" Height="{Binding ElementName=LeftButtonPanel, Path=ActualHeight}" Visibility="{Binding ElementName=ContentContainer, Path=Content.IsAnimatable, Converter={StaticResource ControlsInverseBoolToVisibilityConverter}}">
+                <Grid>
+                    <Button VerticalAlignment="Center" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20">
+                        <controls:SvgContainer SvgSource="{DynamicResource CircledLeftArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
+                    </Button>
+                </Grid>
+                <controls:AirSpaceOverlay.OverlayChild>
+                    <Grid x:Name="OverlayLeftGrid">
+                        <Button x:Name="LeftControlOverlayButton" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:AirSpaceOverlayContainer}, Path=OverlayParent.ParentControl.DataContext.PreviousCommand}" VerticalAlignment="Center" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20">
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                    <!--
+                                    <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:AirSpaceOverlayContainer}, Path=OverlayParent.ParentControl.NavControl.LeftButton.RenderTransform.Children[3].X}" PresentationTraceSources.TraceLevel="High"/>
+                                    -->
+                                </TransformGroup>
+                            </Button.RenderTransform>
+
+                            <controls:SvgContainer SvgSource="{DynamicResource CircledLeftArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
+                        </Button>
+                    </Grid>
+                </controls:AirSpaceOverlay.OverlayChild>
+            </controls:AirSpaceOverlay>
+
+            <controls:AirSpaceOverlay Width="{Binding ElementName=LeftButtonPanel, Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Control}, Path=ActualHeight}" Grid.Column="2" Visibility="{Binding ElementName=ContentContainer, Path=Content.IsAnimatable, Converter={StaticResource ControlsInverseBoolToVisibilityConverter}}">
+                <Grid ap:Hits.RecordHits="True">
+                    <Button VerticalAlignment="Center" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20">
+                        <controls:SvgContainer SvgSource="{DynamicResource CircledRightArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
+                    </Button>
+                </Grid>
+                <controls:AirSpaceOverlay.OverlayChild>
+                    <!--
+                                                cap:Hits.HitElement="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:AirSpaceOverlayContainer}, Path=OverlayParent}" debug:PresentationTraceSources.TraceLevel="High" cap:Hits.RecordHits="True"   
+                            {Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:AirSpaceOverlayContainer}, Path=OverlayParent.ParentControl.(views:MainView.NavControl).RightButton.RenderTransform.Children[3].X}
+                                            -->
+                    <Grid>
+                        <Button x:Name="RightOverlayButton" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:AirSpaceOverlayContainer}, Path=OverlayParent.ParentControl.DataContext.NextCommand}" VerticalAlignment="Center" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20">
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                    <!--
+                                    <TranslateTransform X="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:AirSpaceOverlayContainer}, Path=OverlayParent.ParentControl.NavControl.RightButton.RenderTransform.Children[3].X}" PresentationTraceSources.TraceLevel="High"/>
+                                    -->
+                                </TransformGroup>
+                            </Button.RenderTransform>
+                            <controls:SvgContainer SvgSource="{DynamicResource CircledRightArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
+                        </Button>
+                    </Grid>
+                </controls:AirSpaceOverlay.OverlayChild>
+            </controls:AirSpaceOverlay>
+
+
+            <!--
+            Visibility="{Binding ElementName=ContentContainer, Path=Content.PlayerActive, Converter={StaticResource ControlsInverseBoolToVisibilityConverter}}"
+            -->
+            <Grid x:Name="LeftButtonPanel" Background="{x:Null}" Margin="0 0 0 0" ap:Hits.RecordHits="true" PresentationTraceSources.TraceLevel="High" Height="200">
+                <Button x:Name="LeftButton" VerticalAlignment="Center" Command="{Binding PreviousCommand}" Visibility="{Binding Presenter.VideoActive, Converter={StaticResource ControlsInverseBoolToVisibilityConverter}}" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20" RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-100"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <controls:SvgContainer SvgSource="{DynamicResource CircledLeftArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
+                </Button>
+            </Grid>
+
+            <Grid x:Name="RightButtonPanel" Background="{x:Null}" Grid.Column="2" ap:Hits.RecordHits="true" Height="200">
+                <Button x:Name="RightButton" VerticalAlignment="Center" Grid.Column="2" Command="{Binding NextCommand}" Style="{DynamicResource SimpleRoundButton}" Background="{DynamicResource MainBrush}" BorderThickness="0" Margin="20" Visibility="{Binding Presenter.VideoActive, Converter={StaticResource ControlsInverseBoolToVisibilityConverter}}">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="100"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <controls:SvgContainer SvgSource="{DynamicResource CircledRightArrowSvg}" Style="{DynamicResource ClearImage}" Width="50"/>
+                </Button>
+            </Grid>
+
+
+        </Grid>
+
+        <ControlTemplate.Resources>
+            <ResourceDictionary>
+                <Storyboard x:Key="PopInNavigation">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="LeftButton">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="20">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <ExponentialEase EasingMode="EaseInOut"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <ExponentialEase EasingMode="EaseInOut"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="RightButton">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-20">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <ExponentialEase EasingMode="EaseInOut"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <ExponentialEase EasingMode="EaseInOut"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+
+                <Storyboard x:Key="PopOutNavigation">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="LeftButton">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:2" Value="-100"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="RightButton">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:2" Value="100"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+
+                <Storyboard x:Key="OverlayPopInNavigation">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="LeftOverlayButton">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="20">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <ExponentialEase EasingMode="EaseInOut"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <ExponentialEase EasingMode="EaseInOut"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="RightOverlayButton">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-20">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <ExponentialEase EasingMode="EaseInOut"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <ExponentialEase EasingMode="EaseInOut"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+
+                <Storyboard x:Key="OverlayPopOutNavigation">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="LeftOverlayButton">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:2" Value="-100"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="RightOverlayButton">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:2" Value="100"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+
+
+            </ResourceDictionary>
+        </ControlTemplate.Resources>
+
+        <ControlTemplate.Triggers>
+            <Trigger SourceName="LeftButtonPanel" Property="ap:Hits.MouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <StopStoryboard BeginStoryboardName="BeginPopOutNavigation"/>
+
+                    <BeginStoryboard x:Name="BeginPopInNavigation" Storyboard="{StaticResource PopInNavigation}"/>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard x:Name="BeginPopOutNavigation" Storyboard="{StaticResource PopOutNavigation}"/>
+
+                    <StopStoryboard BeginStoryboardName="BeginPopInNavigation"/>
+
+                </Trigger.ExitActions>
+            </Trigger>
+
+            <Trigger SourceName="RightButtonPanel" Property="ap:Hits.MouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <StopStoryboard BeginStoryboardName="BeginPopOutNavigation1"/>
+                    <BeginStoryboard x:Name="BeginPopInNavigation1" Storyboard="{StaticResource PopInNavigation}"/>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard x:Name="BeginPopOutNavigation1" Storyboard="{StaticResource PopOutNavigation}"/>
+                    <StopStoryboard BeginStoryboardName="BeginPopInNavigation1"/>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="TitleControlTemplate" TargetType="{x:Type controls:TitleControl}">
+        <ControlTemplate.Resources>
+            <Storyboard x:Key="Assemble" x:Name="Assemble">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder2">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder3">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Storyboard x:Key="PopInMenu">
+                <DoubleAnimationUsingKeyFrames BeginTime="0:0:0.3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="UniformGrid">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <BackEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+
+                <DoubleAnimationUsingKeyFrames BeginTime="0:0:0.3" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="UniformGrid">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <BackEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Storyboard x:Key="DockTitle" x:Name="DockTitle">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder2">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <!--
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder3">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                -->
+            </Storyboard>
+
+            <Storyboard x:Key="UndockTitle" x:Name="UndockTitle">
+                <!--
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder3">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                -->
+            </Storyboard>
+
+            <Storyboard x:Key="ActivateTitle" x:Name="ActivateTitle">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <!--
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder2">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                -->
+            </Storyboard>
+
+            <Storyboard x:Key="DeactivateTitle" x:Name="DeactivateTitle">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+                <!--
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="TitleBarDummyBorder2">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                -->
+            </Storyboard>
+
+            <!--
+            Storyboard.TargetName="SearchPanel"
+            -->
+            <DoubleAnimationUsingKeyFrames x:Key="ActivateSearchFrames" Storyboard.TargetProperty="(ap:Directions.VerticalDirection)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames x:Key="DeactivateSearchFrames" Storyboard.TargetProperty="(ap:Directions.VerticalDirection)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-1.5"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <Storyboard x:Key="ActivateSearch" x:Name="ActivateSearch">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(ap:Directions.VerticalDirection)">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Storyboard x:Key="DeactivateSearch" x:Name="DeactivateSearch">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(ap:Directions.VerticalDirection)">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-1.5"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+
+        </ControlTemplate.Resources>
+
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding TitleBarPinned}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Name="DockTitleBegin" Storyboard="{StaticResource DockTitle}"/>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard Name="UndockTitleBegin" Storyboard="{StaticResource UndockTitle}"/>
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+
+
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding TitleBarPinned}" Value="False"/>
+                    <Condition Binding="{Binding TitleBarActive}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+
+                <MultiDataTrigger.EnterActions>
+                    <StopStoryboard BeginStoryboardName="AssembleBegin"/>
+                    <BeginStoryboard x:Name="Storyboard0" Storyboard="{StaticResource ActivateTitle}"/>
+                </MultiDataTrigger.EnterActions>
+                <MultiDataTrigger.ExitActions>
+                    <StopStoryboard BeginStoryboardName="Storyboard0"/>
+                </MultiDataTrigger.ExitActions>
+            </MultiDataTrigger>
+
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding TitleBarPinned}" Value="False"/>
+                    <Condition Binding="{Binding TitleBarActive}" Value="False"/>
+                    <Condition Binding="{Binding SlideBarActive}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+
+                <MultiDataTrigger.EnterActions>
+                    <StopStoryboard BeginStoryboardName="AssembleBegin"/>
+                    <BeginStoryboard x:Name="Storyboard1" Storyboard="{StaticResource DeactivateTitle}"/>
+                </MultiDataTrigger.EnterActions>
+                <MultiDataTrigger.ExitActions>
+                    <StopStoryboard BeginStoryboardName="Storyboard1"/>
+                </MultiDataTrigger.ExitActions>
+            </MultiDataTrigger>
+
+
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <BeginStoryboard Name="AssembleBegin" Storyboard="{StaticResource Assemble}"/>
+                <BeginStoryboard Storyboard="{StaticResource PopInMenu}"/>
+            </EventTrigger>
+
+            <!--
+            <DataTrigger Binding="{Binding SearchActive}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard x:Name="BeginActivateSearch" Storyboard="{StaticResource ActivateSearch}"/>
+                    <StopStoryboard BeginStoryboardName="BeginDeactivateSearch"/>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard x:Name="BeginDeactivateSearch" Storyboard="{StaticResource DeactivateSearch}"/>
+                    <StopStoryboard BeginStoryboardName="BeginActivateSearch"/>
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+            -->
+        </ControlTemplate.Triggers>
+
+
+        <controls:NoClipGrid x:Name="TitleBarMainGrid" VerticalAlignment="Top" Height="{Binding ElementName=TitleBarDummyBorder3, Path=ActualWidth, Converter={StaticResource MathConverter}, ConverterParameter=a*40}" DockPanel.Dock="Top" ClipToBounds="False"  RenderTransformOrigin="0.5,0.5" Visibility="{Binding Presenter.FullPageActive, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseMove">
+                    <prism:InvokeCommandAction Command="{Binding MouseMoveTitleBarCommand}"/>
+                </i:EventTrigger>
+
+                <i:EventTrigger EventName="MouseLeave">
+                    <prism:InvokeCommandAction Command="{Binding MouseLeaveTitleBarCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+
+
+            <Border Width="1" x:Name="TitleBarDummyBorder"/>
+            <Border Width="0" x:Name="TitleBarDummyBorder2"/>
+            <Border Width="1" x:Name="TitleBarDummyBorder3"/>
+
+            <Border Height="{Binding ElementName=TitleContainer, Path=ActualHeight}" Opacity="0" Background="#FFFFFF"/>
+            <DockPanel x:Name="TitleContainer">
+                <DockPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform>
+                            <TranslateTransform.Y>
+                                <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="-(a*(b))">
+                                    <MultiBinding.Bindings>
+                                        <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Grid}" Path="ActualHeight"/>
+                                        <Binding ElementName="TitleBarDummyBorder" Path="ActualWidth"/>
+                                        <!--
+                                                        <Binding ElementName="TitleBarDummyBorder2" Path="ActualWidth"/>
+                                                        -->
+                                    </MultiBinding.Bindings>
+                                </MultiBinding>
+                            </TranslateTransform.Y>
+                        </TranslateTransform>
+                    </TransformGroup>
+                </DockPanel.RenderTransform>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDown">
+                        <prism:InvokeCommandAction Command="{Binding MoveCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Button Width="37" Height="40" DockPanel.Dock="Left" Style="{DynamicResource BasicButton}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <prism:InvokeCommandAction Command="{Binding OpenSlideBarCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <UniformGrid x:Name="UniformGrid" Width="16" Height="16" RenderTransformOrigin="0.5,0.5">
+                        <UniformGrid.Resources>
+                            <ResourceDictionary>
+                                <Style TargetType="Rectangle">
+                                    <Setter Property="Width" Value="3.5"/>
+                                    <Setter Property="Height" Value="3.5"/>
+                                    <Setter Property="Fill" Value="{DynamicResource MainBrush}"/>
+                                </Style>
+                            </ResourceDictionary>
+                        </UniformGrid.Resources>
+                        <UniformGrid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0" ScaleY="0"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </UniformGrid.RenderTransform>
+
+                        <Rectangle/>
+                        <Rectangle/>
+                        <Rectangle/>
+                        <Rectangle/>
+                        <Rectangle/>
+                        <Rectangle/>
+                        <Rectangle/>
+                        <Rectangle/>
+                        <Rectangle/>
+                    </UniformGrid>
+                </Button>
+                <DockPanel x:Name="TitlePanel" RenderTransformOrigin="0.5,0.5" Background="#000000">
+                    <!--
+                                    <DockPanel.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform Y="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DockPanel}, Path=ActualHeight, Converter={StaticResource NegativeConverter}}"/>
+                                        </TransformGroup>
+                                    </DockPanel.RenderTransform>
+                                    -->
+
+                    <Button Foreground="{StaticResource MainBrush}" Style="{DynamicResource TransparentButton}" DockPanel.Dock="Right" Width="34" BorderBrush="{DynamicResource MainBrush}" BorderThickness=".5 0 0 0" Padding="5 0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <prism:InvokeCommandAction Command="{Binding CloseCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                        <Image Source="{DynamicResource CloseIcon}" Style="{DynamicResource ClearImage}"/>
+                    </Button>
+                    <Button Foreground="{StaticResource MainBrush}" DockPanel.Dock="Right" Width="34" Style="{DynamicResource TransparentButton}" BorderBrush="{DynamicResource MainBrush}" BorderThickness=".5 0 0 0" Padding="5">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <prism:InvokeCommandAction Command="{Binding MinimizeCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Image Source="{DynamicResource MinimizeIcon}" Style="{DynamicResource ClearImage}"/>
+                    </Button>
+
+                    <Border BorderThickness=".5 0 0 0" DockPanel.Dock="Right" BorderBrush="#FFFFFF" Padding="3 0" >
+                        <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5 0" Orientation="Horizontal">
+                            <!--
+                                            <Button Style="{DynamicResource RoundButton}" Margin="10 0" Command="{Binding PreviousCommand}">
+                                                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource LeftArrow}" Width="30"/>
+                                            </Button>
+                                            -->
+
+                            <ToggleButton Width="30" Height="30" Style="{DynamicResource RoundToggleButton}" Margin="5 0" Padding="0 5" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SearchActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <controls:SvgContainer SvgSource="{DynamicResource TellMeSvg}" Style="{DynamicResource ClearImage}"/>
+                            </ToggleButton>
+
+                            <Button Width="30" Height="30" Style="{DynamicResource RoundButton}" Margin="5 0" Padding="0 6" Command="{Binding HomeCommand}">
+                                <controls:SvgContainer SvgSource="{DynamicResource HomeSvg}" Style="{DynamicResource ClearImage}"/>
+                            </Button>
+
+                            <ToggleButton Width="30" Style="{DynamicResource RoundToggleButton}" IsChecked="{Binding TitleBarPinned, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5 0">
+                                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource PushPinIcon}"/>
+                            </ToggleButton>
+
+                            <!--
+                                            <Button Style="{DynamicResource RoundButton}" Margin="10 0" Command="{Binding NextCommand}">
+                                                <Image Style="{DynamicResource ClearImage}" Source="{DynamicResource RightArrow}" Width="30"/>
+                                            </Button>
+                                            -->
+                        </StackPanel>
+                    </Border>
+
+
+                    <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal">
+                        <Border Padding="14 0" BorderThickness="0 0 .5 0" BorderBrush="{DynamicResource MainBrush}">
+                            <TextBlock Foreground="{DynamicResource MainBrush}" Margin="10" VerticalAlignment="Center" Width="Auto" FontSize="16" FontFamily="Helvetica" FontWeight="Light">
+                                                Dynamics 365
+                            </TextBlock>
+                        </Border>
+                        <Border BorderThickness="0 0 0 0" BorderBrush="{DynamicResource MainBrush}">
+                            <TextBlock Foreground="{DynamicResource MainBrush}"  Margin="10" VerticalAlignment="Center" Width="Auto" FontSize="16" FontFamily="Helvetica" FontWeight="Light">
+                                                Business Central Guide
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+                </DockPanel>
+            </DockPanel>
+
+            <Grid ClipToBounds="True" Grid.Row="1" Margin="50 0">
+                <DockPanel x:Name="SearchPanel" Margin="10 0 10 10" MaxHeight="450" Background="{DynamicResource MainBrush}" RenderTransformOrigin="0.5,0.5" ap:Directions.VerticalDirection="-1.5" >
+                    <DockPanel.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.MergedDictionaries>
+                                <ResourceDictionary Source="/Guide.Common.Infrastructure;component/Resources/Material.xaml"/>
+                            </ResourceDictionary.MergedDictionaries>
+                        </ResourceDictionary>
+                    </DockPanel.Resources>
+                    <DockPanel.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform>
+                                <TranslateTransform.Y>
+                                    <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="(x*y)+z">
+                                        <Binding ElementName="SearchPanel" Path="ActualHeight"/>
+                                        <Binding ElementName="SearchPanel" Path="(ap:Directions.VerticalDirection)"/>
+                                        <Binding ElementName="TitleContainer" Path="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"/>
+                                    </MultiBinding>
+                                </TranslateTransform.Y>
+                            </TranslateTransform>
+                        </TransformGroup>
+                    </DockPanel.RenderTransform>
+                    <Panel.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="2" Color="Black" Direction="315"/>
+                    </Panel.Effect>
+                    <TextBlock DockPanel.Dock="Top" Margin="20 20 20 2" Text="WHAT WOULD YOU LIKE TO KNOW?" FontWeight="Light" Background="#00FFFFFF" FontFamily="Helectiva" FontSize="20"/>
+                    <TextBox x:Name="SearchBox" DockPanel.Dock="Top" Margin="20 4" Padding="0" Text="{Binding SearchEngine.Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ListBox Margin="20 2" BorderThickness="0" ItemsSource="{Binding SearchEngine.Results, UpdateSourceTrigger=PropertyChanged}">
+                        <ListBox.Resources>
+                            <DataTemplate DataType="{x:Type models:MediaLink}">
+                                <DockPanel>
+                                    <controls:SvgContainer Style="{DynamicResource ClearImage}" DockPanel.Dock="Left" Width="32" SvgSource="{DynamicResource VideoPlaySvg}"/>
+                                    <TextBlock Margin="10 0" Text="{Binding Title}" VerticalAlignment="Center"/>
+                                </DockPanel>
+                            </DataTemplate>
+
+                            <DataTemplate DataType="{x:Type models:Page}">
+                                <DockPanel>
+                                    <controls:SvgContainer Style="{DynamicResource ClearImage}" DockPanel.Dock="Left" Width="32" SvgSource="{DynamicResource BookmarkPageSvg}"/>
+                                    <TextBlock Margin="10 0" Text="{Binding Title}" VerticalAlignment="Center"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </ListBox.Resources>
+                    </ListBox>
+                </DockPanel>
+            </Grid>
+
+        </controls:NoClipGrid>
+    </ControlTemplate>
+
     <Style TargetType="{x:Type controls:MediaPlayer}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:MediaPlayer}">
 
-                    <Grid Background="{DynamicResource SlightlyPolarBrush}">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
@@ -626,10 +1200,33 @@
                                     </Grid>
                                 </controls:ReflectablePopup>
 
+                                <!--
+                                IsOpen="{Binding ElementName=PART_SliderContainer, Path=IsMouseOver, Mode=OneWay}"
+                                -->
+
+                                <controls:ReflectablePopup x:Name="PART_PlacemarkTitle" Width="Auto" Height="Auto" 
+                                    Placement="Bottom" StaysOpen="True" AllowsTransparency="True" VerticalOffset="3"  
+                                     
+                                    PlacementTarget="{Binding ElementName=PART_Slider}">
+                                    <controls:ReflectablePopup.IsOpen>
+                                        <MultiBinding Converter="{StaticResource AndBooleanToVisibilityConverter}">
+                                            <Binding ElementName="PART_SliderContainer" Path="IsMouseOver" Mode="OneWay"/>
+                                            <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="IsFull" Mode="OneWay"/>
+                                            <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="HoverPlacemark" Converter="{StaticResource NullToVisibilityConverter}" Mode="OneWay"/>
+                                        </MultiBinding>
+                                    </controls:ReflectablePopup.IsOpen>
+                                    <Grid>
+                                        <Border BorderThickness="1" Background="{DynamicResource FaintAuxBrush}" Padding="10 3">
+                                            <TextBlock FontWeight="UltraLight" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HoverPlacemark.Title}" FontSize="14" />
+                                        </Border>
+                                    </Grid>
+                                </controls:ReflectablePopup>
+
+
                                 <StackPanel Margin="20 2 20 0">
                                     <Grid x:Name="PART_SliderContainer">
                                         <Border BorderThickness="1" Margin="0 2" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderBrush="{DynamicResource MainBrush}"/>
-                                        <Slider x:Name="PART_Slider" Margin="0 2" IsMoveToPointEnabled="True" Minimum="0" Maximum="{TemplateBinding MediaDuration}" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MediaPosition, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                                        <Slider x:Name="PART_Slider" Margin="0 2" Cursor="Hand" IsMoveToPointEnabled="True" Minimum="0" Maximum="{TemplateBinding MediaDuration}" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MediaPosition, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
                                         <Canvas Width="{Binding ElementName=PART_Slider, Path=ActualWidth}" Margin="0 2" VerticalAlignment="Center" Height="{Binding ElementName=PART_Slider, Path=ActualHeight}" IsHitTestVisible="False">
                                             <Ellipse Width="12" Height="12" Fill="{DynamicResource FaintAuxBrush}" Canvas.Top="3" Visibility="{Binding ElementName=PART_SliderContainer, Path=IsMouseOver,Mode=OneWay, Converter={StaticResource ControlsBoolToVisibilityConverter}}">
                                                 <Canvas.Left>
@@ -640,6 +1237,37 @@
                                                 </Canvas.Left>
                                             </Ellipse>
                                         </Canvas>
+                                        <ItemsControl ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Media.Context.Placemarks}"
+                                                      Margin="0 0" Width="{Binding ElementName=PART_Slider, Path=ActualWidth}" Height="{Binding ElementName=PART_Slider, Path=ActualHeight}" 
+                                                      VerticalAlignment="Center" IsHitTestVisible="False" Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFull, Converter={StaticResource ControlsBoolToVisibilityConverter}}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <Canvas/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemContainerStyle>
+                                                <Style TargetType="ContentPresenter">
+                                                    <Setter Property="Canvas.Left">
+                                                        <Setter.Value>
+                                                            <MultiBinding Converter="{StaticResource ControlsMathConverter}" ConverterParameter="((x/y) * z) - 4">
+                                                                <Binding RelativeSource="{RelativeSource Self}" Path="DataContext.Start.TotalSeconds"/>
+                                                                <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:MediaPlayer}" Path="MediaDuration"/>
+                                                                <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Canvas}" Path="ActualWidth" />
+                                                            </MultiBinding>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="Canvas.Top" Value="3"/>
+                                                </Style>
+                                            </ItemsControl.ItemContainerStyle>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Ellipse Width="12" Height="12" Fill="Transparent" Opacity="0" ap:Hits.RecordHits="True" Margin="0 2" VerticalAlignment="Center"/>
+                                                        <Ellipse Width="8" Height="8" Fill="{DynamicResource IntenseAuxBrush}" Opacity="1" Margin="0 0 0 3" VerticalAlignment="Center"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
                                     </Grid>
 
                                     <TextBlock HorizontalAlignment="Right" FontSize="10" Foreground="{DynamicResource IntenseAuxBrush}" Margin="0 -5 0 0">
@@ -648,13 +1276,16 @@
                                     </TextBlock>
                                 </StackPanel>
 
-                                <Button x:Name="PART_IdeaButton" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 3 10 3" Background="{DynamicResource PolarBrush}" BorderBrush="{DynamicResource PolarBrush}" Grid.Row="1" Padding="0" Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFull, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                                <Button x:Name="PART_IdeaButton" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 3 10 3" Background="{DynamicResource PolarBrush}" BorderBrush="{DynamicResource PolarBrush}" Grid.Row="1" Padding="0" Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFull, Converter={StaticResource ControlsInverseBoolToVisibilityConverter}}">
                                     <controls:SvgContainer DockPanel.Dock="Left" Style="{StaticResource ClearImage}" SvgSource="{DynamicResource LightBulbSvg}" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </Button>
 
 
                                 <DockPanel HorizontalAlignment="Right" Margin="10 3 20 3"  Grid.Row="1">
-                                    <controls:SvgContainer DockPanel.Dock="Right" Style="{StaticResource ClearImage}" SvgSource="{DynamicResource SpeedSvg}" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="Play Speed"/>
+                                    <Button DockPanel.Dock="Right" ToolTip="Play Speed" x:Name="PART_SpeedButton" Background="{DynamicResource PolarBrush}" BorderBrush="{DynamicResource PolarBrush}" Padding="0">
+                                        <controls:SvgContainer Style="{StaticResource ClearImage}" SvgSource="{DynamicResource SpeedSvg}" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>    
+                                    </Button>
+                                    
                                     <controls:ReflectablePopup x:Name="PART_SpeedPositionMarker" Width="Auto" Height="Auto" Placement="Top" StaysOpen="True" IsOpen="{Binding ElementName=PART_SpeedSliderContainer, Path=IsMouseOver,Mode=OneWay}" AllowsTransparency="True" PlacementTarget="{Binding ElementName=PART_SpeedSlider}">
                                         <Grid>
                                             <controls:SvgContainer SvgSource="{DynamicResource MarkerSvg}" Width="20" Style="{DynamicResource ClearImage}"/>
@@ -665,7 +1296,7 @@
 
                                     <Grid x:Name="PART_SpeedSliderContainer" Width="100" Margin="5 0">
                                         <Border BorderThickness="1" Margin="0 2" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderBrush="{DynamicResource MainBrush}"/>
-                                        <Slider x:Name="PART_SpeedSlider" VerticalAlignment="Center" HorizontalAlignment="Stretch" Minimum="0.1" Maximum="4" IsMoveToPointEnabled="True" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SpeedRatio, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <Slider Cursor="Hand" x:Name="PART_SpeedSlider" VerticalAlignment="Center" HorizontalAlignment="Stretch" Minimum="0.1" Maximum="4" IsMoveToPointEnabled="True" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SpeedRatio, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         <Canvas Width="{Binding ElementName=PART_SpeedSlider, Path=ActualWidth}" Margin="0 2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="{Binding ElementName=PART_SpeedSlider, Path=ActualHeight}" IsHitTestVisible="False">
                                             <Ellipse Width="12" Height="12" Fill="{DynamicResource FaintAuxBrush}" Canvas.Top="3" Visibility="{Binding ElementName=PART_SpeedSliderContainer, Path=IsMouseOver,Mode=OneWay, Converter={StaticResource ControlsBoolToVisibilityConverter}}">
                                                 <Canvas.Left>
@@ -690,7 +1321,7 @@
                                     <Button x:Name="PART_PlayButton" Margin="10 3" Padding="5 2" VerticalAlignment="Center" Background="{DynamicResource PolarBrush}" BorderBrush="{DynamicResource PolarBrush}">
                                         <Grid>
                                             <controls:SvgContainer Height="20" Style="{DynamicResource ClearImage}" SvgSource="{StaticResource PauseSvg}" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPlaying, Converter={StaticResource ControlsBoolToVisibilityConverter}}"/>
-                                            <controls:SvgContainer Height="20" Style="{DynamicResource ClearImage}" SvgSource="{StaticResource PlaySvg}" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPlaying, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
+                                            <controls:SvgContainer Height="20" Style="{DynamicResource ClearImage}" SvgSource="{StaticResource PlaySvg}" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPlaying, Converter={StaticResource ControlsInverseBoolToVisibilityConverter}}"/>
                                         </Grid>
                                     </Button>
 
@@ -704,52 +1335,139 @@
                             </Grid>
                         </Grid>
 
-                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
-                            <StackPanel>
-                                <TextBlock Grid.Row="1" Padding="20 10 10 30" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Media.Context.Description}" DockPanel.Dock="Top" Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFull, Converter={StaticResource ControlsBoolToVisibilityConverter}}" Foreground="{DynamicResource AuxBrush}" TextWrapping="Wrap"/>
-                            <ListBox Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Media.Context.Placemarks}" Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFull, Converter={StaticResource ControlsBoolToVisibilityConverter}}" HorizontalContentAlignment="Stretch">
-                                <ListBox.Resources>
+                        <ScrollViewer Background="{DynamicResource SlightlyPolarBrush}" Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFull, Converter={StaticResource ControlsBoolToVisibilityConverter}}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.Resources>
                                     <ResourceDictionary>
-                                        <ResourceDictionary.MergedDictionaries>
-                                            <ResourceDictionary Source="Material.xaml"/>
-                                        </ResourceDictionary.MergedDictionaries>
+                                        <Style TargetType="Hyperlink">
+                                            <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
+                                            <Setter Property="Foreground" Value="{DynamicResource AuxBrush}"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="TextBlock.TextDecorations" Value="{x:Static TextDecorations.Underline}"/>
+                                                    <Setter Property="Foreground" Value="{DynamicResource FaintAuxBrush}"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
                                     </ResourceDictionary>
-                                </ListBox.Resources>
-                                <ListBox.ItemContainerStyle>
-                                    <Style TargetType="ListBoxItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                    </Style>
-                                </ListBox.ItemContainerStyle>
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <DockPanel>
-                                            <TextBlock FontSize="14" Text="{Binding Start, Mode=OneWay}" FontWeight="Light" FontFamily="Helectiva" VerticalAlignment="Top" Background="#00FFFFFF" Foreground="{DynamicResource AuxBrush}" DockPanel.Dock="Left" Padding="4" Margin="20 0 20 0"/>
-                                            <DockPanel>
-                                                <!--
-                                            <Button DockPanel.Dock="Right" Width="20" Padding="0" Background="#FF000000" BorderBrush="#FF000000">
-                                                <controls:SvgContainer SvgSource="{DynamicResource DownArrowSvg}" Style="{DynamicResource ClearImage}"/>
-                                            </Button>
-                                            -->
-                                                <Expander Style="{StaticResource SlimMaterialDesignExpander}" FontFamily="Helectiva" FontWeight="Light" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="#00FFFFFF" Padding="3">
-                                                    <Expander.Header>
-                                                        <TextBlock Text="{Binding Title, Mode=OneWay}" Foreground="{DynamicResource AuxBrush}" TextWrapping="Wrap" FontWeight="Light" FontSize="14"/>
-                                                    </Expander.Header>
-                                                    <Expander.Content>
-                                                        <TextBlock Text="{Binding Description, Mode=OneWay}" Margin="-3 5" FontWeight="Light" Foreground="{DynamicResource AuxBrush}" FontSize="12"/>
-                                                    </Expander.Content>
-                                                </Expander>
-                                                <!--
-                                                      <TextBlock Text="{Binding Title, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="#00FFFFFF" Foreground="{DynamicResource AuxBrush}"/>
-                                                -->
-                                            </DockPanel>
-                                        </DockPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                            </StackPanel>
+                                </Grid.Resources>
+
+                                <controls:FormattedTextBlock Padding="20 10 10 30" FormattedText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Media.Context.Description}" DockPanel.Dock="Top" Foreground="{DynamicResource AuxBrush}" TextWrapping="Wrap"/>
+                                <ListBox Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Media.Context.Placemarks}" 
+                                         SelectedItem="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CurrentPlacemark}"
+                                         Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFull, Converter={StaticResource ControlsBoolToVisibilityConverter}}" 
+                                         HorizontalContentAlignment="Stretch">
+                                    <i:Interaction.Behaviors>
+                                        <behaviors:IgnoreMouseWheelBehavior/>
+                                    </i:Interaction.Behaviors>
+                                    <ListBox.Resources>
+                                        <ResourceDictionary>
+                                            <ResourceDictionary.MergedDictionaries>
+                                                <ResourceDictionary Source="Material.xaml"/>
+                                            </ResourceDictionary.MergedDictionaries>
+
+                                            <Style TargetType="Hyperlink">
+                                                <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
+                                                <Setter Property="Foreground" Value="{DynamicResource AuxBrush}"/>
+                                                <Setter Property="FontWeight" Value="Bold"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="TextBlock.TextDecorations" Value="{x:Static TextDecorations.Underline}"/>
+                                                        <Setter Property="Foreground" Value="{DynamicResource FaintAuxBrush}"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+
+                                            <DataTemplate x:Key="DefaultTemplate">
+                                                <DockPanel>
+                                                    <TextBlock FontSize="14" FontWeight="Light" FontFamily="Helectiva" VerticalAlignment="Top" Background="#00FFFFFF" Foreground="{DynamicResource AuxBrush}" DockPanel.Dock="Left" Padding="4" Margin="20 0 20 0">
+                                                <Hyperlink FontWeight="ExtraLight" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MediaPlayer}, Path=JumpCommand}" CommandParameter="{Binding Start}">
+                                                    <Hyperlink.Style>
+                                                        <Style TargetType="Hyperlink">
+                                                            <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
+                                                            <Setter Property="Foreground" Value="{DynamicResource AuxBrush}"/>
+                                                            <Style.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter Property="TextBlock.TextDecorations" Value="{x:Static TextDecorations.Underline}"/>
+                                                                    <Setter Property="Foreground" Value="{DynamicResource FaintAuxBrush}"/>
+                                                                </Trigger>
+                                                            </Style.Triggers>
+                                                    </Style>
+                                                    </Hyperlink.Style>
+                                                    <Run Text="{Binding Start, Mode=OneWay, StringFormat='{}{0:mm\\:ss}'}"/>
+                                                </Hyperlink>
+                                                    </TextBlock>
+                                                    <Grid>
+                                                        <Expander Visibility="{Binding Description, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}" Style="{StaticResource SlimMaterialDesignExpander}" FontFamily="Helectiva" FontWeight="Light" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="#00FFFFFF" Padding="3">
+                                                            <Expander.Header>
+                                                                <TextBlock Text="{Binding Title, Mode=OneWay}" Foreground="{DynamicResource AuxBrush}" TextWrapping="Wrap" FontWeight="Light" FontSize="14"/>
+                                                            </Expander.Header>
+                                                            <Expander.Content>
+                                                                <controls:FormattedTextBlock FormattedText="{Binding Description, Mode=OneWay}" TextWrapping="Wrap" Margin="-3 5" FontWeight="Light" Foreground="{DynamicResource AuxBrush}" FontSize="12"/>
+                                                            </Expander.Content>
+                                                        </Expander>
+                                                        <TextBlock Text="{Binding Title, Mode=OneWay}" Padding="0 3" TextWrapping="Wrap" FontWeight="ExtraLight" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="#00FFFFFF" Foreground="{DynamicResource AuxBrush}" Visibility="{Binding Description, Mode=OneWay, Converter={StaticResource  InverseNullToVisibilityConverter}}"/>
+                                                    </Grid>
+                                                </DockPanel>
+                                            </DataTemplate>
+
+                                            <DataTemplate x:Key="SelectedTemplate">
+                                                <DockPanel>
+                                                    <TextBlock FontSize="14" FontWeight="Light" FontFamily="Helectiva" VerticalAlignment="Top" Background="#00FFFFFF" Foreground="{DynamicResource AuxBrush}" DockPanel.Dock="Left" Padding="4" Margin="20 0 20 0">
+                                                <Hyperlink FontWeight="Medium" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MediaPlayer}, Path=JumpCommand}" CommandParameter="{Binding Start}">
+                                                    <Hyperlink.Style>
+                                                        <Style TargetType="Hyperlink">
+                                                            <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
+                                                            <Setter Property="Foreground" Value="{DynamicResource AuxBrush}"/>
+                                                            <Style.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter Property="TextBlock.TextDecorations" Value="{x:Static TextDecorations.Underline}"/>
+                                                                    <Setter Property="Foreground" Value="{DynamicResource FaintAuxBrush}"/>
+                                                                </Trigger>
+                                                            </Style.Triggers>
+                                                    </Style>
+                                                    </Hyperlink.Style>
+                                                    <Run Text="{Binding Start, Mode=OneWay, StringFormat='{}{0:mm\\:ss}'}"/>
+                                                </Hyperlink>
+                                                    </TextBlock>
+                                                    <Grid>
+                                                        <Expander Visibility="{Binding Description, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}" Style="{StaticResource SlimMaterialDesignExpander}" FontFamily="Helectiva" FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="#00FFFFFF" Padding="3">
+                                                            <Expander.Header>
+                                                                <TextBlock Text="{Binding Title, Mode=OneWay}" Foreground="{DynamicResource AuxBrush}" TextWrapping="Wrap" FontWeight="Medium" FontSize="14"/>
+                                                            </Expander.Header>
+                                                            <Expander.Content>
+                                                                <controls:FormattedTextBlock FormattedText="{Binding Description, Mode=OneWay}" TextWrapping="Wrap" Margin="-3 5" FontWeight="Light" Foreground="{DynamicResource AuxBrush}" FontSize="12"/>
+                                                            </Expander.Content>
+                                                        </Expander>
+                                                        <TextBlock Text="{Binding Title, Mode=OneWay}" Padding="0 3" TextWrapping="Wrap" FontWeight="Medium" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="#00FFFFFF" Foreground="{DynamicResource AuxBrush}" Visibility="{Binding Description, Mode=OneWay, Converter={StaticResource  InverseNullToVisibilityConverter}}"/>
+                                                    </Grid>
+                                                </DockPanel>
+                                            </DataTemplate>
+                                            
+                                        </ResourceDictionary>
+                                    </ListBox.Resources>
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                            <Setter Property="ContentTemplate" Value="{StaticResource DefaultTemplate}" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="ContentTemplate" Value="{StaticResource SelectedTemplate}" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Grid>
                         </ScrollViewer>
-                        
+
                     </Grid>
                     
 
@@ -758,28 +1476,28 @@
                             <ResourceDictionary.MergedDictionaries>
                                 <ResourceDictionary Source="Material.xaml"/>
                             </ResourceDictionary.MergedDictionaries>
-                            
+
                             <Storyboard x:Key="SlideInControlPanel" x:Name="SlideInControlPanel">
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_ControlPanelSlideDummy" Storyboard.TargetProperty="Width">
-                                    <EasingDoubleKeyFrame KeyTime="00:00:0.5" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="00:00:0.2" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
 
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_TitlePanelSlideDummy" Storyboard.TargetProperty="Width">
-                                    <EasingDoubleKeyFrame KeyTime="00:00:0.5" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="00:00:0.2" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
                             </Storyboard>
 
                             <Storyboard x:Key="SlideOutControlPanel" x:Name="SlideOutControlPanel">
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_ControlPanelSlideDummy" Storyboard.TargetProperty="Width">
+                                    <EasingDoubleKeyFrame KeyTime="00:00:0.2" Value="0"/>
                                     <EasingDoubleKeyFrame KeyTime="00:00:0.5" Value="0"/>
-                                    <EasingDoubleKeyFrame KeyTime="00:00:2" Value="0"/>
-                                    <EasingDoubleKeyFrame KeyTime="00:00:2.5" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="00:00:0.8" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
 
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_TitlePanelSlideDummy" Storyboard.TargetProperty="Width">
+                                    <EasingDoubleKeyFrame KeyTime="00:00:0.2" Value="0"/>
                                     <EasingDoubleKeyFrame KeyTime="00:00:0.5" Value="0"/>
-                                    <EasingDoubleKeyFrame KeyTime="00:00:2" Value="0"/>
-                                    <EasingDoubleKeyFrame KeyTime="00:00:2.5" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="00:00:0.8" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
                             </Storyboard>
                         </ResourceDictionary>
@@ -899,9 +1617,13 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:RippleControl}">
-        <Setter Property="Template" Value="{StaticResource PlayerRippleControlTemplate }"/>
+    
+
+    <!--
+    <Style TargetType="{x:Type controls:NavigationControl}">
+        <Setter Property="Template" Value="{StaticResource NavigationControlTemplate}"/>
     </Style>
+    -->
 
     <Style TargetType="{x:Type controls:SwipeContainer}">
         <Setter Property="Template">
@@ -949,5 +1671,47 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <!--#endregion-->
+
+
+    <!--#region Custom Styles-->
+
+    <Style x:Key="CardWindow" TargetType="{x:Type Window}">
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="ResizeMode" Value="CanMinimize"/>
+        <Setter Property="AllowsTransparency" Value="True"/>
+    </Style>
+
+    <Style x:Key="ClearImage" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="RenderOptions.EdgeMode" Value="Aliased"/>
+    </Style>
+
+    <Style TargetType="{x:Type controls:ActiveHyperlink}">
+        <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{DynamicResource MainBrush}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="TextBlock.TextDecorations" Value="{x:Static TextDecorations.Underline}"/>
+                <Setter Property="Foreground" Value="#dddddd"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type controls:RippleControl}">
+        <Setter Property="Template" Value="{StaticResource PlayerRippleControlTemplate }"/>
+    </Style>
+
+    <Style TargetType="{x:Type controls:NavigationControl}">
+        <Setter Property="Template" Value="{StaticResource NavigationControlTemplate}"/>
+    </Style>
+
+    <Style TargetType="{x:Type controls:TitleControl}">
+        <Setter Property="Template" Value="{StaticResource TitleControlTemplate}"/>
+    </Style>
+
     <!--#endregion-->
 </ResourceDictionary>

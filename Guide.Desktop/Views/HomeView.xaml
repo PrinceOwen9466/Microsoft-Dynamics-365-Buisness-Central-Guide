@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Guide.Desktop.Views"
-             xmlns:prism="http://prismlibrary.com/"
+             xmlns:prism="http://prismlibrary.com/" IsContent="False"
              xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
-             xmlns:cp="clr-namespace:CircularProgressBarLibrary;assembly=CircularProgressBarLibrary"
+             xmlns:cp="clr-namespace:CircularProgressBarLibrary;assembly=CircularProgressBarLibrary" Background="{DynamicResource MainBrush}"
              mc:Ignorable="d"  d:DesignHeight="450" d:DesignWidth="800" prism:ViewModelLocator.AutoWireViewModel="True">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -33,7 +33,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <coreControls:ParticleControl Background="#00FFFFFF" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+            <coreControls:ParticleControl Active="{Binding Presenter.IsHome, Mode=OneWay}"  Background="#00FFFFFF" Grid.ColumnSpan="2" Grid.RowSpan="2" />
 
             <StackPanel Margin="20" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <cp:CircularProgressBar 
@@ -47,7 +47,7 @@
                 StrokeMode="Middle"
                 EndLineCap="Flat" Foreground="White"/>
 
-                <TextBlock FontSize="20" Margin="5 20 05 0" TextAlignment="Center" Foreground="{DynamicResource MainBrush}" Text="{Binding ConfigurationManager.CurrentConfiguration.RecentPage.TargetPageName}"/>
+                <TextBlock FontSize="20" Margin="5 20 05 0" TextAlignment="Center" Foreground="{DynamicResource MainBrush}" Text="{Binding ConfigurationManager.CurrentConfiguration.RecentPage.Section.Name}"/>
             </StackPanel>
 
 
@@ -59,25 +59,25 @@
             </StackPanel>
             
 
-            <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="20 10">
+            <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="20 10" Command="{Binding ResumeCommand}">
                 <TextBlock TextAlignment="Center" Foreground="{DynamicResource MainBrush}">
-                    <Run Text="{Binding ConfigurationManager.CurrentConfiguration.RecentPage.TargetPageName, Mode=OneWay}"></Run>
+                    <Run Text="{Binding ConfigurationManager.CurrentConfiguration.RecentPage.Title, Mode=OneWay}"></Run>
                     <Run>></Run>
                 </TextBlock>
             </Button>
         </Grid>
 
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <ItemsControl ItemsSource="{Binding ConfigurationManager.CurrentConfiguration.Progress}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            
-                            <cp:CircularProgressBar Margin="10"
+        <ListBox ItemsSource="{Binding ConfigurationManager.CurrentConfiguration.Progress}" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <cp:CircularProgressBar Margin="20 20 10 10"
                             Thickness="6" Radius="40"
                             Value="{Binding Progress}"
                             Style="{StaticResource CircularProgressBarStyle}"
@@ -87,10 +87,11 @@
                             StrokeThickness="1"
                             StrokeMode="Middle"
                             EndLineCap="Flat" Foreground="{DynamicResource AuxBrush}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+
+                        <TextBlock Text="{Binding Section.Name}" Grid.Column="1" FontSize="30" FontWeight="Light" Foreground="{DynamicResource AuxBrush}" VerticalAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </coreControls:PresentationControl>

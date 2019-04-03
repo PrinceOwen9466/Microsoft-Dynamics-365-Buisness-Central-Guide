@@ -6,7 +6,7 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:core="clr-namespace:Guide.Common.Infrastructure;assembly=Guide.Common.Infrastructure"
-        xmlns:local="clr-namespace:Guide.Desktop" Height="650" Width="950"
+        xmlns:local="clr-namespace:Guide.Desktop" Height="700" Width="950"
         xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         WindowStyle="None" Background="#00FFFFFF"
@@ -17,6 +17,7 @@
     <Window.InputBindings>
         <KeyBinding Key="Left" Command="{Binding PreviousCommand}"/>
         <KeyBinding Key="Right" Command="{Binding NextCommand}"/>
+        <KeyBinding Key="Space" Command="{Binding TogglePlayCommand}"/>
     </Window.InputBindings>
     <Border Margin="15" Background="{DynamicResource MainBrush}" BorderBrush="{DynamicResource AuxBrush}" BorderThickness="1">
         <Border.Effect>

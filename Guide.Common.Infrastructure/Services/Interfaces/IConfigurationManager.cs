@@ -13,5 +13,6 @@ namespace Guide.Common.Infrastructure.Services.Interfaces
         #region Properties
         Configuration CurrentConfiguration { get; }
         #endregion
+        void Open(Page page);
     }
 }

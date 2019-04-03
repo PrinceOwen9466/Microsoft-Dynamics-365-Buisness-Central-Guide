@@ -56,11 +56,47 @@
     <Reference Include="Lucene.Net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
       <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
     </Reference>
+    <Reference Include="Lucene.Net.Contrib.Analyzers, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Analyzers.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Core, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.FastVectorHighlighter, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.FastVectorHighlighter.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Highlighter, Version=2.3.2.1, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Highlighter.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Memory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Queries, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Queries.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Regex, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Regex.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.SimpleFacetedSearch, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.SimpleFacetedSearch.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.Snowball, Version=2.0.0.1, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Snowball.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.Contrib.SpellChecker, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.SpellChecker.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net.ObjectMapping, Version=1.0.3.0, Culture=neutral, PublicKeyToken=eb8993f7ddad3f4d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.ObjectMapping.1.0.3\lib\net40\Lucene.Net.ObjectMapping.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.4.1.1101, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.4.1.1101\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.5.10\lib\net45\NLog.dll</HintPath>
@@ -138,15 +174,20 @@
   <ItemGroup>
     <Compile Include="Core.cs" />
     <Compile Include="Extensions\BitmapHelper.cs" />
+    <Compile Include="Extensions\DependencyObjectExtensions.cs" />
     <Compile Include="Extensions\LoggerExtensions.cs" />
     <Compile Include="Extensions\ResourceHelper.cs" />
     <Compile Include="Extensions\UIHelper.cs" />
+    <Compile Include="Extensions\Win32.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\ContentContainer.cs" />
     <Compile Include="Models\ContentManager.cs" />
+    <Compile Include="Models\Interfaces\ILinkable.cs" />
     <Compile Include="Models\Interfaces\ISection.cs" />
     <Compile Include="Models\Interfaces\IReference.cs" />
     <Compile Include="Models\Interfaces\IPresentable.cs" />
+    <Compile Include="Models\LinkBase.cs" />
+    <Compile Include="Models\MediaLink.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Presentation.cs" />
     <Compile Include="Models\ProgressWrapper.cs" />
@@ -155,6 +196,9 @@
     <Compile Include="Resources\AttachedProperties\ReferenceKey.cs" />
     <Compile Include="Resources\AttachedProperties\Search.cs" />
     <Compile Include="Resources\Behaviors\ClickThroughBehavior.cs" />
+    <Compile Include="Resources\Behaviors\IgnoreMouseWheelBehavior.cs" />
+    <Compile Include="Resources\Behaviors\MouseBubbleBehavior.cs" />
+    <Compile Include="Models\Linker.cs" />
     <Compile Include="Resources\Containers\MediaContext.cs" />
     <Compile Include="Models\Reference.cs" />
     <Compile Include="Models\UIReference.cs" />
@@ -180,11 +224,14 @@
     <Compile Include="Resources\Controls\ActiveHyperlink.cs" />
     <Compile Include="Resources\Controls\AirSpaceOverlay.cs" />
     <Compile Include="Resources\Controls\ClickThroughGrid.cs" />
+    <Compile Include="Resources\Controls\FormattedTextBlock.cs" />
     <Compile Include="Resources\Controls\GeckoBrowser.cs" />
     <Compile Include="Resources\Controls\GifImage.cs" />
     <Compile Include="Resources\Controls\HyperlinkButton.cs" />
+    <Compile Include="Resources\Controls\TitleControl.cs" />
     <Compile Include="Resources\Controls\MediaPlayer.cs" />
     <Compile Include="Resources\Controls\MediaPlayerContainer.cs" />
+    <Compile Include="Resources\Controls\NavigationControl.cs" />
     <Compile Include="Resources\Controls\NoClipGrid.cs" />
     <Compile Include="Resources\Controls\ParticleControl.cs" />
     <Compile Include="Resources\Controls\PresentationControl.cs" />
@@ -202,8 +249,12 @@
     <Compile Include="Resources\Converters\LengthToThicknessConverter.cs" />
     <Compile Include="Resources\Converters\MathConverter.cs" />
     <Compile Include="Resources\Converters\NegativeConverter.cs" />
+    <Compile Include="Resources\Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Resources\Converters\StringToArrayConverter.cs" />
     <Compile Include="Resources\Converters\TimespanToDoubleConverter.cs" />
     <Compile Include="Resources\Enums.cs" />
+    <Compile Include="Resources\Interfaces\IHitableContext.cs" />
+    <Compile Include="Resources\Interfaces\IPlayer.cs" />
     <Compile Include="Resources\Interfaces\IShell.cs" />
     <Compile Include="Resources\Behaviors\LoopBehavior.cs" />
     <Compile Include="Resources\Misc\ChromiumSilentKeyboardHandler.cs" />
@@ -310,6 +361,10 @@
     <Content Include="Firefox\qipcap.dll" />
     <Content Include="Firefox\softokn3.dll" />
     <Content Include="Firefox\xul.dll" />
+    <Resource Include="Resources\Image Sets\Official\svg\atom.svg" />
+    <Resource Include="Resources\Image Sets\Official\svg\bookmark-page.svg" />
+    <Resource Include="Resources\Image Sets\Official\svg\video-play.svg" />
+    <Resource Include="Resources\Image Sets\Official\svg\video-player.svg" />
     <Resource Include="Resources\Image Sets\Official\svg\home.svg" />
     <Resource Include="Resources\Image Sets\Official\svg\tell-me.svg" />
     <Resource Include="Resources\Image Sets\Official\svg\arrow-alt-circle-left.svg" />

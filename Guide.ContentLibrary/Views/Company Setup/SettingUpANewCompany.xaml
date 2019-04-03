@@ -7,7 +7,7 @@
              xmlns:contentCore="clr-namespace:Guide.ContentLibrary"
              xmlns:coreControls="clr-namespace:Guide.Common.Infrastructure.Resources.Controls;assembly=Guide.Common.Infrastructure"
              xmlns:cap="clr-namespace:Guide.Common.Infrastructure.Resources.AttachedProperties;assembly=Guide.Common.Infrastructure"
-             mc:Ignorable="d" Template="{StaticResource RippleControlTemplate}"
+             mc:Ignorable="d" Template="{StaticResource RippleControlTemplate}" Title="Setting Up A Company"
              d:DesignHeight="450" d:DesignWidth="800" Background="{DynamicResource MainBrush}">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -62,44 +62,52 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid ClipToBounds="True">
+                        <coreControls:RippleControl Title="Creating A New Company">
+                            <UserControl.Resources>
+                                <ResourceDictionary>
+                                    <ResourceDictionary.MergedDictionaries>
+                                        <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Common.xaml"/>
+                                    </ResourceDictionary.MergedDictionaries>
+                                </ResourceDictionary>
+                            </UserControl.Resources>
+                            <Grid ClipToBounds="True">
 
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
 
 
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <StackPanel VerticalAlignment="Center" Margin="5">
-                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
-                                            <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
-                                        </UserControl>
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <StackPanel VerticalAlignment="Center" Margin="5">
+                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                                <TextBlock Text="1" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                            </UserControl>
+                                        </StackPanel>
+
+
+
+                                        <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
+                                        Creating a new company
+                                        </TextBlock>
                                     </StackPanel>
 
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                        <ScrollViewer.Resources>
+                                            <ResourceDictionary>
+                                                <ResourceDictionary.MergedDictionaries>
+                                                    <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                                </ResourceDictionary.MergedDictionaries>
+                                            </ResourceDictionary>
+                                        </ScrollViewer.Resources>
 
-
-                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold">
-                                        Creating a new company
-                                    </TextBlock>
-                                </StackPanel>
-
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
-                                    <ScrollViewer.Resources>
-                                        <ResourceDictionary>
-                                            <ResourceDictionary.MergedDictionaries>
-                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
-                                            </ResourceDictionary.MergedDictionaries>
-                                        </ResourceDictionary>
-                                    </ScrollViewer.Resources>
-
-                                    <DockPanel Grid.Row="1">
+                                        <DockPanel Grid.Row="1">
 
 
 
-                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                            <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                                             Microsoft Dynamics 365 Business Central is designed to contain 
                                             and manage multiple companies. To create a new company,
                                             simply follow the steps provided in the walkthrough below.
@@ -114,19 +122,20 @@
                                             for testing, demonstration and development purposes. 
                                             You are free to open and analyze it at anytime inorder 
                                             to better understand Microsoft Dynamics 365 Business Central.
-                                        </TextBlock>
+                                            </TextBlock>
 
-                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/New Company.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
-                                        </Border>
-                                    </DockPanel>
-                                </ScrollViewer>
-
-
+                                            <Border BorderThickness=".5" BorderBrush="{DynamicResource MainBrush}">
+                                                <coreControls:MediaPlayer Media="{DynamicResource NewCompanyMedia}"/>
+                                            </Border>
+                                        </DockPanel>
+                                    </ScrollViewer>
 
 
+
+
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:RippleControl>
                     </coreControls:RippleControlButton.TransitionContent>
                 </coreControls:RippleControlButton>
                 
@@ -143,7 +152,7 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <local:AssistedSetup/>
+                        <local:AssistedSetup Title="Assisted Setup"/>
                     </coreControls:RippleControlButton.TransitionContent>
                 </coreControls:RippleControlButton>
 
@@ -161,7 +170,7 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <local:ManualSetup cap:Search.SearchActive="True"/>
+                        <local:ManualSetup Title="Manual Setup"/>
                     </coreControls:RippleControlButton.TransitionContent>
                     
                 </coreControls:RippleControlButton>
@@ -178,53 +187,54 @@
                     </UserControl>
 
                     <coreControls:RippleControlButton.TransitionContent>
-                        <Grid ClipToBounds="True">
+                        <coreControls:PresentationControl Title="Setting Up Users And Role Centers">
+                            <Grid ClipToBounds="True">
 
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                                <Grid Margin="20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
 
 
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <StackPanel VerticalAlignment="Center" Margin="5">
-                                        <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
-                                            <TextBlock Text="4" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
-                                        </UserControl>
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <StackPanel VerticalAlignment="Center" Margin="5">
+                                            <UserControl Template="{DynamicResource EllipseImageContainer}" Background="{DynamicResource MainBrush}">
+                                                <TextBlock Text="4" Padding="5" Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" VerticalAlignment="Stretch" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource AuxBrush}"/>
+                                            </UserControl>
+                                        </StackPanel>
+
+
+
+                                        <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold" cap:Search.SearchActive="True">
+                    Setting Up Users And Role Centers
+                                        </TextBlock>
                                     </StackPanel>
 
+                                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
+                                        <ScrollViewer.Resources>
+                                            <ResourceDictionary>
+                                                <ResourceDictionary.MergedDictionaries>
+                                                    <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
+                                                </ResourceDictionary.MergedDictionaries>
+                                            </ResourceDictionary>
+                                        </ScrollViewer.Resources>
 
-
-                                    <TextBlock FontSize="20" Foreground="{DynamicResource MainBrush}" Margin="5" VerticalAlignment="Center" FontWeight="Bold" cap:Search.SearchActive="True">
-                    Setting Up Users And Role Centers
-                                    </TextBlock>
-                                </StackPanel>
-
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="20 0">
-                                    <ScrollViewer.Resources>
-                                        <ResourceDictionary>
-                                            <ResourceDictionary.MergedDictionaries>
-                                                <ResourceDictionary Source="/Guide.ContentLibrary;component/Resources/Material.xaml"/>
-                                            </ResourceDictionary.MergedDictionaries>
-                                        </ResourceDictionary>
-                                    </ScrollViewer.Resources>
-
-                                    <DockPanel Grid.Row="1">
-                                        <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                        <DockPanel Grid.Row="1">
+                                            <TextBlock DockPanel.Dock="Top" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                         Users in Dynamics 365 Business Central are managed by the 
                         company administrators and are normally 
                         registered with the company's business email address.
                         To manage a user, simply visit the Office 365 admin center or
                         follow the steps provided in the walkthrough below.
-                                        </TextBlock>
+                                            </TextBlock>
 
-                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}" DockPanel.Dock="Bottom">
-                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Role Centers and Personalization.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}"  SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
-                                        </Border>
+                                            <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}" DockPanel.Dock="Bottom">
+                                                <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Role Centers and Personalization.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}"  SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}"/>
+                                            </Border>
 
-                                        <TextBlock DockPanel.Dock="Bottom" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
+                                            <TextBlock DockPanel.Dock="Bottom" FontWeight="DemiBold" FontFamily="Helectiva" TextWrapping="Wrap" FontSize="17" Foreground="{DynamicResource MainBrush}" Grid.Row="1" Padding="20">
                         In Microsoft Dynamics 365 Business Central, 
                         users are grouped into Role Centers. The home
                         screen of each Role Center User can be personalized to 
@@ -234,18 +244,19 @@
                         <LineBreak/>
                         The demonstration video below shows how to change 
                         and personalize role centers in Microsoft Dynamics 365 Business Central.
-                                        </TextBlock>
+                                            </TextBlock>
 
-                                        <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
-                                            <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Creating Users.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}" />
-                                        </Border>
+                                            <Border BorderThickness="1" BorderBrush="{DynamicResource AuxBrush}">
+                                                <coreControls:MediaPlayerContainer ResourcePath="Resources/Videos/Creating Users.mp4" ResourceAssembly="{x:Static contentCore:ContentCore.ContentAssembly}" SpeedRatio="2" Template="{DynamicResource MediaPlayerContainerTemplate}" />
+                                            </Border>
 
 
 
-                                    </DockPanel>
-                                </ScrollViewer>
+                                        </DockPanel>
+                                    </ScrollViewer>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </coreControls:PresentationControl>
                     </coreControls:RippleControlButton.TransitionContent>
 
                 </coreControls:RippleControlButton>

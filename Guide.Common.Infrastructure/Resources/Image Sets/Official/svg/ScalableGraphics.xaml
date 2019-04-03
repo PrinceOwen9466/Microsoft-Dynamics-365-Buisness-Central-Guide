@@ -28,4 +28,8 @@
     <c:Svg x:Key="TellMeSvg" Source="tell-me.svg" Fill="{DynamicResource MainBrush}"/>
 
     <c:Svg x:Key="HomeSvg" Source="home.svg" Fill="{DynamicResource MainBrush}"/>
+    <c:Svg x:Key="VideoPlayerSvg" Source="video-player.svg" />
+    <c:Svg x:Key="VideoPlaySvg" Source="video-play.svg"/>
+    <c:Svg x:Key="BookmarkPageSvg" Source="bookmark-page.svg"/>
+    <c:Svg x:Key="AtomSvg" Source="atom.svg"/>
 </ResourceDictionary>

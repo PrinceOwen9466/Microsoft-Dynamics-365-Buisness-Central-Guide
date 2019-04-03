@@ -95,12 +95,7 @@ namespace Guide.Common.Infrastructure.Resources.Controls
 
         async void OnContentChanged(object oldContent, object newContent)
         {
-            if (!IsActive)
-            {
-                //base.OnContentChanged(oldContent, newContent);
-                return;
-            }
-            //base.OnContentChanged(oldContent, newContent);
+            if (!IsActive) return;
 
             if (oldContent == newContent) return;
 
@@ -108,7 +103,6 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             if (Content == null)
             {
                 ContentControl.Content = Content;
-                //base.OnContentChanged(oldContent, newContent);
                 return;
             }
 
@@ -119,19 +113,24 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             {
                 if (((IView)Content).IsAnimatable) SwipeControl.Content = newContent;
                 else SwipeControl.Content = null;
-                
             }
             else SwipeControl.Content = newContent;
+
+            if (oldContent is IView) ((IView)oldContent).Close();
+
             await Swipe();
             SwapContainers();
             ResetSwipeContainer();
 
+            
+            
             if (Content is IView)
             {
                 if (!((IView)Content).IsAnimatable) ContentControl.Content = newContent;
                 await Task.Delay(100);
                 Core.Log.Debug("Opening View...");
                 ((IView)Content).Open();
+                Core.Log.Debug(Content);
             }
         }
 

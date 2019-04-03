@@ -2,6 +2,8 @@
 using Guide.Common.Infrastructure.Extensions;
 using Guide.Common.Infrastructure.Services.Interfaces;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -73,6 +75,18 @@ namespace Guide.Common.Infrastructure.Resources.Controls
         }
         public static readonly DependencyProperty PlayerActiveProperty =
             DependencyProperty.Register("PlayerActive", typeof(bool), typeof(RippleControl), new UIPropertyMetadata(false));
+
+
+
+        public bool RippleActive
+        {
+            get { return (bool)GetValue(RippleActiveProperty); }
+            private set { SetValue(RippleActiveProperty, value); }
+        }
+        public static readonly DependencyProperty RippleActiveProperty =
+            DependencyProperty.Register("RippleActive", typeof(bool), typeof(RippleControl), new UIPropertyMetadata(false));
+
+
         #endregion
 
 
@@ -91,8 +105,6 @@ namespace Guide.Common.Infrastructure.Resources.Controls
 
         MediaPlayer OriginalPlayer { get; set; }
         #endregion
-
-        bool RippleActive { get; set; }
 
         IPresenter Presenter => ServiceLocator.Current.GetInstance<IPresenter>();
 
@@ -180,6 +192,31 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             storyboard.Begin();
         }
 
+        public override void Close()
+        {
+            if (!RippleActive)
+            {
+                base.Close();
+                return;
+            }
+
+            RippleControl control = this;
+            List<RippleControl> controls = new List<RippleControl>();
+            while (control != null)
+            {
+                if (control.PlayerActive) DisablePlayer();
+                controls.Add(control);
+                if (control.RippleActive && control.ExtraContent is RippleControl)
+                    control = (RippleControl)control.ExtraContent;
+                else control = null;
+            }
+            controls.Reverse();
+
+            foreach (var c in controls) c.TransitToMainContent();
+            base.Close();
+        }
+
+
         #endregion
 
         #region Overrides
@@ -202,6 +239,8 @@ namespace Guide.Common.Infrastructure.Resources.Controls
                 Player.BackInvoked += (s, e) =>
                 {
                     DisablePlayer();
+                    if (Presenter != null)
+                        Presenter.VideoActive = false;
                 };
             }
 
@@ -234,24 +273,28 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             PlayerBorder.PreviewMouseRightButtonDown += (s, e) =>
             {
                 e.Handled = true;
-                PlayerBorder.Visibility = Visibility.Hidden;
+                
 
-                if (OriginalElement != null)
-                {
-                    OriginalElement.Position = MediaElement.Position;
-                    OriginalElement.Play();
-                    OriginalElement.Position = MediaElement.Position;
-                }
+                
 
                 if (MediaElement != null)
                 {
+                    PlayerBorder.Visibility = Visibility.Hidden;
                     MediaElement.Stop();
                     MediaElement.ClearValue(MediaElement.SourceProperty);
+
+                    if (OriginalElement != null)
+                    {
+                        OriginalElement.Position = MediaElement.Position;
+                        OriginalElement.Play();
+                        OriginalElement.Position = MediaElement.Position;
+                        OriginalElement = null;
+                    }
                 }
 
-                if (Player != null) Player.Stop();
+                // if (Player != null) Player.Stop();
 
-                OriginalElement = null;
+                
 
                 
             };
@@ -297,6 +340,12 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             OriginalPlayer.Pause();
 
             InitializePlayer();
+
+            if (Presenter != null)
+            {
+                Presenter.VideoActive = true;
+                Presenter.Player = Player;
+            }
         }
         #endregion
 
@@ -305,11 +354,31 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             Player.Media = OriginalPlayer.Media;
             Player.MediaPosition = OriginalPlayer.MediaPosition;
             Player.SpeedRatio = OriginalPlayer.SpeedRatio;
-            
+
             //PlayerBorder.Visibility = Visibility.Visible;
-            
-            IsFullPage = true;
-            if (Presenter != null) Presenter.RefreshFullView();
+
+
+            /*
+            PresentationControl mainControl = this;
+
+            while (true)
+            {
+                var control = mainControl.FindParent<RippleControl>();
+                if (control == null) break;
+                if (!control.IsContent) break;
+                mainControl = control;
+            }
+
+            mainControl.IsFullPage = true;
+            */
+
+
+            if (Presenter != null)
+            {
+                Presenter.FullPageActive = true;
+                // Presenter.RefreshFullView();
+            }
+
             PlayerActive = true;
             Player.Play();
             //await PlayerBorder.AnimateTranslateY(null, 0, TimeSpan.FromSeconds(10));
@@ -328,10 +397,16 @@ namespace Guide.Common.Infrastructure.Resources.Controls
             
 
             IsFullPage = false;
-            if (Presenter != null) Presenter.RefreshFullView();
+            
 
             PlayerActive = false;
-           // PlayerBorder.Visibility = Visibility.Hidden;
+            if (Presenter != null)
+            {
+                Presenter.FullPageActive = false;
+                Presenter.Player = null;
+                // Presenter.RefreshFullView();
+            }
+            // PlayerBorder.Visibility = Visibility.Hidden;
 
             /*
             double transformY = -Application.Current.MainWindow.ActualHeight - 20;
@@ -340,10 +415,10 @@ namespace Guide.Common.Infrastructure.Resources.Controls
                 , null, transformY, TimeSpan.FromSeconds(1));
                 */
 
-            
-                //((TranslateTransform)Player.RenderTransform).Y = transformY;
 
-            
+            //((TranslateTransform)Player.RenderTransform).Y = transformY;
+
+
         }
 
         #endregion

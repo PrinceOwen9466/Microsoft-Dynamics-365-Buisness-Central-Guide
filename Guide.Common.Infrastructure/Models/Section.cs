@@ -41,6 +41,25 @@ namespace Guide.Common.Infrastructure.Models
         #endregion
 
         #region Constructors
+        public Section() { }
+        public Section(Section section)
+        {
+            Name = section.Name;
+            Index = section.Index;
+            Description = section.Description;
+
+            foreach (var @ref in section.Summary)
+                Summary.Add(new UIReference(@ref));
+
+            foreach (var page in section.Pages)
+                Pages.Add(page);
+
+            foreach (var @ref in section.PageMap)
+                PageMap.Add(new Reference(@ref));
+
+            foreach (var page in section.PageList)
+                PageList.Add(new Page(page));
+        }
         #endregion
 
         #region Methods
